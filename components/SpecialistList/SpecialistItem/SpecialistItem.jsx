@@ -4,7 +4,8 @@ import {StyleSheet, Image, Text, View, TouchableOpacity, Dimensions} from 'react
 const SpecialistItem = ({doctor, navigation}) => {
     return (
         <TouchableOpacity
-            activeOpacity={0.7}
+            delayPressIn={70}
+            activeOpacity={0.8}
             style={styles.item}
             onPress={() => navigation.navigate('SpecialistDescription', doctor)}
         >

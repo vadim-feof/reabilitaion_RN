@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {StyleSheet, Text, View} from 'react-native';
-import SpecialistList from "../components/SpecialistList/SpecialistList";
+import SpecialistList from "../../components/SpecialistList/SpecialistList";
 
 const Specialists = ({navigation}) => {
     const [doctors, setDoctors] = useState([

@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import MainNavigator from "./Navigators/MainNavigator";
+import MainNavigator from "./navigators/MainNavigator";
 
 export default function App() {
     return (

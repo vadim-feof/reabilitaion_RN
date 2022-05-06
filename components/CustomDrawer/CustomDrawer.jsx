@@ -1,23 +1,30 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {DrawerContentScrollView, DrawerItemList} from "@react-navigation/drawer";
 
 const CustomDrawer = (props) => {
     const insets = useSafeAreaInsets()
-
+    const navigation = props.navigation
     return (
         <View style={styles.container}>
             <DrawerContentScrollView
                 {...props}
                 contentContainerStyle={{paddingTop: insets.top}}
             >
-                <View style={styles.profileContainer}>
-                    <View style={styles.profile}>
+                <TouchableOpacity
+                    delayPressIn={70}
+                    activeOpacity={0.8}
+                    style={styles.item}
+                    onPress={() => navigation.navigate('MyAccount')}
+                >
+                    <View style={styles.profileContainer}>
+                        <View style={styles.profile}>
 
+                        </View>
+                        <Text>Имя</Text>
                     </View>
-                    <Text>Имя</Text>
-                </View>
+                </TouchableOpacity>
                 <DrawerItemList {...props}/>
             </DrawerContentScrollView>
 
