@@ -1,9 +1,8 @@
 import React from 'react';
-
 import CustomDrawer from "../components/CustomDrawer/CustomDrawer";
 import {publicScreens} from "../routes/DrawerRoutes";
 import {createDrawerNavigator} from "@react-navigation/drawer";
-import {Text} from "react-native";
+
 const Drawer = createDrawerNavigator()
 
 const DrawerNavigator = () => {
@@ -40,7 +39,7 @@ const drawerOptions = {
     drawerInactiveTintColor: '#000',
     drawerLabelStyle: {
         marginLeft: -20,
-        fontSize: 17,
+        fontSize: 18,
     },
     drawerType: 'slide',
     swipeEdgeWidth: 400,

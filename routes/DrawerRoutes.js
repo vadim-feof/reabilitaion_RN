@@ -4,18 +4,20 @@ import Specialists from "../screens/DrawerScreens/Specialists";
 import MyAccount from "../screens/DrawerScreens/MyAccount";
 import AddButton from "../components/Buttons/AddButton/AddButton";
 import {
-    FontAwesome5,
-    Fontisto,
     Ionicons,
     MaterialCommunityIcons as MatComIcon,
     MaterialIcons
 } from "@expo/vector-icons";
 
 export const publicScreens = [
-    {name: 'News', component: News, options: {
+    {name: 'News', component: News, options: ({navigation}) => ({
             title: 'Новости',
-            drawerIcon: ({color}) => <Ionicons name={'newspaper-outline'} size={32} color={color}/>
-        }
+            drawerIcon: ({color}) => <Ionicons name={'newspaper-outline'} size={32} color={color}/>,
+            headerRight: ({tintColor}) => <AddButton
+                color={tintColor}
+                navigate={() => navigation.navigate('CreateNewsScreen')}
+            />
+        })
     },
     {name: 'MyAccount', component: MyAccount, options: {
             title: 'Личный кабинет',
