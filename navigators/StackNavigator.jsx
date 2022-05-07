@@ -3,16 +3,18 @@ import {NavigationContainer} from "@react-navigation/native";
 import {StatusBar} from "expo-status-bar";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import DrawerNavigator from "./DrawerNavigator";
-import {publicScreens} from "../routes/OtherRoutes";
+import {publicScreens} from "../routes/StackRoutes";
 
 const Stack = createNativeStackNavigator()
-const MainNavigator = () => {
+
+const StackNavigator = () => {
     return (
         <NavigationContainer>
             <StatusBar backgroundColor={'#D58B40'}/>
 
             <Stack.Navigator>
                 <Stack.Screen name={'Root'} component={DrawerNavigator} options={{headerShown: false}}/>
+
                 {publicScreens.map(screen =>
                     <Stack.Screen
                         key={screen.name}
@@ -26,4 +28,4 @@ const MainNavigator = () => {
     );
 };
 
-export default MainNavigator;
+export default StackNavigator;

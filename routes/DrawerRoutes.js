@@ -4,8 +4,6 @@ import Specialists from "../screens/DrawerScreens/Specialists";
 import MyAccount from "../screens/DrawerScreens/MyAccount";
 import AddButton from "../components/Buttons/AddButton/AddButton";
 import {
-    FontAwesome5,
-    Fontisto,
     Ionicons,
     MaterialCommunityIcons as MatComIcon,
     MaterialIcons
