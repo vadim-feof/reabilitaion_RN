@@ -8,6 +8,7 @@ import {
     MaterialCommunityIcons as MatComIcon,
     MaterialIcons
 } from "@expo/vector-icons";
+import Registration from "../screens/DrawerScreens/Registration";
 
 export const publicScreens = [
     {name: 'News', component: News, options: ({navigation}) => ({
@@ -38,6 +39,12 @@ export const publicScreens = [
             />
         })
     },
+
+    {name: 'Registration', component: Registration, options: {
+            title: 'Регистрация',
+            drawerIcon: ({color}) => <MaterialIcons name="app-registration" size={32} color={color} />
+        }
+    }
 ]
 
 export const privateScreens = [
