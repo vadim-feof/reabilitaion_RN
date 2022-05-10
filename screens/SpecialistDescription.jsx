@@ -10,7 +10,9 @@ const SpecialistDescription = ({route}) => {
                 <Text style={styles.position}>{position}</Text>
             </View>
             <Image style={styles.photo} source={require('../assets/doctorNoPhoto.png')}/>
-            <Text style={styles.about}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi fuga fugiat hic in itaque laudantium libero, magnam nostrum pariatur quaerat quis quos reiciendis repellendus tempore temporibus unde veniam veritatis. Illo.</Text>
+            <Text style={styles.about}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi fuga fugiat
+                hic in itaque laudantium libero, magnam nostrum pariatur quaerat quis quos reiciendis repellendus
+                tempore temporibus unde veniam veritatis. Illo.</Text>
         </View>
     );
 };
