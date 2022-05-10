@@ -9,8 +9,6 @@ const NewsList = ({news, navigation}) => {
             renderItem={({item}) => (
                 <NewsItem news={item}
                           navigation={navigation}
-
-
                 />
             )}
             keyExtractor={news => news.key}

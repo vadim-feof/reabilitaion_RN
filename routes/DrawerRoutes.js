@@ -8,15 +8,13 @@ import {
     MaterialCommunityIcons as MatComIcon,
     MaterialIcons
 } from "@expo/vector-icons";
+import {NewsProvider} from "../context/NewsContext";
 
 export const publicScreens = [
-    {name: 'News', component: News, options: ({navigation}) => ({
+    {name: 'News', component: (props) => <NewsProvider><News {...props}/></NewsProvider>,
+        options: ({navigation}) => ({
             title: 'Новости',
-            drawerIcon: ({color}) => <Ionicons name={'newspaper-outline'} size={32} color={color}/>,
-            headerRight: ({tintColor}) => <AddButton
-                color={tintColor}
-                navigate={() => navigation.navigate('CreateNewsScreen')}
-            />
+            drawerIcon: ({color}) => <Ionicons name={'newspaper-outline'} size={32} color={color}/>
         })
     },
     {name: 'MyAccount', component: MyAccount, options: {

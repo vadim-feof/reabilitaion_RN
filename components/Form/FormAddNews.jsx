@@ -2,68 +2,61 @@ import React from 'react';
 import {StyleSheet, TextInput, View, Button, Text, TouchableOpacity, Image} from "react-native";
 import {Formik} from 'formik'
 import * as yup from 'yup'
+import {useNews} from "../../context/NewsContext";
 
-const FormAddNews = () => {
+const FormAddNews = ({navigation}) => {
+
     const validationSchema = yup.object().shape(
         {
             title: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-            full: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-            data: yup.string().typeError('Должно быть строкой').required('Обязательно'),
+            content: yup.string().typeError('Должно быть строкой').required('Обязательно'),
         }
     )
 
+    const addNews = (newNews) => {
+        navigation.navigate('News', {newNews})
+    }
+
     return (
         <View>
-            <Formik initialValues={{
-                title: '',
-                full: '',
-                data: '',
-            }}
-                    validateOnBlur
-                    onSubmit={(values, action) => {
-                        /*addNews(values) ДОДЕЛАТЬ ПОЛУЧЕНИ ФУНКЦИИ ДОБАЛЕНИЯ НОВОСТИ*/
-                        action.resetForm() /*чистка формы*/
-
-                    }}
-                    validationSchema={validationSchema}
+            <Formik
+                initialValues={{
+                    title: '',
+                    content: '',
+                }}
+                validateOnBlur
+                onSubmit={(values, action) => {
+                    addNews(values)
+                }}
+                validationSchema={validationSchema}
             >
-                {({values, errors, touched,
+                {({
+                      values, errors, touched,
                       handleChange, handleBlur,
-                       handleSubmit, }) => (
+                      handleSubmit,
+                  }) => (
                     <View>
                         <TextInput type={'text'}
                                    onChangeText={handleChange('title')}
                                    onBlur={handleBlur('title')}
                                    value={values.title}
-                                   placeholder={'Введите название новости'}
+                                   placeholder={'Введите заголовок новости'}
                                    multiline
                                    style={styles.input}
-
                         />
                         {touched.title && errors.title && <Text style={styles.error}> {errors.title}</Text>}
-                        <TextInput  type={'text'}
-                                    onChangeText={handleChange('full')}
-                                    onBlur={handleBlur('full')}
-                                    value={values.full}
-                                    placeholder={'Введите описание новости'}
-                                    multiline
-                                    style={styles.input}
-
+                        <TextInput type={'text'}
+                                   onChangeText={handleChange('content')}
+                                   onBlur={handleBlur('content')}
+                                   value={values.content}
+                                   placeholder={'Введите текст новости'}
+                                   multiline
+                                   style={styles.input}
                         />
-                        {touched.full && errors.full && <Text style={styles.error}> {errors.full}</Text>}
-                        <TextInput  type={'text'}
-                                    onChangeText={handleChange('data')}
-                                    onBlur={handleBlur('data')}
-                                    value={values.data}
-                                    placeholder={'Введите дату'}
-                                    multiline
-                                    style={styles.input}
-                        />
-                        {touched.data && errors.data && <Text style={styles.error}> {errors.data}</Text>}
+                        {touched.content && errors.content && <Text style={styles.error}>{errors.content}</Text>}
 
                         <Text style={styles.textAdd}> Добавить картинку </Text>
 
-                        <Image style={styles.img} source={require('../../assets/addNews.png')}/>
                         <View style={styles.btn}>
                             <TouchableOpacity onPress={handleSubmit}>
                                 <Text style={styles.text}> Добавить </Text>
@@ -71,7 +64,6 @@ const FormAddNews = () => {
                         </View>
                     </View>
                 )}
-
             </Formik>
         </View>
     );

@@ -1,53 +1,34 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text} from "react-native";
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {ActivityIndicator, StyleSheet, View, Text} from "react-native";
 import NewsList from "../../components/NewsList/NewsList";
+import {useNews} from "../../context/NewsContext";
+import AddButton from "../../components/Buttons/AddButton/AddButton";
 
-const News = ({navigation}) => {
+const News = ({navigation, route}) => {
 
-    const [news, setNews] = useState([
-        {   data: '01.01.2022',
-            title: 'Мультидисциплинарный подход в диагностике и лечении заболеваний ' +
-                'пищеварительной и дыхательной систем',
-            full: 'УВАЖАЕМЫЕ КОЛЛЕГИ! Приглашаем Вас 12 ноября в ' +
-                '9.00 (по МСК) принять участие в III Всероссийской ' +
-                'научно-практической конференции «Мультидисциплинарный подход ' +
-                'в диагностике и лечении заболеваний пищеварительной и дыхательной систем», ' +
-                'посвященной памяти профессора В.Ю. Муравьева. Отдельная секция посвящена ' +
-                'работе среднего медицинского персонала и роли медицинских сестер в организации ' +
-                'работы эндоскопических отделений ...\n' +
-                'Подробнеее',
-            key: '1'},
-        {   data: '01.01.2022',
-            title: 'Мультидисциплинарный подход в диагностике и лечении заболеваний ' +
-                'пищеварительной и дыхательной систем',
-            full: 'УВАЖАЕМЫЕ КОЛЛЕГИ! Приглашаем Вас 12 ноября в ' +
-                '9.00 (по МСК) принять участие в III Всероссийской ' +
-                'научно-практической конференции «Мультидисциплинарный подход ' +
-                'в диагностике и лечении заболеваний пищеварительной и дыхательной систем», ' +
-                'посвященной памяти профессора В.Ю. Муравьева. Отдельная секция посвящена ' +
-                'работе среднего медицинского персонала и роли медицинских сестер в организации ' +
-                'работы эндоскопических отделений ...\n' +
-                'Подробнеее',
-            key: '1'}
+    const {news, addNews, isLoading} = useNews()
+    useEffect(async () => {
+        const newNews = route.params?.newNews
+        if (newNews) {
+            await addNews(newNews)
+        }
+    }, [route.params?.newNews])
 
-    ])
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: ({tintColor}) => <AddButton
+                color={tintColor}
+                navigate={() => navigation.navigate('CreateNewsScreen')}
+            />
+        });
+    }, [navigation]);
 
-
-    const addNews = (newNews) => {
-        setNews((actualNews) => {
-            actualNews.key = Math.random().toString()
-            return [
-                newNews,
-                ...actualNews
-            ]
-        })
-    }
 
     return (
         <View style={styles.container}>
+            {isLoading && <ActivityIndicator size={'large'} color={'#D58B40'}/>}
             <NewsList news={news}
                       navigation={navigation}
-
             />
         </View>
     );

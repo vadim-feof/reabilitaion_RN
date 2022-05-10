@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 const NewsItem = ({news, navigation}) => {
     return (
@@ -9,16 +9,16 @@ const NewsItem = ({news, navigation}) => {
             style={styles.item}
             onPress={() => navigation.navigate('NewsDescription', news)}
         >
-            <View style={styles.imgData}>
+            <View style={styles.imgDate}>
                 <Image style={styles.img} source={require('../../../assets/news.jpg')}/>
-                <Text style={styles.data}>{news.data}</Text>
+                <Text style={styles.date}>{news.date}</Text>
             </View>
 
 
             <View style={styles.description}>
                 <Text style={styles.title}>{news.title}</Text>
 
-                <Text style={styles.full}>{news.full}</Text>
+                <Text style={styles.content}>{news.content}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0,0,0,0.2)',
         margin: 10
     },
-    imgData: {
+    imgDate: {
         display: "flex",
         flexDirection: "row",
     },
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         width: 250,
         height: 250,
     },
-    data: {
+    date: {
         color: '#D58B40',
         marginLeft: 20,
         fontWeight: 'bold'
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         padding: 5,
     },
-    full: {
+    content: {
         fontSize: 16,
         padding: 5,
     }

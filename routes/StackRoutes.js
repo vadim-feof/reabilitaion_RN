@@ -7,6 +7,6 @@ export const publicScreens = [
     {name: 'SpecialistDescription', component: SpecialistDescription, options: {title: 'О специалисте'}},
     {name: 'CreateSpecialistScreen', component: CreateSpecialistScreen, options: {title: 'Добавить специалиста'}},
     {name: 'NewsDescription', component: NewsDescription, options: {title: 'Новости'}},
-    {name: 'CreateNewsScreen', component: CreateNewsScreen, options: {title: 'Добвить новость'}},
+    {name: 'CreateNewsScreen', component: CreateNewsScreen, options: {title: 'Добавить новость'}},
 
 ]

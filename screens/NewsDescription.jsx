@@ -2,13 +2,13 @@ import React from 'react';
 import {Image, StyleSheet, Text, View, ScrollView} from "react-native";
 
 const NewsDescription = ({route}) => {
-    const {title, full} = route.params
+    const {title, content} = route.params
     return (
         <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.title}>{title}</Text>
                 <Image style={styles.photo} source={require('../assets/news.jpg')}/>
-                <Text style={styles.full}>{full}</Text>
+                <Text style={styles.content}>{content}</Text>
             </View>
         </ScrollView>
 
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         width: 370,
         height: 370,
     },
-    full: {
+    content: {
         marginTop: 10,
         lineHeight: 28,
         fontSize: 20,
