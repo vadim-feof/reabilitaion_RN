@@ -23,6 +23,7 @@ const CustomDrawer = (props) => {
 
                         </View>
                         <Text>Имя</Text>
+                        <Text>Номер телефона</Text>
                     </View>
                 </TouchableOpacity>
                 <DrawerItemList {...props}/>
