@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, TextInput, View, Text, TouchableOpacity} from "react-native";
 import {Formik} from 'formik'
 import * as yup from 'yup'
+import CustomInput from "../CustomInput/CustomInput";
 
 const FormAddNews = ({navigation}) => {
 
@@ -35,22 +36,22 @@ const FormAddNews = ({navigation}) => {
                       handleSubmit,
                   }) => (
                     <View>
-                        <TextInput type={'text'}
-                                   onChangeText={handleChange('title')}
-                                   onBlur={handleBlur('title')}
-                                   value={values.title}
-                                   placeholder={'Введите заголовок новости'}
-                                   multiline
-                                   style={styles.input}
+                        <CustomInput type={'text'}
+                                     onChangeText={handleChange('title')}
+                                     onBlur={handleBlur('title')}
+                                     value={values.title}
+                                     placeholder={'Введите заголовок новости'}
+                                     multiline
+
                         />
                         {touched.title && errors.title && <Text style={styles.error}> {errors.title}</Text>}
-                        <TextInput type={'text'}
-                                   onChangeText={handleChange('content')}
-                                   onBlur={handleBlur('content')}
-                                   value={values.content}
-                                   placeholder={'Введите текст новости'}
-                                   multiline
-                                   style={styles.input}
+                        <CustomInput type={'text'}
+                                     onChangeText={handleChange('content')}
+                                     onBlur={handleBlur('content')}
+                                     value={values.content}
+                                     placeholder={'Введите описание новости'}
+                                     multiline
+
                         />
                         {touched.content && errors.content && <Text style={styles.error}>{errors.content}</Text>}
 
@@ -69,14 +70,6 @@ const FormAddNews = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-    input: {
-        borderWidth: 1,
-        marginTop: 15,
-        padding: 15,
-        borderColor: 'silver',
-        borderRadius: 5,
-        marginHorizontal: 12
-    },
     btn: {
         width: '80%',
         height: 50,

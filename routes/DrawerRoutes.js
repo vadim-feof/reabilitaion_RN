@@ -9,6 +9,7 @@ import {
     MaterialIcons
 } from "@expo/vector-icons";
 import {NewsProvider} from "../context/NewsContext";
+import Registration from "../screens/DrawerScreens/Registration";
 
 export const publicScreens = [
     {name: 'News', component: (props) => <NewsProvider><News {...props}/></NewsProvider>,
@@ -36,6 +37,12 @@ export const publicScreens = [
             />
         })
     },
+
+    {name: 'Registration', component: Registration, options: {
+            title: 'Регистрация',
+            drawerIcon: ({color}) => <MaterialIcons name="app-registration" size={32} color={color} />
+        }
+    }
 ]
 
 export const privateScreens = [
