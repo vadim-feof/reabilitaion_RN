@@ -3,6 +3,7 @@ import {StyleSheet, TextInput, View, Text, TouchableOpacity} from "react-native"
 import {Formik} from 'formik'
 import * as yup from 'yup'
 import CustomInput from "../CustomInput/CustomInput";
+import CustomButton from "../CustomButton/CustomButton";
 
 const FormAddNews = ({navigation}) => {
 
@@ -56,12 +57,9 @@ const FormAddNews = ({navigation}) => {
                         {touched.content && errors.content && <Text style={styles.error}>{errors.content}</Text>}
 
                         <Text style={styles.textAdd}> Добавить картинку </Text>
-
-                        <View style={styles.btn}>
-                            <TouchableOpacity onPress={handleSubmit}>
+                            <CustomButton onPress={handleSubmit}>
                                 <Text style={styles.text}> Добавить </Text>
-                            </TouchableOpacity>
-                        </View>
+                            </CustomButton>
                     </View>
                 )}
             </Formik>
