@@ -6,7 +6,12 @@ import AddButton from "../../components/Buttons/AddButton/AddButton";
 
 const News = ({navigation, route}) => {
 
-    const {news, addNews, isLoading} = useNews()
+    const {news, addNews, isLoading, fetchNews} = useNews()
+
+    useEffect(async () => {
+        await fetchNews()
+    }, [])
+
     useEffect(async () => {
         const newNews = route.params?.newNews
         if (newNews) {

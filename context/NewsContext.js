@@ -1,51 +1,24 @@
 import {createContext, useContext, useMemo, useState} from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import News from "../screens/DrawerScreens/News";
+import NewsService from "../services/NewsService";
 
 export const NewsContext = createContext(null)
 
 export const NewsProvider = ({children}) => {
-    const [news, setNews] = useState([
-        {
-            date: '01.01.2022',
-            title: 'Мультидисциплинарный подход в диагностике и лечении заболеваний ' +
-                'пищеварительной и дыхательной систем',
-            content: 'УВАЖАЕМЫЕ КОЛЛЕГИ! Приглашаем Вас 12 ноября в ' +
-                '9.00 (по МСК) принять участие в III Всероссийской ' +
-                'научно-практической конференции «Мультидисциплинарный подход ' +
-                'в диагностике и лечении заболеваний пищеварительной и дыхательной систем», ' +
-                'посвященной памяти профессора В.Ю. Муравьева. Отдельная секция посвящена ' +
-                'работе среднего медицинского персонала и роли медицинских сестер в организации ' +
-                'работы эндоскопических отделений ...\n' +
-                'Подробнеее',
-            key: '1'
-        },
-        {
-            date: '01.01.2022',
-            title: 'Мультидисциплинарный подход в диагностике и лечении заболеваний ' +
-                'пищеварительной и дыхательной систем',
-            content: 'УВАЖАЕМЫЕ КОЛЛЕГИ! Приглашаем Вас 12 ноября в ' +
-                '9.00 (по МСК) принять участие в III Всероссийской ' +
-                'научно-практической конференции «Мультидисциплинарный подход ' +
-                'в диагностике и лечении заболеваний пищеварительной и дыхательной систем», ' +
-                'посвященной памяти профессора В.Ю. Муравьева. Отдельная секция посвящена ' +
-                'работе среднего медицинского персонала и роли медицинских сестер в организации ' +
-                'работы эндоскопических отделений ...\n' +
-                'Подробнеее',
-            key: '2'
-        }
-
-    ])
+    const [news, setNews] = useState([])
     const [fetchError, setFetchError] = useState('')
     const [addError, setAddError] = useState('')
     const [removeError, setRemoveError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
-    const fetchNews = () => {
+    const fetchNews = async () => {
         try {
             setIsLoading(true)
-            // обращение к api...
-            setTimeout(() => {}, 1000)
+            const fetchedNews = await NewsService.getAll()
+            setNews([...fetchedNews])
         } catch(e) {
-            setFetchError(e.response.data.message)
+            setFetchError(e.response.data?.message)
         } finally {
             setIsLoading(false)
         }
@@ -54,25 +27,24 @@ export const NewsProvider = ({children}) => {
     const addNews = async (newNews) => {
         try {
             setIsLoading(true)
-            // обращение к api...
-            setNews(prevNews => [newNews, ...prevNews])
+            const addedNews = await NewsService.create(newNews)
+            setNews(prevNews => [addedNews, ...prevNews])
         } catch(e) {
-            setAddError(e.response.data.message)
+            setAddError(e.response.data?.message)
         } finally {
             setIsLoading(false)
         }
     }
 
-    const removeNews = (news) => {
+    const removeNews = async (news) => {
         try {
             setIsLoading(true)
-            // обращение к api...
-            setTimeout(() => {}, 1000)
+            const deletedNews = await NewsService.delete(news)
             setNews(prevNews => prevNews.filter(
-                newsItem => newsItem._id !== news._id
+                newsItem => newsItem._id !== deletedNews._id
             ))
         } catch(e) {
-            setRemoveError(e.response.data.message)
+            setRemoveError(e.response.data?.message)
         } finally {
             setIsLoading(false)
         }

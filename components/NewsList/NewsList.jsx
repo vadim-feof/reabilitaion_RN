@@ -11,7 +11,7 @@ const NewsList = ({news, navigation}) => {
                           navigation={navigation}
                 />
             )}
-            keyExtractor={news => news.key}
+            keyExtractor={news => news._id}
         />
     );
 };

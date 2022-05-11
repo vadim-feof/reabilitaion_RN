@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, TextInput, View, Button, Text, TouchableOpacity, Image} from "react-native";
+import {StyleSheet, TextInput, View, Text, TouchableOpacity} from "react-native";
 import {Formik} from 'formik'
 import * as yup from 'yup'
-import {useNews} from "../../context/NewsContext";
 
 const FormAddNews = ({navigation}) => {
 
