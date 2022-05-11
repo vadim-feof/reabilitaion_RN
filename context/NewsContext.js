@@ -1,6 +1,4 @@
-import {createContext, useContext, useMemo, useState} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import News from "../screens/DrawerScreens/News";
+import {createContext, useContext, useState} from "react";
 import NewsService from "../services/NewsService";
 
 export const NewsContext = createContext(null)

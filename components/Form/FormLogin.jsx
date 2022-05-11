@@ -59,7 +59,6 @@ const FormLogin = () => {
                                 </>
                         }
 
-
                         <CustomInput secureTextEntry={true}
                                      onChangeText={handleChange('password')}
                                      onBlur={handleBlur('password')}
@@ -68,8 +67,6 @@ const FormLogin = () => {
 
                         />
                         {touched.password && errors.password && <Text style={styles.error}> {errors.password}</Text>}
-
-
 
                         <View style={styles.checkboxContainer}>
                             <CheckBox
@@ -82,12 +79,13 @@ const FormLogin = () => {
 
                         <View style={styles.btn}>
                             <TouchableOpacity onPress={handleSubmit}>
-                                <Text style={styles.text}> Войти </Text>
+                                <Text style={styles.text}>
+                                    Войти
+                                </Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 )}
-
             </Formik>
         </View>
     );
