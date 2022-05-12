@@ -1,20 +1,20 @@
 import React from 'react';
-import {StyleSheet, Image, Text, View, TouchableOpacity, Dimensions} from 'react-native';
+import {StyleSheet, Image, Text, View, TouchableNativeFeedback, Dimensions} from 'react-native';
 
 const SpecialistItem = ({doctor, navigation}) => {
     return (
-        <TouchableOpacity
+        <TouchableNativeFeedback
             delayPressIn={70}
-            activeOpacity={0.8}
-            style={styles.item}
             onPress={() => navigation.navigate('SpecialistDescription', doctor)}
         >
-            <Image style={styles.photo} source={require('../../../assets/doctorNoPhoto.png')}/>
-            <View style={styles.description}>
-                <Text style={styles.name}>{doctor.name}</Text>
-                <Text style={styles.position}>{doctor.position}</Text>
+            <View style={styles.item}>
+                <Image style={styles.photo} source={require('../../../assets/doctorNoPhoto.png')}/>
+                <View style={styles.description}>
+                    <Text style={styles.name}>{doctor.name}</Text>
+                    <Text style={styles.position}>{doctor.position}</Text>
+                </View>
             </View>
-        </TouchableOpacity>
+        </TouchableNativeFeedback>
     );
 };
 
