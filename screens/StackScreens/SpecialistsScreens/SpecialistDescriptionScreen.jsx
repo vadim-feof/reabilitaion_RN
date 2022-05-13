@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
+import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
 
-const SpecialistDescriptionScreen = ({route}) => {
-    const {name, position} = route.params
+const SpecialistDescriptionScreen = ({navigation, route}) => {
+
+    const {name, position, description} = route.params
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: ({tintColor}) => <DeleteButton
+                color={tintColor}
+                navigate={() => navigation.navigate('Specialists', {_id: route.params._id} )}
+
+            />
+        });
+    }, [navigation]);
+
     return (
         <View style={styles.container}>
             <View style={styles.description}>
@@ -10,9 +23,7 @@ const SpecialistDescriptionScreen = ({route}) => {
                 <Text style={styles.position}>{position}</Text>
             </View>
             <Image style={styles.photo} source={require('../../../assets/doctorNoPhoto.png')}/>
-            <Text style={styles.about}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi fuga fugiat
-                hic in itaque laudantium libero, magnam nostrum pariatur quaerat quis quos reiciendis repellendus
-                tempore temporibus unde veniam veritatis. Illo.</Text>
+            <Text style={styles.about}>{description}</Text>
         </View>
     );
 };

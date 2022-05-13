@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 const DeleteButton = ({color, navigate}) => {
     return (
         <TouchableWithoutFeedback onPress={navigate}>
-            <View>
+            <View style={styles.container}>
                 <AntDesign name="delete" size={30} color={color} />
                 <Text style={{...styles.text, color: color}}>Удалить</Text>
             </View>
@@ -14,6 +14,9 @@ const DeleteButton = ({color, navigate}) => {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flexDirection: "row"
+    },
     text: {
         fontSize: 18,
         marginLeft: 10,
