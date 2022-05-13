@@ -28,7 +28,6 @@ const CustomDrawer = (props) => {
                 </TouchableOpacity>
                 <DrawerItemList {...props}/>
             </DrawerContentScrollView>
-
         </View>
     );
 };
@@ -49,9 +48,7 @@ const styles = StyleSheet.create({
         width: 100,
         backgroundColor: '#3f3e3e',
         borderRadius: 50,
-
-    }
-
+    },
 })
 
 export default CustomDrawer;

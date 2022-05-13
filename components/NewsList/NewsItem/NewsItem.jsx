@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableNativeFeedback} from "react-native";
+import {StyleSheet, Text, View, TouchableHighlight} from "react-native";
 import FitImage from "react-native-fit-image";
 
 const NewsItem = ({news, navigation}) => {
@@ -9,13 +9,13 @@ const NewsItem = ({news, navigation}) => {
     }
 
     return (
-        <TouchableNativeFeedback
+        <TouchableHighlight
             delayPressIn={70}
+            underlayColor={'#dddddd'}
             onPress={() => navigation.navigate('NewsDescription', news)}
+            style={styles.item}
         >
-            <View
-                style={styles.item}
-            >
+            <>
                 <Text style={styles.date}>
                     {new Date(news.date).toLocaleDateString('ru')}
                 </Text>
@@ -30,9 +30,8 @@ const NewsItem = ({news, navigation}) => {
                         {content}
                     </Text>
                 </View>
-
-            </View>
-        </TouchableNativeFeedback>
+            </>
+        </TouchableHighlight>
     );
 };
 

@@ -10,6 +10,7 @@ import {
 } from "@expo/vector-icons";
 import {NewsProvider} from "../context/NewsContext";
 import Registration from "../screens/DrawerScreens/Registration";
+import {SpecialistProvider} from "../context/SpecialistContext";
 
 export const publicScreens = [
     {name: 'News', component: (props) => <NewsProvider><News {...props}/></NewsProvider>,
@@ -28,7 +29,8 @@ export const publicScreens = [
             drawerIcon: ({color}) => <MaterialIcons name={'login'} size={32} color={color}/>
         }
     },
-    {name: 'Specialists', component: Specialists, options: ({navigation}) => ({
+    {name: 'Specialists', component: (props) => <SpecialistProvider><Specialists {...props}/></SpecialistProvider>,
+        options: ({navigation}) => ({
             title: 'Специалисты',
             drawerIcon: ({color}) => <MatComIcon name="account-supervisor-outline" size={32} color={color} />,
             headerRight: ({tintColor}) => <AddButton

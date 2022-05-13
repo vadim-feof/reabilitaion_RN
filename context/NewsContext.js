@@ -1,22 +1,12 @@
 import {createContext, useContext, useState} from "react";
 import NewsService from "../services/NewsService";
-import {Alert} from "react-native";
-import Toast from "react-native-toast-message";
+import {toastShow} from "../utils/toastShow";
 
 export const NewsContext = createContext(null)
 
 export const NewsProvider = ({children}) => {
     const [news, setNews] = useState([])
-    const [fetchError, setFetchError] = useState('')
-    const [addError, setAddError] = useState('')
-    const [removeError, setRemoveError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
-
-    const toastShow = (type, text1, text2) => {
-        Toast.show({
-            type, text1, text2
-        })
-    }
 
     const fetchNews = async () => {
         try {
@@ -43,6 +33,22 @@ export const NewsProvider = ({children}) => {
         }
     }
 
+    const updateNews = async (news) => {
+        try {
+            setIsLoading(true)
+            const updatedNews = await NewsService.update(news)
+            setNews(prevNews => prevNews.map(news => {
+                if (news._id === updatedNews._id)
+                    return updatedNews
+                return news
+            }))
+        } catch(e) {
+            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     const removeNews = async (news) => {
         try {
             setIsLoading(true)
@@ -61,10 +67,8 @@ export const NewsProvider = ({children}) => {
         news,
         fetchNews,
         addNews,
+        updateNews,
         removeNews,
-        fetchError,
-        addError,
-        removeError,
         isLoading
     }
     return <NewsContext.Provider value={value}>

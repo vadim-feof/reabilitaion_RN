@@ -8,7 +8,7 @@ import CustomInput from "../CustomInput/CustomInput";
 const FormLogin = () => {
     const validationSchema = yup.object().shape(
         {
-            telephone: yup.number().typeError('Должно быть число').required('Обязательно'),
+            telephone: yup.number().typeError('Введите верный номер телефона').required('Обязательно'),
             email: yup.string().email('Введите верный email').required('Обязательно'),
             password: yup.string().typeError('Должно быть строкой').required('Обязательно'),
         }
@@ -23,33 +23,35 @@ const FormLogin = () => {
                 email: '',
                 password: '',
             }}
-                    validateOnBlur
-                    onSubmit={(values, action) => {
-                        /*ФУНКЦИЯ ДОБАВЛЕНИЯ АВТОРИЗАЦИИ*/
-                        action.resetForm() /*чистка формы*/
+                validateOnBlur
+                onSubmit={(values, action) => {
+                    /*ФУНКЦИЯ ДОБАВЛЕНИЯ АВТОРИЗАЦИИ*/
+                    action.resetForm() /*чистка формы*/
 
-                    }}
-                    validationSchema={validationSchema}
+                }}
+                validationSchema={validationSchema}
             >
                 {({
                       values, errors, touched,
                       handleChange, handleBlur,
                       handleSubmit,
                   }) => (
-
                     <View>
                         {
-                            isSelected ? <>
-                                    <CustomInput type={'email-address'}
+                            isSelected
+                                ?
+                                <>
+                                    <CustomInput keyboardType={'email-address'}
                                                  onChangeText={handleChange('email')}
                                                  onBlur={handleBlur('email')}
                                                  value={values.email}
                                                  placeholder={'Email'}
                                     />
                                     {touched.email && errors.email && <Text style={styles.error}> {errors.email}</Text>}
-                            </>
-                                : <>
-                                    <CustomInput keyboardType={'number-pad'}
+                                </>
+                                :
+                                <>
+                                    <CustomInput keyboardType={'phone-pad'}
                                                  onChangeText={handleChange('telephone')}
                                                  onBlur={handleBlur('telephone')}
                                                  value={values.telephone}
@@ -74,7 +76,7 @@ const FormLogin = () => {
                                 onValueChange={setSelection}
                                 style={styles.checkbox}
                             />
-                            <Text style={styles.label}> Войти с помощью электронной почты</Text>
+                            <Text style={styles.label}>Войти с помощью электронной почты</Text>
                         </View>
 
                         <View style={styles.btn}>
@@ -111,9 +113,9 @@ const styles = StyleSheet.create({
         marginTop: 5
     },
     checkboxContainer: {
+        flexShrink: 1,
         flexDirection: "row",
         margin: 15
-
     },
     checkbox: {
         width: 25,

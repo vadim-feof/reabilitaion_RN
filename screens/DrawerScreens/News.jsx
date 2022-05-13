@@ -1,5 +1,5 @@
 import React, {useEffect, useLayoutEffect} from 'react';
-import {StyleSheet, View, RefreshControl} from "react-native";
+import {StyleSheet, View} from "react-native";
 import NewsList from "../../components/NewsList/NewsList";
 import {useNews} from "../../context/NewsContext";
 import AddButton from "../../components/Buttons/AddButton/AddButton";
@@ -30,11 +30,6 @@ const News = ({navigation, route}) => {
 
     return (
         <View style={styles.container}>
-            <RefreshControl
-                refreshing={isLoading}
-                colors={['#D58B40', '#D58B40']}
-            />
-
             <NewsList news={news}
                       navigation={navigation}
                       refresh={fetchNews}

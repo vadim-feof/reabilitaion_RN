@@ -1,24 +1,32 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import SpecialistList from "../../components/SpecialistList/SpecialistList";
+import {useSpecialist} from "../../context/SpecialistContext";
 
-const Specialists = ({navigation}) => {
-    const [doctors, setDoctors] = useState([
-        {name: 'Файрушина Айгуль Наилевна', position: 'Заведующий отделением'},
-        {name: 'Самигуллина Алия Ринатовна', position: 'Врач-психотерапевт'},
-        {name: 'Кирюхина Марина Васильевна', position: 'Врач-психотерапевт'},
-        {name: 'Разумнова Ольга Александровна', position: 'Клинический психолог'},
-        {name: 'Сарбаева Ольга Юрьевна', position: 'Клинический психолог'},
-        {name: 'Хусаинова Раузалия Фановна', position: 'Врач по лечебной физкультуре'},
-        {name: 'Хачатурян Виктория Александровна', position: 'Врач-физиотерапевт'},
-        {name: 'Нурмангазиев Руслан Батырович', position: 'Инструктор – методист ЛФК'},
-        {name: 'Гарапов Рифнур Рифатович', position: 'Инструктор ЛФК'},
-    ])
+const Specialists = ({navigation, route}) => {
+
+    const {specialists, addSpecialist, removeSpecialist, isLoading, fetchSpecialist} = useSpecialist()
+
+    useEffect(async () => {
+        await fetchSpecialist()
+    }, [])
+
+    useEffect(async () => {
+        const newSpecialist = route.params?.newSpecialist
+        if (newSpecialist) {
+            await addSpecialist(newSpecialist)
+        }
+    }, [route.params?.newSpecialist])
 
     return (
         <View style={styles.container}>
-            <SpecialistList doctors={doctors} navigation={navigation}/>
+            <SpecialistList
+                specialists={specialists}
+                navigation={navigation}
+                refresh={fetchSpecialist}
+                isLoading={isLoading}
+            />
         </View>
     );
 };

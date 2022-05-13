@@ -3,14 +3,23 @@ import React from 'react';
 import {FlatList, RefreshControl} from 'react-native';
 import SpecialistItem from "./SpecialistItem/SpecialistItem";
 
-const SpecialistList = ({doctors, navigation}) => {
+const SpecialistList = ({specialists, navigation, refresh, isLoading}) => {
     return (
         <FlatList
-            data={doctors}
+            data={specialists}
             renderItem={({item}) => (
-                <SpecialistItem doctor={item} navigation={navigation}/>
+                <SpecialistItem
+                    specialist={item}
+                    navigation={navigation}
+                />
             )}
             keyExtractor={doctor => doctor.name}
+            refreshControl={<RefreshControl
+                refreshing={isLoading}
+                onRefresh={refresh}
+                title={'Отпустите для обновления'}
+                colors={['#D58B40', '#D58B40']}
+            />}
         />
     );
 };

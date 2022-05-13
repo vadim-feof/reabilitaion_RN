@@ -15,7 +15,7 @@ export default class NewsService {
 
     static async update(news) {
         const response = await $api.put(`/news/${news._id}`, {
-            news
+            ...news
         })
         return response.data
     }

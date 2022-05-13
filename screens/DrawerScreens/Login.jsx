@@ -3,7 +3,7 @@ import {StyleSheet, Image, Text, TextInput, View} from "react-native";
 import logo from "../../assets/logo.png";
 import FormLogin from "../../components/Form/FormLogin";
 
-const AuthPage = () => {
+const Login = () => {
     return (
         <View style={styles.container}>
             <Image style={styles.logo_img} source={logo}/>
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        alignItems: 'center'
     },
     logo_img: {
         resizeMode: 'contain',
@@ -25,4 +26,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default AuthPage;
+export default Login;
