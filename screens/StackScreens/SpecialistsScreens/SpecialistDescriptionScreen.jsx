@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
 
-const SpecialistDescription = ({route}) => {
+const SpecialistDescriptionScreen = ({route}) => {
     const {name, position} = route.params
     return (
         <View style={styles.container}>
@@ -9,7 +9,7 @@ const SpecialistDescription = ({route}) => {
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.position}>{position}</Text>
             </View>
-            <Image style={styles.photo} source={require('../assets/doctorNoPhoto.png')}/>
+            <Image style={styles.photo} source={require('../../../assets/doctorNoPhoto.png')}/>
             <Text style={styles.about}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi fuga fugiat
                 hic in itaque laudantium libero, magnam nostrum pariatur quaerat quis quos reiciendis repellendus
                 tempore temporibus unde veniam veritatis. Illo.</Text>
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SpecialistDescription;
+export default SpecialistDescriptionScreen;

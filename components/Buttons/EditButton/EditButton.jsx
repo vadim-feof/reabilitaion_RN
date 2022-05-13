@@ -2,12 +2,12 @@ import React from 'react';
 import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
-const DeleteButton = ({color, navigate}) => {
+const EditButton = ({color, navigate}) => {
     return (
         <TouchableWithoutFeedback onPress={navigate}>
             <View>
-                <AntDesign name="delete" size={30} color={color} />
-                <Text style={{...styles.text, color: color}}>Удалить</Text>
+                <AntDesign name="edit" size={30} color={color} />
+                <Text style={{...styles.text, color: color}}>Редактировать</Text>
             </View>
         </TouchableWithoutFeedback>
     );
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default DeleteButton;
+export default EditButton;

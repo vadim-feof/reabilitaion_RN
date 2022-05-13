@@ -42,6 +42,7 @@ export const NewsProvider = ({children}) => {
                     return updatedNews
                 return news
             }))
+            toastShow('success', 'Новость обновлена')
         } catch(e) {
             toastShow('error', 'Что-то пошло не так...', e.response.data.message)
         } finally {
@@ -56,6 +57,7 @@ export const NewsProvider = ({children}) => {
             setNews(prevNews => prevNews.filter(
                 newsItem => newsItem._id !== deletedNews._id
             ))
+            toastShow('success', 'Новость удалена')
         } catch(e) {
             toastShow('error', 'Что-то пошло не так...', e.response.data.message)
         } finally {

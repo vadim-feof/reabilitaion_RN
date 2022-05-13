@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
-import FormAddNews from "../components/Form/FormAddNews";
-import FormAddSpecialist from "../components/Form/FormAddSpecialist";
+import FormAddNews from "../../../components/Form/FormAddNews";
+import FormAddSpecialist from "../../../components/Form/FormAddSpecialist";
 
 const CreateSpecialistScreen = ({navigation}) => {
 
@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         justifyContent: "flex-start",
-        alignItems: "center"
     },
 
 })

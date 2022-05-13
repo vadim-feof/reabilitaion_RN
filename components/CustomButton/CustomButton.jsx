@@ -3,7 +3,11 @@ import {StyleSheet, Text, TouchableOpacity} from "react-native";
 
 const CustomButton = (props) => {
     return (
-        <TouchableOpacity style={styles.btn} {...props}>
+        <TouchableOpacity
+            style={styles.btn}
+            {...props}
+
+        >
             {props.children}
         </TouchableOpacity>
     );

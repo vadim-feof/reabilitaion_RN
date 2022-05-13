@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import CustomInput from "../CustomInput/CustomInput";
 import CustomButton from "../CustomButton/CustomButton";
 
-const FormAddNews = ({navigation}) => {
+const FormAddNews = ({navigation, edit, editingNews}) => {
 
     const validationSchema = yup.object().shape(
         {
@@ -14,20 +14,28 @@ const FormAddNews = ({navigation}) => {
         }
     )
 
-    const addNews = (newNews) => {
-        navigation.navigate('News', {newNews})
+    const submit = (news) => {
+        if (edit)
+            navigation.navigate('News', {
+                editedNews: {
+                    ...news,
+                    _id: editingNews._id},
+                edit: edit
+            })
+        else
+            navigation.navigate('News', {newNews: news})
     }
 
     return (
         <View>
             <Formik
                 initialValues={{
-                    title: '',
-                    content: '',
+                    title: edit ? editingNews.title : '',
+                    content: edit ? editingNews.content : '',
                 }}
                 validateOnBlur
                 onSubmit={(values, action) => {
-                    addNews(values)
+                    submit(values)
                 }}
                 validationSchema={validationSchema}
             >
@@ -58,7 +66,7 @@ const FormAddNews = ({navigation}) => {
 
                         <Text style={styles.textAdd}>Добавить картинку</Text>
                             <CustomButton onPress={handleSubmit}>
-                                <Text style={styles.text}>Добавить</Text>
+                                <Text style={styles.text}>{edit ? 'Изменить' : 'Добавить'}</Text>
                             </CustomButton>
                     </View>
                 )}

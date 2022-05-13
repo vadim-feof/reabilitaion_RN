@@ -1,20 +1,29 @@
 import React, {useLayoutEffect} from 'react';
-import {Image, StyleSheet, Text, View, ScrollView} from "react-native";
+import {StyleSheet, Text, ScrollView} from "react-native";
 import FitImage from "react-native-fit-image";
-import AddButton from "../components/Buttons/AddButton/AddButton";
-import DeleteButton from "../components/Buttons/DeleteButton/DeleteButton";
-import {useNews} from "../context/NewsContext";
+import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
+import EditButton from "../../../components/Buttons/EditButton/EditButton";
 
-const NewsDescription = ({route, navigation}) => {
-
+const NewsDescriptionScreen = ({route, navigation}) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            headerRight: ({tintColor}) => <DeleteButton
-                color={tintColor}
-                navigate={() => navigation.navigate('News', {_id: route.params._id} )}
-
-            />
+            headerRight: ({tintColor}) => (
+                <>
+                    <DeleteButton
+                        color={tintColor}
+                        navigate={() => console.log('переход')}
+                    />
+                    <EditButton
+                        color={tintColor}
+                        navigate={() => navigation.navigate('UpdateNewsScreen',
+                            {
+                                editingNews: route.params
+                            }
+                        )}
+                    />
+                </>
+            )
         });
     }, [navigation]);
 
@@ -62,4 +71,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default NewsDescription;
+export default NewsDescriptionScreen;

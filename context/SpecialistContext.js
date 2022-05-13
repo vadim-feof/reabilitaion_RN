@@ -42,8 +42,9 @@ export const SpecialistProvider = ({children}) => {
                     return updatedSpecialist
                 return specialist
             }))
+            toastShow('success', 'Специалист обновлен')
         } catch (e) {
-
+            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
         } finally {
             setIsLoading(false)
         }
@@ -56,6 +57,7 @@ export const SpecialistProvider = ({children}) => {
             setSpecialists(prevSpecialists => prevSpecialists.filter(
                 specialistItem => specialistItem._id !== deletedSpecialist._id
             ))
+            toastShow('success', 'Специалист удален')
         } catch(e) {
             toastShow('error', 'Что-то пошло не так...', e.response.data.message)
         } finally {
