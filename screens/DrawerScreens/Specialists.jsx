@@ -19,11 +19,19 @@ const Specialists = ({navigation, route}) => {
         }
     }, [route.params?.newSpecialist])
 
+
+    useEffect(async () => {
+        const idSpecialist = route.params?._id
+        if (idSpecialist) {
+            await removeSpecialist(idSpecialist)
+        }
+    }, [route.params?._id])
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: ({tintColor}) => <AddButton
                 color={tintColor}
-                navigate={() => navigation.navigate('CreateSpecialistsScreen')}
+                navigate={() => navigation.navigate('CreateSpecialistScreen')}
             />
         });
     }, [navigation]);

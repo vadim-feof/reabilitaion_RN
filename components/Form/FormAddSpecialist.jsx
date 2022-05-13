@@ -15,9 +15,9 @@ const FormAddSpecialist = ({navigation}) => {
         }
     )
 
-    /*const addSpecialist = (newSpecialist) => {
+    const addSpecialist = (newSpecialist) => {
         navigation.navigate('Specialists', {newSpecialist})
-    }*/
+    }
 
     return (
         <View>
@@ -29,8 +29,8 @@ const FormAddSpecialist = ({navigation}) => {
 
                 }}
                 validateOnBlur
-                onSubmit={(values, action) => {
-                    console.log(values)
+                onSubmit={(values) => {
+                    addSpecialist(values)
                 }}
                 validationSchema={validationSchema}
             >

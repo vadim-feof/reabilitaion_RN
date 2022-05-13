@@ -26,7 +26,7 @@ const FormAddNews = ({navigation}) => {
                     content: '',
                 }}
                 validateOnBlur
-                onSubmit={(values, action) => {
+                onSubmit={(values) => {
                     addNews(values)
                 }}
                 validationSchema={validationSchema}
