@@ -4,6 +4,7 @@ import {Formik} from "formik";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import CheckBox from 'expo-checkbox';
 import CustomInput from "../CustomInput/CustomInput";
+import CustomButton from "../CustomButton/CustomButton";
 
 const FormLogin = () => {
     const validationSchema = yup.object().shape(
@@ -78,14 +79,9 @@ const FormLogin = () => {
                             />
                             <Text style={styles.label}>Войти с помощью электронной почты</Text>
                         </View>
-
-                        <View style={styles.btn}>
-                            <TouchableOpacity onPress={handleSubmit}>
-                                <Text style={styles.text}>
-                                    Войти
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
+                        <CustomButton onPress={handleSubmit}>
+                            <Text style={styles.text}>Войти</Text>
+                        </CustomButton>
                     </View>
                 )}
             </Formik>
@@ -94,14 +90,6 @@ const FormLogin = () => {
 };
 
 const styles = StyleSheet.create({
-    btn: {
-        width: '80%',
-        height: 50,
-        marginHorizontal: '10%',
-        backgroundColor: '#D58B40',
-        borderRadius: 5,
-        marginTop: 20
-    },
     text: {
         textAlign: 'center',
         color: '#E0FFFF',

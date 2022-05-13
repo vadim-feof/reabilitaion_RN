@@ -3,6 +3,7 @@ import {View, Text, Image, TouchableOpacity, StyleSheet, ScrollView} from "react
 import {Formik} from "formik";
 import CustomInput from "../CustomInput/CustomInput";
 import * as yup from 'yup'
+import CustomButton from "../CustomButton/CustomButton";
 
 const FormRegistration = () => {
     const validationSchema = yup.object().shape(
@@ -104,12 +105,9 @@ const FormRegistration = () => {
                         />
                         {touched.confirmPassword && errors.confirmPassword && <Text style={styles.error}> {errors.confirmPassword}</Text>}
 
-
-                        <View style={styles.btn}>
-                            <TouchableOpacity onPress={handleSubmit}>
-                                <Text style={styles.text}> Зарегестрироваться </Text>
-                            </TouchableOpacity>
-                        </View>
+                            <CustomButton onPress={handleSubmit}>
+                                <Text style={styles.text}>Зарегестрироваться</Text>
+                            </CustomButton>
                     </ScrollView>
                 )}
 
