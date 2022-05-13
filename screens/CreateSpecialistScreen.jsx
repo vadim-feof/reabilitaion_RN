@@ -1,11 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
+import FormAddNews from "../components/Form/FormAddNews";
+import FormAddSpecialist from "../components/Form/FormAddSpecialist";
 
-const CreateSpecialistScreen = ({route}) => {
+const CreateSpecialistScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <Text>Добавить специалиста</Text>
+            <FormAddSpecialist navigation={navigation}/>
         </View>
     );
 };

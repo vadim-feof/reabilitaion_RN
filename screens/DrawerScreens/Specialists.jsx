@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
-
+import React, {useLayoutEffect, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import SpecialistList from "../../components/SpecialistList/SpecialistList";
 import {useSpecialist} from "../../context/SpecialistContext";
+import AddButton from "../../components/Buttons/AddButton/AddButton";
 
 const Specialists = ({navigation, route}) => {
 
@@ -18,6 +18,15 @@ const Specialists = ({navigation, route}) => {
             await addSpecialist(newSpecialist)
         }
     }, [route.params?.newSpecialist])
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: ({tintColor}) => <AddButton
+                color={tintColor}
+                navigate={() => navigation.navigate('CreateSpecialistsScreen')}
+            />
+        });
+    }, [navigation]);
 
     return (
         <View style={styles.container}>

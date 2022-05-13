@@ -49,10 +49,10 @@ export const NewsProvider = ({children}) => {
         }
     }
 
-    const removeNews = async (news) => {
+    const removeNews = async (_id) => {
         try {
             setIsLoading(true)
-            const deletedNews = await NewsService.delete(news)
+            const deletedNews = await NewsService.delete(_id)
             setNews(prevNews => prevNews.filter(
                 newsItem => newsItem._id !== deletedNews._id
             ))

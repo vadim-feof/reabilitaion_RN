@@ -1,8 +1,25 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {Image, StyleSheet, Text, View, ScrollView} from "react-native";
 import FitImage from "react-native-fit-image";
+import AddButton from "../components/Buttons/AddButton/AddButton";
+import DeleteButton from "../components/Buttons/DeleteButton/DeleteButton";
+import {useNews} from "../context/NewsContext";
 
-const NewsDescription = ({route}) => {
+const NewsDescription = ({route, navigation}) => {
+
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: ({tintColor}) => <DeleteButton
+                color={tintColor}
+                navigate={() => navigation.navigate('News', {_id: route.params._id} )}
+
+            />
+        });
+    }, [navigation]);
+
+
+
     const {title, content, date, picture} = route.params
     return (
         <ScrollView
