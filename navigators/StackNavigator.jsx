@@ -12,7 +12,7 @@ const StackNavigator = () => {
         <NavigationContainer>
             <StatusBar backgroundColor={'#D58B40'}/>
 
-            <Stack.Navigator>
+            <Stack.Navigator screenOptions={stackOptions}>
                 <Stack.Screen name={'Root'} component={DrawerNavigator} options={{headerShown: false}}/>
 
                 {publicScreens.map(screen =>
@@ -27,5 +27,15 @@ const StackNavigator = () => {
         </NavigationContainer>
     );
 };
+
+const stackOptions = {
+    headerStyle: {
+        backgroundColor: '#D58B40',
+    },
+    headerTitleStyle: {
+        color: '#fff'
+    },
+    headerTintColor: '#fff',
+}
 
 export default StackNavigator;

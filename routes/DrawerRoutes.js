@@ -18,23 +18,22 @@ export const publicScreens = [
             drawerIcon: ({color}) => <Ionicons name={'newspaper-outline'} size={32} color={color}/>
         })
     },
-    {name: 'MyAccount', component: MyAccount, options: {
+    {name: 'MyAccount', component: MyAccount,
+        options: {
             title: 'Личный кабинет',
             drawerIcon: ({color}) => <MatComIcon name={'account-circle'} size={32} color={color}/>
         }
     },
-    {name: 'Login', component: Login, options: {
+    {name: 'Login', component: Login,
+        options: {
             title: 'Войти',
             drawerIcon: ({color}) => <MaterialIcons name={'login'} size={32} color={color}/>
         }
     },
-    {name: 'Specialists', component: Specialists, options: ({navigation}) => ({
+    {name: 'Specialists', component: Specialists,
+        options: ({navigation}) => ({
             title: 'Специалисты',
             drawerIcon: ({color}) => <MatComIcon name="account-supervisor-outline" size={32} color={color} />,
-            headerRight: ({tintColor}) => <AddButton
-                color={tintColor}
-                navigate={() => navigation.navigate('CreateSpecialistScreen')}
-            />
         })
     },
 

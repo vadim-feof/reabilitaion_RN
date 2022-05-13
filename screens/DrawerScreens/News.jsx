@@ -1,5 +1,5 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {ActivityIndicator, StyleSheet, View, Text} from "react-native";
+import React, {useEffect, useLayoutEffect} from 'react';
+import {StyleSheet, View, RefreshControl} from "react-native";
 import NewsList from "../../components/NewsList/NewsList";
 import {useNews} from "../../context/NewsContext";
 import AddButton from "../../components/Buttons/AddButton/AddButton";
@@ -19,6 +19,8 @@ const News = ({navigation, route}) => {
         }
     }, [route.params?.newNews])
 
+
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: ({tintColor}) => <AddButton
@@ -28,12 +30,17 @@ const News = ({navigation, route}) => {
         });
     }, [navigation]);
 
-
     return (
         <View style={styles.container}>
-            {isLoading && <ActivityIndicator size={'large'} color={'#D58B40'}/>}
+            <RefreshControl
+                refreshing={isLoading}
+                colors={['#D58B40', '#D58B40']}
+            />
+
             <NewsList news={news}
                       navigation={navigation}
+                      refresh={fetchNews}
+                      isLoading={isLoading}
             />
         </View>
     );
@@ -43,12 +50,6 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    text: {
-        fontWeight: 'bold',
-        fontSize: 24,
     }
 })
 

@@ -60,7 +60,6 @@ const FormLogin = () => {
                                 </>
                         }
 
-
                         <CustomInput secureTextEntry={true}
                                      onChangeText={handleChange('password')}
                                      onBlur={handleBlur('password')}
@@ -69,8 +68,6 @@ const FormLogin = () => {
 
                         />
                         {touched.password && errors.password && <Text style={styles.error}> {errors.password}</Text>}
-
-
 
                         <View style={styles.checkboxContainer}>
                             <CheckBox
@@ -85,7 +82,6 @@ const FormLogin = () => {
                         </CustomButton>
                     </View>
                 )}
-
             </Formik>
         </View>
     );

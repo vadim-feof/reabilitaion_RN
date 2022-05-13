@@ -56,9 +56,9 @@ const FormAddNews = ({navigation}) => {
                         />
                         {touched.content && errors.content && <Text style={styles.error}>{errors.content}</Text>}
 
-                        <Text style={styles.textAdd}> Добавить картинку </Text>
+                        <Text style={styles.textAdd}>Добавить картинку</Text>
                             <CustomButton onPress={handleSubmit}>
-                                <Text style={styles.text}> Добавить </Text>
+                                <Text style={styles.text}>Добавить</Text>
                             </CustomButton>
                     </View>
                 )}
@@ -68,23 +68,10 @@ const FormAddNews = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-    btn: {
-        width: '80%',
-        height: 50,
-        marginHorizontal: '10%',
-        backgroundColor: '#D58B40',
-        borderRadius: 5,
-        marginTop: 20
-    },
     text: {
         textAlign: 'center',
         color: '#E0FFFF',
         paddingTop: 15
-    },
-    img: {
-        width: 70,
-        height: 70,
-        margin: 10
     },
     textAdd: {
         margin: 10

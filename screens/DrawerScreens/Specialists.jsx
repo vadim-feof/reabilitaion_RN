@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 
 import {StyleSheet, Text, View} from 'react-native';
 import SpecialistList from "../../components/SpecialistList/SpecialistList";
+import AddButton from "../../components/Buttons/AddButton/AddButton";
 
 const Specialists = ({navigation}) => {
     const [doctors, setDoctors] = useState([
@@ -15,6 +16,15 @@ const Specialists = ({navigation}) => {
         {name: 'Нурмангазиев Руслан Батырович', position: 'Инструктор – методист ЛФК'},
         {name: 'Гарапов Рифнур Рифатович', position: 'Инструктор ЛФК'},
     ])
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: ({tintColor}) => <AddButton
+                color={tintColor}
+                navigate={() => navigation.navigate('CreateSpecialistsScreen')}
+            />
+        });
+    }, [navigation]);
 
     return (
         <View style={styles.container}>

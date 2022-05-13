@@ -1,7 +1,7 @@
-import {createContext, useContext, useMemo, useState} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import News from "../screens/DrawerScreens/News";
+import {createContext, useContext, useState} from "react";
 import NewsService from "../services/NewsService";
+import {Alert} from "react-native";
+import Toast from "react-native-toast-message";
 
 export const NewsContext = createContext(null)
 
@@ -12,13 +12,19 @@ export const NewsProvider = ({children}) => {
     const [removeError, setRemoveError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
+    const toastShow = (type, text1, text2) => {
+        Toast.show({
+            type, text1, text2
+        })
+    }
+
     const fetchNews = async () => {
         try {
             setIsLoading(true)
             const fetchedNews = await NewsService.getAll()
-            setNews([...fetchedNews])
+            setNews([...fetchedNews.reverse()])
         } catch(e) {
-            setFetchError(e.response.data?.message)
+            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
         } finally {
             setIsLoading(false)
         }
@@ -29,22 +35,23 @@ export const NewsProvider = ({children}) => {
             setIsLoading(true)
             const addedNews = await NewsService.create(newNews)
             setNews(prevNews => [addedNews, ...prevNews])
+            toastShow('success', 'Новость добавлена')
         } catch(e) {
-            setAddError(e.response.data?.message)
+            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
         } finally {
             setIsLoading(false)
         }
     }
 
-    const removeNews = async (news) => {
+    const removeNews = async (_id) => {
         try {
             setIsLoading(true)
-            const deletedNews = await NewsService.delete(news)
+            const deletedNews = await NewsService.delete(_id)
             setNews(prevNews => prevNews.filter(
                 newsItem => newsItem._id !== deletedNews._id
             ))
         } catch(e) {
-            setRemoveError(e.response.data?.message)
+            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
         } finally {
             setIsLoading(false)
         }

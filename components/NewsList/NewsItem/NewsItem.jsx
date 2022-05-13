@@ -1,26 +1,38 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {StyleSheet, Text, View, TouchableNativeFeedback} from "react-native";
+import FitImage from "react-native-fit-image";
 
 const NewsItem = ({news, navigation}) => {
+    let content = news.content
+    if (news.content.length > 250) {
+        content = content.substring(0, 250) + '...'
+    }
+
     return (
-        <TouchableOpacity
+        <TouchableNativeFeedback
             delayPressIn={70}
-            activeOpacity={0.8}
-            style={styles.item}
             onPress={() => navigation.navigate('NewsDescription', news)}
         >
-            <View style={styles.imgDate}>
-                <Image style={styles.img} source={require('../../../assets/news.jpg')}/>
-                <Text style={styles.date}>{news.date}</Text>
-            </View>
-
-
-            <View style={styles.description}>
+            <View
+                style={styles.item}
+            >
+                <Text style={styles.date}>
+                    {new Date(news.date).toLocaleDateString('ru')}
+                </Text>
                 <Text style={styles.title}>{news.title}</Text>
+                <View
+                    style={{marginTop: 10}}
+                >
+                    {news.picture && <FitImage source={{uri: news.picture}}/>}
+                </View>
+                <View style={styles.description}>
+                    <Text style={styles.content}>
+                        {content}
+                    </Text>
+                </View>
 
-                <Text style={styles.content}>{news.content}</Text>
             </View>
-        </TouchableOpacity>
+        </TouchableNativeFeedback>
     );
 };
 
@@ -28,37 +40,30 @@ const styles = StyleSheet.create({
     item: {
         padding: 10,
         borderWidth: 1,
-        borderColor: 'rgba(0,0,0,0.2)',
-        margin: 10
-    },
-    imgDate: {
-        display: "flex",
-        flexDirection: "row",
-    },
-    img: {
-        width: 250,
-        height: 250,
+        borderColor: '#b8b8b8',
+        marginTop: 10,
+        marginHorizontal: 7,
     },
     date: {
         color: '#D58B40',
-        marginLeft: 20,
+        fontSize: 16,
         fontWeight: 'bold'
-
-    },
-    description: {
-        alignItems: "flex-start",
-        flexShrink: 1,
-        justifyContent: 'space-around',
     },
     title: {
+        marginTop: 5,
         fontWeight: 'bold',
         flexWrap: 'wrap',
-        fontSize: 18,
-        padding: 5,
+        fontSize: 20,
+    },
+    description: {
+        flexDirection: 'row',
+        alignItems: "flex-start",
+        justifyContent: 'space-between',
+        marginTop: 7
     },
     content: {
+        flex: 1,
         fontSize: 16,
-        padding: 5,
     }
 })
 

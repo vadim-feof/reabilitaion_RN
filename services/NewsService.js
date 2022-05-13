@@ -20,8 +20,8 @@ export default class NewsService {
         return response.data
     }
 
-    static async delete(news) {
-        const response = await $api.delete(`/news/${news._id}`)
+    static async delete(_id) {
+        const response = await $api.delete(`/news/${_id}`)
         return response.data
     }
 }
