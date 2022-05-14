@@ -19,7 +19,7 @@ export const publicScreens = [
             drawerIcon: ({color}) => <Ionicons name={'newspaper-outline'} size={32} color={color}/>
         })
     },
-    {name: 'MyAccount', component: MyAccount,
+    {name: 'MyAccount', component: (props) =>  <MyAccount {...props}/>,
         options: {
             title: 'Личный кабинет',
             drawerIcon: ({color}) => <MatComIcon name={'account-circle'} size={32} color={color}/>
@@ -42,7 +42,7 @@ export const publicScreens = [
             title: 'Регистрация',
             drawerIcon: ({color}) => <MaterialIcons name="app-registration" size={32} color={color} />
         }
-    }
+    },
 ]
 
 export const privateScreens = [

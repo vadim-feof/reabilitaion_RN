@@ -1,22 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 
 const MyAccount = () => {
+    const [info, setInfo ] = useState(
+        {name:'Прощекальникова Геля Дмитриевна', phone: '89111111111', email: 'text@mail.ru',
+            birthday: '10.08.2000', card: '123456789009876'}
+    )
+
+
     return (
         <View style={styles.container}>
             <View style={styles.wrapperPhoto}>
                 <Image  style={styles.photo} source={require('../../assets/Angelina.jpg')}/>
-                <Text style={styles.name}> Прощекальникова Геля Дмитриевна</Text>
+                <Text style={styles.name}> {info.name} </Text>
             </View>
             <View style={styles.info}>
-                <Text style={styles.item}>Телефон:</Text>
-                <Text style={styles.item}>Почта:</Text>
-                <Text style={styles.item}>Номер карты:</Text>
-                <Text style={styles.item}>День рождения:</Text>
+                <Text style={styles.item}>Телефон:
+                    <Text> {info.phone}</Text>
+                </Text>
+                <Text style={styles.item}>Почта:
+                    <Text> {info.email}</Text>
+                </Text>
+                <Text style={styles.item}>Номер карты:
+                    <Text> {info.card}</Text>
+                </Text>
+                <Text style={styles.item}>День рождения:
+                    <Text> {info.birthday}</Text>
+                </Text>
             </View>
-
-
         </View>
     );
 };
@@ -25,8 +37,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
     },
     name: {
         marginTop: 15,
@@ -34,14 +44,15 @@ const styles = StyleSheet.create({
         color: '#696969',
         fontSize: 18
     },
-    /*info: {
-        flexDirection: 'column',
+    info: {
         marginTop: 15,
-        display: 'flex',
-        justifyContent: "start" /!*НЕ РАБОТАЕТ*!/
-    },*/
+        marginLeft: 30,
+    },
     item: {
-        marginTop: 7
+        marginTop: 7,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#696969'
     },
     photo: {
         width: 300,
