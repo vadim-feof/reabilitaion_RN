@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text} from "react-native";
-import {View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import FormRegistration from "../../components/Form/FormRegistration";
 
 const Registration = () => {
+
     return (
         <View style={styles.container}>
             <FormRegistration/>
@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        justifyContent: "flex-start"
     }
 })
 

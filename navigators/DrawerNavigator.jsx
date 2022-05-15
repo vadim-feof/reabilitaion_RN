@@ -43,7 +43,6 @@ const drawerOptions = {
         fontSize: 18,
     },
     drawerType: 'slide',
-    swipeEdgeWidth: 400,
     drawerItemPress: (obj) => {
         console.log(obj)
         this.closeDrawer()

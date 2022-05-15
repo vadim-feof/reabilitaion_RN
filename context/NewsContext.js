@@ -14,7 +14,7 @@ export const NewsProvider = ({children}) => {
             const fetchedNews = await NewsService.getAll()
             setNews([...fetchedNews.reverse()])
         } catch(e) {
-            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
@@ -27,7 +27,7 @@ export const NewsProvider = ({children}) => {
             setNews(prevNews => [addedNews, ...prevNews])
             toastShow('success', 'Новость добавлена')
         } catch(e) {
-            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
@@ -44,7 +44,7 @@ export const NewsProvider = ({children}) => {
             }))
             toastShow('success', 'Новость обновлена')
         } catch(e) {
-            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
@@ -59,7 +59,7 @@ export const NewsProvider = ({children}) => {
             ))
             toastShow('success', 'Новость удалена')
         } catch(e) {
-            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
+            console.log(e)
         } finally {
             setIsLoading(false)
         }

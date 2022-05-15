@@ -6,19 +6,25 @@ import EditButton from "../../../components/Buttons/EditButton/EditButton";
 
 const NewsDescriptionScreen = ({route, navigation}) => {
 
+    const news = route.params
+    const {title, content, date, picture} = news
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: ({tintColor}) => (
                 <>
                     <DeleteButton
                         color={tintColor}
-                        navigate={() => console.log('переход')}
+                        navigate={() => navigation.navigate('News', {
+                                type: 'delete',
+                                _id: news._id
+                            }
+                        )}
                     />
                     <EditButton
                         color={tintColor}
-                        navigate={() => navigation.navigate('UpdateNewsScreen',
-                            {
-                                editingNews: route.params
+                        navigate={() => navigation.navigate('UpdateNewsScreen', {
+                                editingNews: news
                             }
                         )}
                     />
@@ -29,7 +35,6 @@ const NewsDescriptionScreen = ({route, navigation}) => {
 
 
 
-    const {title, content, date, picture} = route.params
     return (
         <ScrollView
             contentContainerStyle={styles.container}

@@ -5,7 +5,7 @@ import CustomInput from "../CustomInput/CustomInput";
 import CustomButton from "../CustomButton/CustomButton";
 import * as yup from "yup";
 
-const FormAddSpecialist = ({navigation}) => {
+const FormAddSpecialist = ({navigation, isEdit, editingSpecialist}) => {
 
     const validationSchema = yup.object().shape(
         {
@@ -15,22 +15,33 @@ const FormAddSpecialist = ({navigation}) => {
         }
     )
 
-    const addSpecialist = (newSpecialist) => {
-        navigation.navigate('Specialists', {newSpecialist})
+    const submit = (specialist) => {
+        if (isEdit)
+            navigation.navigate('Specialists', {
+                type: 'edit',
+                editedSpecialist: {
+                    ...specialist,
+                    _id: editingSpecialist._id
+                }
+            })
+        else
+            navigation.navigate('Specialists', {
+                type: 'add',
+                newSpecialist: specialist
+            })
     }
 
     return (
         <View>
             <Formik
                 initialValues={{
-                    name: '',
-                    position: '',
-                    description: '',
-
+                    name: isEdit ? editingSpecialist.name : '',
+                    position: isEdit ? editingSpecialist.position : '',
+                    description: isEdit ? editingSpecialist.description : '',
                 }}
                 validateOnBlur
                 onSubmit={(values) => {
-                    addSpecialist(values)
+                    submit(values)
                 }}
                 validationSchema={validationSchema}
             >
@@ -68,7 +79,7 @@ const FormAddSpecialist = ({navigation}) => {
 
 
                         <CustomButton onPress={handleSubmit}>
-                            <Text style={styles.text}>Добавить</Text>
+                            <Text style={styles.text}>{isEdit ? 'Изменить' : 'Добавить'}</Text>
                         </CustomButton>
                     </View>
                 )}

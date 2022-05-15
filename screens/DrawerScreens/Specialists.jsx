@@ -3,29 +3,39 @@ import {StyleSheet, View} from 'react-native';
 import SpecialistList from "../../components/SpecialistList/SpecialistList";
 import {useSpecialist} from "../../context/SpecialistContext";
 import AddButton from "../../components/Buttons/AddButton/AddButton";
+import {toastShow} from "../../utils/toastShow";
 
+
+// TODO: добавить изменение специалистов как с новостями
 const Specialists = ({navigation, route}) => {
 
-    const {specialists, addSpecialist, removeSpecialist, isLoading, fetchSpecialist} = useSpecialist()
+    const {specialists, addSpecialist, updateSpecialist, removeSpecialist, isLoading, fetchSpecialist} = useSpecialist()
 
     useEffect(async () => {
         await fetchSpecialist()
     }, [])
 
     useEffect(async () => {
-        const newSpecialist = route.params?.newSpecialist
-        if (newSpecialist) {
-            await addSpecialist(newSpecialist)
-        }
-    }, [route.params?.newSpecialist])
-
-
-    useEffect(async () => {
-        const idSpecialist = route.params?._id
-        if (idSpecialist) {
-            await removeSpecialist(idSpecialist)
-        }
-    }, [route.params?._id])
+        const type = route.params?.type
+        console.log(type)
+        if (type)
+            switch (type) {
+                case 'add':
+                    if (route.params.newSpecialist)
+                        await addSpecialist(route.params.newSpecialist)
+                    break
+                case 'edit':
+                    if (route.params.editedSpecialist)
+                        await updateSpecialist(route.params.editedSpecialist)
+                    break
+                case 'delete':
+                    if (route.params._id)
+                        await removeSpecialist(route.params._id)
+                    break
+                default:
+                    toastShow('error', 'Произошла ошибка', 'Неизвестная операция')
+            }
+    }, [route.params])
 
     useLayoutEffect(() => {
         navigation.setOptions({

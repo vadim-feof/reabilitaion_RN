@@ -12,9 +12,9 @@ export const SpecialistProvider = ({children}) => {
         try {
             setIsLoading(true)
             const fetchedSpecialists = await SpecialistService.getAll()
-            setSpecialists([...fetchedSpecialists.reverse()])
+            setSpecialists([...fetchedSpecialists])
         } catch(e) {
-            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
@@ -27,7 +27,7 @@ export const SpecialistProvider = ({children}) => {
             setSpecialists(prevSpecialists => [...prevSpecialists, addedSpecialist])
             toastShow('success', 'Специалист добавлен')
         } catch(e) {
-            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
@@ -44,7 +44,7 @@ export const SpecialistProvider = ({children}) => {
             }))
             toastShow('success', 'Специалист обновлен')
         } catch (e) {
-            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
@@ -59,7 +59,7 @@ export const SpecialistProvider = ({children}) => {
             ))
             toastShow('success', 'Специалист удален')
         } catch(e) {
-            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
+            console.log(e)
         } finally {
             setIsLoading(false)
         }

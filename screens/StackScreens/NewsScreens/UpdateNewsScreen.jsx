@@ -8,7 +8,7 @@ const UpdateNewsScreen = ({navigation, route}) => {
         <View style={styles.container}>
             <FormEditNews
                 navigation={navigation}
-                edit={true}
+                isEdit={true}
                 editingNews={route.params.editingNews}
             />
         </View>

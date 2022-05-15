@@ -1,10 +1,27 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {StyleSheet, Text, TouchableWithoutFeedback, View, Alert} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 const DeleteButton = ({color, navigate}) => {
+
+    const onPress = () => {
+        Alert.alert(
+            'Действительно удалить?',
+            '',
+            [
+                {
+                    text: 'Удалить',
+                    onPress: navigate
+                },
+                {
+                    text: 'Отмена'
+                }
+            ]
+        )
+    }
+
     return (
-        <TouchableWithoutFeedback onPress={navigate}>
+        <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.container}>
                 <AntDesign name="delete" size={30} color={color} />
                 <Text style={{...styles.text, color: color}}>Удалить</Text>

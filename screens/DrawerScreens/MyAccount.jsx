@@ -1,12 +1,12 @@
 import React from 'react';
 
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
 const MyAccount = () => {
     return (
         <View style={styles.container}>
             <View>
-                <Image  style={styles.photo} source={require('../../assets/Angelina.jpg')}/>
+                <Text>123123вфывфыв</Text>
             </View>
         </View>
     );
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     photo: {
         width: 300,
         height: 300,
-        borderRadius: Dimensions.get('window').width / 2,
+
     }
 })
 

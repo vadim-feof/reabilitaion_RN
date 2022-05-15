@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet, ScrollView} from "react-native";
+import {View, Text, StyleSheet, ScrollView} from "react-native";
 import {Formik} from "formik";
 import CustomInput from "../CustomInput/CustomInput";
 import * as yup from 'yup'
 import CustomButton from "../CustomButton/CustomButton";
 
 const FormRegistration = () => {
+
     const validationSchema = yup.object().shape(
         {
             secondName: yup.string().typeError('Должно быть строкой').required('Обязательно'),
@@ -49,7 +50,6 @@ const FormRegistration = () => {
                                      onBlur={handleBlur('secondName')}
                                      value={values.secondName}
                                      placeholder={'Фамилия'}
-
                         />
                         {touched.secondName && errors.secondName && <Text style={styles.error}> {errors.secondName}</Text>}
                         <CustomInput type={'text'}
@@ -105,9 +105,9 @@ const FormRegistration = () => {
                         />
                         {touched.confirmPassword && errors.confirmPassword && <Text style={styles.error}> {errors.confirmPassword}</Text>}
 
-                            <CustomButton onPress={handleSubmit}>
-                                <Text style={styles.text}>Зарегестрироваться</Text>
-                            </CustomButton>
+                        <CustomButton onPress={handleSubmit}>
+                            <Text style={styles.text}>Зарегистрироваться</Text>
+                        </CustomButton>
                     </ScrollView>
                 )}
 

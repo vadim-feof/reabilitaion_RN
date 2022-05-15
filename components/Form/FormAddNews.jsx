@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, TextInput, View, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, View, Text} from "react-native";
 import {Formik} from 'formik'
 import * as yup from 'yup'
 import CustomInput from "../CustomInput/CustomInput";
 import CustomButton from "../CustomButton/CustomButton";
 
-const FormAddNews = ({navigation, edit, editingNews}) => {
+const FormAddNews = ({navigation, isEdit, editingNews}) => {
 
     const validationSchema = yup.object().shape(
         {
@@ -15,23 +15,27 @@ const FormAddNews = ({navigation, edit, editingNews}) => {
     )
 
     const submit = (news) => {
-        if (edit)
+        if (isEdit)
             navigation.navigate('News', {
+                type: 'edit',
                 editedNews: {
                     ...news,
-                    _id: editingNews._id},
-                edit: edit
+                    _id: editingNews._id
+                },
             })
         else
-            navigation.navigate('News', {newNews: news})
+            navigation.navigate('News', {
+                type: 'add',
+                newNews: news
+            })
     }
 
     return (
         <View>
             <Formik
                 initialValues={{
-                    title: edit ? editingNews.title : '',
-                    content: edit ? editingNews.content : '',
+                    title: isEdit ? editingNews.title : '',
+                    content: isEdit ? editingNews.content : '',
                 }}
                 validateOnBlur
                 onSubmit={(values, action) => {
@@ -66,7 +70,7 @@ const FormAddNews = ({navigation, edit, editingNews}) => {
 
                         <Text style={styles.textAdd}>Добавить картинку</Text>
                             <CustomButton onPress={handleSubmit}>
-                                <Text style={styles.text}>{edit ? 'Изменить' : 'Добавить'}</Text>
+                                <Text style={styles.text}>{isEdit ? 'Изменить' : 'Добавить'}</Text>
                             </CustomButton>
                     </View>
                 )}

@@ -3,7 +3,11 @@ import {StyleSheet, TextInput} from "react-native";
 
 const CustomInput = (props) => {
     return (
-        <TextInput style={styles.input} {...props} />
+        <TextInput
+            style={styles.input}
+            {...props}
+            selectionColor={'#D58B40'}
+        />
     );
 };
 

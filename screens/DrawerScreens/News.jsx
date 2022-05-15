@@ -3,7 +3,9 @@ import {StyleSheet, View} from "react-native";
 import NewsList from "../../components/NewsList/NewsList";
 import {useNews} from "../../context/NewsContext";
 import AddButton from "../../components/Buttons/AddButton/AddButton";
+import {toastShow} from "../../utils/toastShow";
 
+// TODO: Загрузка фото на сервер
 const News = ({navigation, route}) => {
 
     const {news, addNews, updateNews, removeNews, isLoading, fetchNews} = useNews()
@@ -13,22 +15,25 @@ const News = ({navigation, route}) => {
     }, [])
 
     useEffect(async () => {
-        const edit = route.params.edit
-        if (edit && route.params.editedNews) {
-            await updateNews(route.params.editedNews)
-        }
-        else if (!edit && route.params.newNews) {
-            await addNews(route.params.newNews)
-        }
+        const type = route.params?.type
+        if (type)
+            switch (type) {
+                case 'add':
+                    if (route.params.newNews)
+                        await addNews(route.params.newNews)
+                    break
+                case 'edit':
+                    if (route.params.editedNews)
+                        await updateNews(route.params.editedNews)
+                    break
+                case 'delete':
+                    if (route.params._id)
+                        await removeNews(route.params._id)
+                    break
+                default:
+                    toastShow('error', 'Произошла ошибка', 'Неизвестная операция')
+            }
     }, [route.params])
-
-    useEffect(async () => {
-        const idNews = route.params?._id
-        if (idNews) {
-            await removeNews(idNews)
-        }
-    }, [route.params?._id])
-
 
 
     useLayoutEffect(() => {

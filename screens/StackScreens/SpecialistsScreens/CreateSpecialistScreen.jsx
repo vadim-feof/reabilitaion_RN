@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-import FormAddNews from "../../../components/Form/FormAddNews";
+import {StyleSheet, View} from 'react-native';
 import FormAddSpecialist from "../../../components/Form/FormAddSpecialist";
 
 const CreateSpecialistScreen = ({navigation}) => {
