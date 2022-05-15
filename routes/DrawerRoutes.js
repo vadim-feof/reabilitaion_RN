@@ -37,12 +37,11 @@ export const publicScreens = [
             drawerIcon: ({color}) => <MatComIcon name="account-supervisor-outline" size={32} color={color} />,
         })
     },
-
     {name: 'Registration', component: Registration, options: {
             title: 'Регистрация',
             drawerIcon: ({color}) => <MaterialIcons name="app-registration" size={32} color={color} />
         }
-    }
+    },
 ]
 
 export const privateScreens = [

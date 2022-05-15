@@ -9,9 +9,9 @@ import CustomButton from "../CustomButton/CustomButton";
 const FormLogin = () => {
     const validationSchema = yup.object().shape(
         {
-            telephone: yup.number().typeError('Введите верный номер телефона').required('Обязательно'),
-            email: yup.string().email('Введите верный email').required('Обязательно'),
-            password: yup.string().typeError('Должно быть строкой').required('Обязательно'),
+            telephone: yup.number().typeError('Введите верный номер телефона').required('Пожалуйста, укажите телефон'),
+            email: yup.string().email('Введите верный email').required('Пожалуйста, укажите вашу элекронную почту '),
+            password: yup.string().typeError('Должно быть строкой').required('Укажите пароль'),
         }
     )
 

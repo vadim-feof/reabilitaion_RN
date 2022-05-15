@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
         padding: 15,
         borderColor: 'silver',
         borderRadius: 5,
-        marginHorizontal: 12
+        marginHorizontal: 12,
+        marginVertical: 10
     },
 })
 
