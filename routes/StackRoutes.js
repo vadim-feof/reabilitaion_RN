@@ -4,13 +4,19 @@ import NewsDescriptionScreen from "../screens/StackScreens/NewsScreens/NewsDescr
 import CreateNewsScreen from "../screens/StackScreens/NewsScreens/CreateNewsScreen";
 import UpdateNewsScreen from "../screens/StackScreens/NewsScreens/UpdateNewsScreen";
 import UpdateSpecialistScreen from "../screens/StackScreens/SpecialistsScreens/UpdateSpecialistScreen";
+import CreateServiceScreen from "../screens/StackScreens/ServicesScreens/CreateServiceScreen";
+import ServiceDescriptionScreen from "../screens/StackScreens/ServicesScreens/ServiceDescriptionScreen";
+import UpdateServiceScreen from "../screens/StackScreens/ServicesScreens/UpdateServiceScreen";
 
 export const publicScreens = [
-    {name: 'SpecialistDescription', component: SpecialistDescriptionScreen, options: {title: 'О специалисте'}},
+    {name: 'SpecialistDescriptionScreen', component: SpecialistDescriptionScreen, options: {title: 'О специалисте'}},
     {name: 'CreateSpecialistScreen', component: CreateSpecialistScreen, options: {title: 'Добавить специалиста'}},
     {name: 'UpdateSpecialistScreen', component: UpdateSpecialistScreen, options: {title: 'Изменить специалиста'}},
-    {name: 'NewsDescription', component: NewsDescriptionScreen, options: {title: 'Новости'}},
+    {name: 'NewsDescriptionScreen', component: NewsDescriptionScreen, options: {title: 'Новости'}},
     {name: 'CreateNewsScreen', component: CreateNewsScreen, options: {title: 'Добавить новость'}},
     {name: 'UpdateNewsScreen', component: UpdateNewsScreen, options: {title: 'Изменить новость'}},
+    {name: 'CreateServiceScreen', component: CreateServiceScreen, options: {title: 'Добавить услугу'}},
+    {name: 'ServiceDescriptionScreen', component: ServiceDescriptionScreen, options: {title: 'Об услуге'}},
+    {name: 'UpdateServiceScreen', component: UpdateServiceScreen, options: {title: 'Изменить услугу'}},
 
 ]

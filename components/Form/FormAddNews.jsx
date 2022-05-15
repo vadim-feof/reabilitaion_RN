@@ -9,8 +9,8 @@ const FormAddNews = ({navigation, isEdit, editingNews}) => {
 
     const validationSchema = yup.object().shape(
         {
-            title: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-            content: yup.string().typeError('Должно быть строкой').required('Обязательно'),
+            title: yup.string().typeError('Должно быть строкой').required('Обязательно для заполнения'),
+            content: yup.string().typeError('Должно быть строкой').required('Обязательно для заполнения'),
         }
     )
 

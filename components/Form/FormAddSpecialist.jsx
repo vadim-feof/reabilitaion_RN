@@ -9,9 +9,9 @@ const FormAddSpecialist = ({navigation, isEdit, editingSpecialist}) => {
 
     const validationSchema = yup.object().shape(
         {
-            name: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-            position: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-            description: yup.string().typeError('Должно быть строкой').required('Обязательно'),
+            name: yup.string().typeError('Должно быть строкой').required('Поажлуйста, ввдедите ФИО специалиста'),
+            position: yup.string().typeError('Должно быть строкой').required('Пожалуйста, введите должность'),
+            description: yup.string().typeError('Должно быть строкой').required('Пожалуйста, введите описание'),
         }
     )
 
@@ -55,7 +55,7 @@ const FormAddSpecialist = ({navigation, isEdit, editingSpecialist}) => {
                                      onChangeText={handleChange('name')}
                                      onBlur={handleBlur('name')}
                                      value={values.name}
-                                     placeholder={'Введите имя ФИО специалиста'}
+                                     placeholder={'Введите ФИО специалиста'}
 
                         />
                         {touched.name && errors.name && <Text style={styles.error}> {errors.name}</Text>}
@@ -94,12 +94,6 @@ const styles = StyleSheet.create({
         color: '#E0FFFF',
         paddingTop: 15
     },
-    img: {
-        width: 70,
-        height: 70,
-        margin: 10
-    },
-
     error: {
         color: 'red',
         marginLeft: 10,

@@ -5,20 +5,17 @@ import { AntDesign } from '@expo/vector-icons';
 const EditButton = ({color, navigate}) => {
     return (
         <TouchableWithoutFeedback onPress={navigate}>
-            <View>
+            <View style={styles.container}>
                 <AntDesign name="edit" size={30} color={color} />
-                <Text style={{...styles.text, color: color}}>Редактировать</Text>
             </View>
         </TouchableWithoutFeedback>
     );
 };
 
 const styles = StyleSheet.create({
-    text: {
-        fontSize: 18,
-        marginLeft: 10,
-        fontWeight: 'bold'
-    }
+    container: {
+        marginRight: 5
+    },
 })
 
 export default EditButton;

@@ -6,11 +6,12 @@ import MyAccount from "../screens/DrawerScreens/MyAccount";
 import {
     Ionicons,
     MaterialCommunityIcons as MatComIcon,
-    MaterialIcons
+    MaterialIcons, Entypo
 } from "@expo/vector-icons";
 import {NewsProvider} from "../context/NewsContext";
 import Registration from "../screens/DrawerScreens/Registration";
 import {SpecialistProvider} from "../context/SpecialistContext";
+import Services from "../screens/DrawerScreens/Services";
 
 export const publicScreens = [
     {name: 'News', component: (props) => <NewsProvider><News {...props}/></NewsProvider>,
@@ -40,6 +41,12 @@ export const publicScreens = [
     {name: 'Registration', component: Registration, options: {
             title: 'Регистрация',
             drawerIcon: ({color}) => <MaterialIcons name="app-registration" size={32} color={color} />
+        }
+    },
+    {name: 'Services', component: (props) => <Services {...props}/>,
+        options: {
+            title: 'Услуги',
+            drawerIcon: ({color}) => <Entypo name="list" size={32} color={color} />
         }
     },
 ]

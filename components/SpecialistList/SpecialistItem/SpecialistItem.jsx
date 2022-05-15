@@ -2,11 +2,12 @@ import React from 'react';
 import {StyleSheet, Image, Text, View, TouchableHighlight, Dimensions} from 'react-native';
 
 const SpecialistItem = ({specialist, navigation}) => {
+
     return (
         <TouchableHighlight
             delayPressIn={70}
             underlayColor={'#dddddd'}
-            onPress={() => navigation.navigate('SpecialistDescription', specialist)}
+            onPress={() => navigation.navigate('SpecialistDescriptionScreen', specialist)}
         >
             <View style={styles.item}>
                 <Image style={styles.photo} source={require('../../../assets/doctorNoPhoto.png')}/>

@@ -12,7 +12,7 @@ const NewsItem = ({news, navigation}) => {
         <TouchableHighlight
             delayPressIn={70}
             underlayColor={'#dddddd'}
-            onPress={() => navigation.navigate('NewsDescription', news)}
+            onPress={() => navigation.navigate('NewsDescriptionScreen', news)}
             style={styles.item}
         >
             <>
