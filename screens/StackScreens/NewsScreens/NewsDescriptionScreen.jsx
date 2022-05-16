@@ -3,12 +3,13 @@ import {StyleSheet, Text, ScrollView} from "react-native";
 import FitImage from "react-native-fit-image";
 import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
 import EditButton from "../../../components/Buttons/EditButton/EditButton";
+import {STATIC_IMAGE_NEWS_URL} from "../../../services/api";
 
 const NewsDescriptionScreen = ({route, navigation}) => {
 
     const news = route.params
     const {title, content, date, picture} = news
-
+    const imageUrl = STATIC_IMAGE_NEWS_URL + news.picture
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: ({tintColor}) => (
@@ -24,7 +25,8 @@ const NewsDescriptionScreen = ({route, navigation}) => {
                     <EditButton
                         color={tintColor}
                         navigate={() => navigation.navigate('UpdateNewsScreen', {
-                                editingNews: news
+                                editingNews: news,
+                                isEdit: true
                             }
                         )}
                     />
@@ -41,7 +43,7 @@ const NewsDescriptionScreen = ({route, navigation}) => {
         >
             <Text style={styles.date}>{new Date(date).toLocaleDateString('ru')}</Text>
             <Text style={styles.title}>{title}</Text>
-            {picture && <FitImage style={styles.photo} source={{uri: picture}}/>}
+            {picture ? <FitImage style={styles.photo} source={{uri: imageUrl}}/> : null}
             <Text style={styles.content}>{content}</Text>
         </ScrollView>
 

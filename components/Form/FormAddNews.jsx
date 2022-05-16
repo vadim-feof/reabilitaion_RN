@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text} from "react-native";
 import {Formik} from 'formik'
 import * as yup from 'yup'
 import CustomInput from "../CustomInput/CustomInput";
 import CustomButton from "../CustomButton/CustomButton";
+import FitImage from "react-native-fit-image";
+import {STATIC_IMAGE_NEWS_URL} from "../../services/api";
 
-const FormAddNews = ({navigation, isEdit, editingNews}) => {
-
+const FormAddNews = ({navigation, isEdit, editingNews, takePicture, deletePicture, picture, setFormIsEdit}) => {
+    const imageUrl = STATIC_IMAGE_NEWS_URL + picture
     const validationSchema = yup.object().shape(
         {
             title: yup.string().typeError('Должно быть строкой').required('Обязательно'),
@@ -20,13 +22,14 @@ const FormAddNews = ({navigation, isEdit, editingNews}) => {
                 type: 'edit',
                 editedNews: {
                     ...news,
-                    _id: editingNews._id
+                    _id: editingNews._id,
+                    picture
                 },
             })
         else
             navigation.navigate('News', {
                 type: 'add',
-                newNews: news
+                newNews: {...news, picture},
             })
     }
 
@@ -44,47 +47,68 @@ const FormAddNews = ({navigation, isEdit, editingNews}) => {
                 validationSchema={validationSchema}
             >
                 {({
-                      values, errors, touched,
+                      values, errors, touched, dirty,
                       handleChange, handleBlur,
                       handleSubmit,
-                  }) => (
-                    <View>
-                        <CustomInput type={'text'}
-                                     onChangeText={handleChange('title')}
-                                     onBlur={handleBlur('title')}
-                                     value={values.title}
-                                     placeholder={'Введите заголовок новости'}
-                                     multiline
+                  }) => {
+                    useEffect(() => {
+                        if (dirty)
+                            setFormIsEdit(true)
+                    }, [dirty]);
 
-                        />
-                        {touched.title && errors.title && <Text style={styles.error}> {errors.title}</Text>}
-                        <CustomInput type={'text'}
-                                     onChangeText={handleChange('content')}
-                                     onBlur={handleBlur('content')}
-                                     value={values.content}
-                                     placeholder={'Введите описание новости'}
-                                     multiline
+                    return (
+                        <View>
+                            <CustomInput type={'text'}
+                                         onChangeText={handleChange('title')}
+                                         onBlur={handleBlur('title')}
+                                         value={values.title}
+                                         placeholder={'Введите заголовок новости'}
+                                         multiline
 
-                        />
-                        {touched.content && errors.content && <Text style={styles.error}>{errors.content}</Text>}
+                            />
+                            {touched.title && errors.title && <Text style={styles.error}> {errors.title}</Text>}
+                            <CustomInput type={'text'}
+                                         onChangeText={handleChange('content')}
+                                         onBlur={handleBlur('content')}
+                                         value={values.content}
+                                         placeholder={'Введите описание новости'}
+                                         multiline
 
-                        <Text style={styles.textAdd}>Добавить картинку</Text>
-                            <CustomButton onPress={handleSubmit}>
-                                <Text style={styles.text}>{isEdit ? 'Изменить' : 'Добавить'}</Text>
-                            </CustomButton>
-                    </View>
-                )}
+                            />
+                            {touched.content && errors.content && <Text style={styles.error}>{errors.content}</Text>}
+
+                            {
+                                picture
+                                    ?
+                                    <>
+                                        <View style={{marginTop: 10}}>
+                                            <FitImage source={{uri: imageUrl}}/>
+                                        </View>
+                                        <CustomButton
+                                            onPress={deletePicture}
+                                            text={'Удалить изображение'}
+                                        />
+                                    </>
+                                    :
+                                    <CustomButton
+                                        onPress={takePicture}
+                                        text={'Добавить изображение'}
+                                    />
+                            }
+
+                            <CustomButton
+                                onPress={handleSubmit}
+                                text={isEdit ? 'Изменить новость' : 'Опубликовать новость'}
+                            />
+                        </View>
+                    )
+                }}
             </Formik>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    text: {
-        textAlign: 'center',
-        color: '#E0FFFF',
-        paddingTop: 15
-    },
     textAdd: {
         margin: 10
     },

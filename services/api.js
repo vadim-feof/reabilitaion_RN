@@ -3,7 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetInfo from '@react-native-community/netinfo'
 import Toast from "react-native-toast-message";
 import {toastShow} from "../utils/toastShow";
-export const API_URL = 'http://192.168.0.110:5000/api'
+
+export const SERVER_URL = 'http://192.168.0.110:5000'
+export const API_URL = `${SERVER_URL}/api`
+export const STATIC_IMAGE_NEWS_URL = `${SERVER_URL}/image/news/`
+export const STATIC_NEWS_UPLOAD = 'static/news'
+export const STATIC_SPECIALIST_UPLOAD = 'static/specialist'
 
 const $api = axios.create({
     baseURL: API_URL,
@@ -25,6 +30,7 @@ $api.interceptors.request.use(async (config) => {
 $api.interceptors.response.use((response) => {
     return response
 }, (error) => {
+    console.log(error)
     console.log(error.code)
     switch (error.code) {
         case 'ECONNABORTED':

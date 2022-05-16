@@ -5,7 +5,7 @@ import {useNews} from "../../context/NewsContext";
 import AddButton from "../../components/Buttons/AddButton/AddButton";
 import {toastShow} from "../../utils/toastShow";
 
-// TODO: Загрузка фото на сервер
+// TODO: progressbar for picture upload
 const News = ({navigation, route}) => {
 
     const {news, addNews, updateNews, removeNews, isLoading, fetchNews} = useNews()
@@ -40,7 +40,7 @@ const News = ({navigation, route}) => {
         navigation.setOptions({
             headerRight: ({tintColor}) => <AddButton
                 color={tintColor}
-                navigate={() => navigation.navigate('CreateNewsScreen')}
+                navigate={() => navigation.navigate('CreateNewsScreen', { isEdit: false })}
             />
         });
     }, [navigation]);

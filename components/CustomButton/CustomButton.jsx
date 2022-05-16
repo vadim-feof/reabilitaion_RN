@@ -6,9 +6,11 @@ const CustomButton = (props) => {
         <TouchableOpacity
             style={styles.btn}
             {...props}
-
+            activeOpacity={0.8}
         >
-            {props.children}
+            <Text style={styles.text}>
+                {props.text}
+            </Text>
         </TouchableOpacity>
     );
 };
@@ -22,6 +24,13 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginTop: 20,
         marginBottom: 15
+    },
+    text: {
+        textAlign: 'center',
+        color: '#ffffff',
+        fontSize: 16,
+        fontWeight: 'bold',
+        paddingTop: 15
     },
 })
 
