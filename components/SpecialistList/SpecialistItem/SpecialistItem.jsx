@@ -9,7 +9,7 @@ const SpecialistItem = ({specialist, navigation}) => {
         <TouchableHighlight
             delayPressIn={70}
             underlayColor={'#dddddd'}
-            onPress={() => navigation.navigate('SpecialistDescription', specialist)}
+            onPress={() => navigation.navigate('SpecialistDescriptionScreen', specialist)}
         >
             <View style={styles.item}>
                 <Image style={styles.photo} source={specialist.photo ? {uri: imageUrl} : require('../../../assets/doctorNoPhoto.png')}/>

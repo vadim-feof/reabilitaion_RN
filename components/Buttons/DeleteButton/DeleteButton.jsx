@@ -24,7 +24,6 @@ const DeleteButton = ({color, navigate}) => {
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.container}>
                 <AntDesign name="delete" size={30} color={color} />
-                <Text style={{...styles.text, color: color}}>Удалить</Text>
             </View>
         </TouchableWithoutFeedback>
     );
@@ -32,13 +31,8 @@ const DeleteButton = ({color, navigate}) => {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "row"
+        marginRight: 25
     },
-    text: {
-        fontSize: 18,
-        marginLeft: 10,
-        fontWeight: 'bold'
-    }
 })
 
 export default DeleteButton;

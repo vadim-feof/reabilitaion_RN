@@ -11,9 +11,9 @@ const FormAddSpecialist = ({navigation, isEdit, editingSpecialist, takePicture, 
     const imageUrl = STATIC_IMAGE_SPECIALIST_URL + photo
     const validationSchema = yup.object().shape(
         {
-            name: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-            position: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-            description: yup.string().typeError('Должно быть строкой').required('Обязательно'),
+            name: yup.string().typeError('Должно быть строкой').required('Поажлуйста, ввдедите ФИО специалиста'),
+            position: yup.string().typeError('Должно быть строкой').required('Пожалуйста, введите должность'),
+            description: yup.string().typeError('Должно быть строкой').required('Пожалуйста, введите описание'),
         }
     )
 

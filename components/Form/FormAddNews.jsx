@@ -11,8 +11,8 @@ const FormAddNews = ({navigation, isEdit, editingNews, takePicture, deletePictur
     const imageUrl = STATIC_IMAGE_NEWS_URL + picture
     const validationSchema = yup.object().shape(
         {
-            title: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-            content: yup.string().typeError('Должно быть строкой').required('Обязательно'),
+            title: yup.string().typeError('Должно быть строкой').required('Обязательно для заполнения'),
+            content: yup.string().typeError('Должно быть строкой').required('Обязательно для заполнения'),
         }
     )
 
