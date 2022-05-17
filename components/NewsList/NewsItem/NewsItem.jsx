@@ -23,7 +23,7 @@ const NewsItem = ({news, navigation}) => {
                 <View
                     style={{marginTop: 10}}
                 >
-                    {news.picture && <FitImage source={{uri: news.picture}}/>}
+                    {news.picture ? <FitImage source={{uri: news.picture}}/> : null}
                 </View>
                 <View style={styles.description}>
                     <Text style={styles.content}>

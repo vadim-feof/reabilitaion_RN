@@ -3,7 +3,7 @@ import {Dimensions, Image, StyleSheet, Text, TouchableHighlight, View} from "rea
 
 const ServiceItem = ({service, index, navigation}) => {
 
-    const itemClass = []
+    const itemClass = [styles.item]
     if (index % 2 === 0) {
         itemClass.push(styles.greyItem)
     }
@@ -36,8 +36,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(0,0,0,0.2)',
-        borderBottomLeftRadius: 80,
-        borderBottomRightRadius: 80,
+
     },
     description: {
         alignItems: "flex-start",

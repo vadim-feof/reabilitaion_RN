@@ -17,6 +17,7 @@
     "@react-navigation/drawer": "^6.4.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
+    "accordion-collapse-react-native": "^1.1.0",
     "axios": "^0.27.2",
     "expo": "~44.0.0",
     "expo-checkbox": "~2.0.0",
