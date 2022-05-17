@@ -41,7 +41,7 @@ const Specialists = ({navigation, route}) => {
         navigation.setOptions({
             headerRight: ({tintColor}) => <AddButton
                 color={tintColor}
-                navigate={() => navigation.navigate('CreateSpecialistScreen')}
+                navigate={() => navigation.navigate('CreateSpecialistScreen', { isEdit: false})}
             />
         });
     }, [navigation]);

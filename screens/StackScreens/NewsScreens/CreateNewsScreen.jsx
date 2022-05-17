@@ -6,7 +6,9 @@ import PictureService from "../../../services/PictureService";
 import {toastShow} from "../../../utils/toastShow";
 import BackButton from "../../../components/Buttons/BackButton/BackButton";
 import {STATIC_NEWS_UPLOAD} from "../../../services/api";
+import {takePictureFromLibrary} from "../../../utils/takePictureFromLibrary";
 
+// TODO: попробовать убрать кнопку выхода в роуты
 const CreateNewsScreen = ({navigation, route}) => {
 
     const [picture, setPicture] = useState('')
@@ -16,18 +18,7 @@ const CreateNewsScreen = ({navigation, route}) => {
     const [isNewPicture, setIsNewPicture] = useState(!Boolean(editingNews?.picture || ''))
 
     const takePicture = async () => {
-        // Ask the user for the permission to access the media library
-        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-        if (permissionResult.granted === false) {
-            alert("You've refused to allow this app to access your photos!");
-            return;
-        }
-        const picture = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            base64: false,
-            presentationStyle: 0
-        })
+        const picture = await takePictureFromLibrary()
         if (!picture.cancelled) {
             const {pictureFilename} = await PictureService.uploadPicture(picture.uri, STATIC_NEWS_UPLOAD)
             setPicture(pictureFilename)
@@ -37,8 +28,10 @@ const CreateNewsScreen = ({navigation, route}) => {
 
     const deletePicture = async () => {
         // удалить пикчу с сервера если: не режим редактирования или это новая пикча
-        if (!isEdit || isNewPicture)
+        if (!isEdit || isNewPicture) {
+            console.log('УДАЛЕНИЕ С СЕРВЕРА')
             await PictureService.removePicture(picture, STATIC_NEWS_UPLOAD)
+        }
         setPicture('')
         setIsNewPicture(true)
         toastShow('success', 'Изображение удалено')
