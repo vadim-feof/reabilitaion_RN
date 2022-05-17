@@ -41,7 +41,7 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.position}>{position}</Text>
             </View>
-            <View style={{justifyContent: 'center'}}>
+            <View style={{alignItems: 'center'}}>
                 <FitImage style={styles.photo}
                           source={photo ? {uri: imageUrl} : require('../../../assets/doctorNoPhoto.png')}
                           resizeMode='cover'
