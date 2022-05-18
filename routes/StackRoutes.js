@@ -35,15 +35,7 @@ export const publicScreens = [
             gestureEnabled: false
         }
     },
-    {name: 'SpecialistDescriptionScreen', component: SpecialistDescriptionScreen, options: {title: 'О специалисте'}},
-    {name: 'CreateSpecialistScreen', component: CreateSpecialistScreen, options: {title: 'Добавить специалиста'}},
-    {name: 'UpdateSpecialistScreen', component: UpdateSpecialistScreen, options: {title: 'Изменить специалиста'}},
-    {name: 'NewsDescriptionScreen', component: NewsDescriptionScreen, options: {title: 'Новости'}},
-    {name: 'CreateNewsScreen', component: CreateNewsScreen, options: {title: 'Добавить новость'}},
-    {name: 'UpdateNewsScreen', component: UpdateNewsScreen, options: {title: 'Изменить новость'}},
-    {name: 'CreateServiceScreen', component: CreateServiceScreen, options: {title: 'Добавить услугу'}},
-    {name: 'ServiceDescriptionScreen', component: ServiceDescriptionScreen, options: {title: 'Об услуге'}},
-    {name: 'UpdateServiceScreen', component: UpdateServiceScreen, options: {title: 'Изменить услугу'}},
+
     {name: 'CreateServiceScreen', component: CreateServiceScreen, options: {title: 'Добавить услугу'}},
     {name: 'ServiceDescriptionScreen', component: ServiceDescriptionScreen, options: {title: 'Об услуге'}},
     {name: 'UpdateServiceScreen', component: UpdateServiceScreen, options: {title: 'Изменить услугу'}},

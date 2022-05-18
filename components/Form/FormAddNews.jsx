@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text} from "react-native";
+import {StyleSheet, View, Text, ScrollView} from "react-native";
 import {Formik} from 'formik'
 import * as yup from 'yup'
 import CustomInput from "../CustomInput/CustomInput";
@@ -57,7 +57,7 @@ const FormAddNews = ({navigation, isEdit, editingNews, takePicture, deletePictur
                     }, [dirty]);
 
                     return (
-                        <View>
+                        <ScrollView>
                             <CustomInput type={'text'}
                                          onChangeText={handleChange('title')}
                                          onBlur={handleBlur('title')}
@@ -100,7 +100,7 @@ const FormAddNews = ({navigation, isEdit, editingNews, takePicture, deletePictur
                                 onPress={handleSubmit}
                                 text={isEdit ? 'Изменить новость' : 'Опубликовать новость'}
                             />
-                        </View>
+                        </ScrollView>
                     )
                 }}
             </Formik>

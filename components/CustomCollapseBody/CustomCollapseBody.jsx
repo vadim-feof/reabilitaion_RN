@@ -4,9 +4,9 @@ import {StyleSheet, View, Text} from "react-native";
 
 const CustomCollapseBody = (props) => {
     return (
-        <View style={styles.header}>
+        <Text style={styles.header}>
             <Text style={styles.text}>{props.children}</Text>
-        </View>
+        </Text>
     );
 };
 

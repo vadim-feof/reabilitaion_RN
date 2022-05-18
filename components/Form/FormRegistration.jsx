@@ -130,9 +130,7 @@ const FormRegistration = () => {
                             {touched.confirmPassword && errors.confirmPassword && <Text style={styles.error}> {errors.confirmPassword}</Text>}
                         </View>
 
-                        <CustomButton onPress={handleSubmit}>
-                            <Text style={styles.text}>Зарегистрироваться</Text>
-                        </CustomButton>
+                        <CustomButton onPress={handleSubmit} text={'Зарегистрироваться'}/>
                     </ScrollView>
                 )}
 
