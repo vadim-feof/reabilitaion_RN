@@ -13,6 +13,8 @@ import Registration from "../screens/DrawerScreens/Registration";
 import {SpecialistProvider} from "../context/SpecialistContext";
 import Services from "../screens/DrawerScreens/Services";
 import Questions from "../screens/DrawerScreens/Questions";
+import LFK from "../components/LFK/LFK";
+import {ServicesProvider} from "../context/ServicesContext";
 
 export const publicScreens = [
     {name: 'News', component: (props) => <NewsProvider><News {...props}/></NewsProvider>,
@@ -44,7 +46,7 @@ export const publicScreens = [
             drawerIcon: ({color}) => <MaterialIcons name="app-registration" size={32} color={color} />
         }
     },
-    {name: 'Services', component: (props) => <Services {...props}/>,
+    {name: 'Services', component: (props) => <ServicesProvider><Services {...props}/></ServicesProvider>,
         options: {
             title: 'Услуги',
             drawerIcon: ({color}) => <Entypo name="list" size={32} color={color} />
@@ -54,6 +56,12 @@ export const publicScreens = [
         options: {
             title: 'Помощь',
             drawerIcon: ({color}) => <AntDesign name="questioncircleo" size={32} color={color} />
+        }
+    },
+    {name: 'LFK', component: (props) => <LFK {...props}/>,
+        options: {
+            title: 'Комплексы ЛФК',
+            drawerIcon: ({color}) => <AntDesign name="database" size={32} color={color} />
         }
     },
 ]

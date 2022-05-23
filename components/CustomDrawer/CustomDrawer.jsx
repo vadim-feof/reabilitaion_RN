@@ -22,8 +22,7 @@ const CustomDrawer = (props) => {
                         <View style={styles.profile}>
 
                         </View>
-                        <Text>Имя</Text>
-                        <Text>Номер телефона</Text>
+                        <Text style={{marginLeft: 15}}>Вход не выполнен</Text>
                     </View>
                 </TouchableOpacity>
                 <DrawerItemList {...props}/>

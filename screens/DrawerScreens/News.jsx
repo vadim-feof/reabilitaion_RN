@@ -35,7 +35,6 @@ const News = ({navigation, route}) => {
             }
     }, [route.params])
 
-
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: ({tintColor}) => <AddButton

@@ -3,10 +3,10 @@ import SpecialistItem from "../SpecialistList/SpecialistItem/SpecialistItem";
 import {FlatList, RefreshControl} from "react-native";
 import ServiceItem from "./ServiceItem/ServiceItem";
 
-const ServiceList = ({service, navigation}) => {
+const ServiceList = ({services, navigation, refresh, isLoading}) => {
     return (
         <FlatList
-            data={service}
+            data={services}
             renderItem={({item, index}) => (
                 <ServiceItem
                     service={item}
@@ -15,6 +15,12 @@ const ServiceList = ({service, navigation}) => {
                 />
             )}
             keyExtractor={service => service.name}
+            refreshControl={<RefreshControl
+                refreshing={isLoading}
+                onRefresh={refresh}
+                title={'Отпустите для обновления'}
+                colors={['#D58B40', '#D58B40']}
+            />}
         />
     );
 };

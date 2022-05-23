@@ -56,7 +56,7 @@ const FormAddService = ({navigation, isEdit, editingService}) => {
                                      onChangeText={handleChange('code')}
                                      onBlur={handleBlur('code')}
                                      value={values.code}
-                                     placeholder={'Введите код амбулаторной карты'}
+                                     placeholder={'Введите код услуги'}
                                      multiline
 
                         />

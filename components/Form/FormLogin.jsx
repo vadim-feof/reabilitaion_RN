@@ -92,7 +92,7 @@ const FormLogin = () => {
 const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
-        color: '#E0FFFF',
+        color: 'white',
         paddingTop: 15
     },
     error: {
