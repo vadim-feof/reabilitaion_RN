@@ -56,7 +56,7 @@ const FormLogin = () => {
                                                  onChangeText={handleChange('telephone')}
                                                  onBlur={handleBlur('telephone')}
                                                  value={values.telephone}
-                                                 placeholder={'Телефон'}
+                                                 placeholder={'Введите номер телефона'}
                                     />
                                     {touched.telephone && errors.telephone && <Text style={styles.error}> {errors.telephone}</Text>}
                                 </>
@@ -66,7 +66,7 @@ const FormLogin = () => {
                                      onChangeText={handleChange('password')}
                                      onBlur={handleBlur('password')}
                                      value={values.password}
-                                     placeholder={'Пароль'}
+                                     placeholder={'Введите пароль'}
 
                         />
                         {touched.password && errors.password && <Text style={styles.error}> {errors.password}</Text>}
@@ -79,9 +79,7 @@ const FormLogin = () => {
                             />
                             <Text style={styles.label}>Войти с помощью электронной почты</Text>
                         </View>
-                        <CustomButton onPress={handleSubmit}>
-                            <Text style={styles.text}>Войти</Text>
-                        </CustomButton>
+                        <CustomButton onPress={handleSubmit} text={'Войти'}/>
                     </View>
                 )}
             </Formik>
@@ -111,6 +109,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 17,
+        height: 45,
         marginLeft: 5
     }
 })

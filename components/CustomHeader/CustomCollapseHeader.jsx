@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {AntDesign} from '@expo/vector-icons';
 
 const CustomCollapseHeader = (props) => {
 
     return (
-        <TouchableOpacity style={styles.header}>
+        <View style={styles.header}>
             <Text style={styles.text}>{props.children}</Text>
             <AntDesign name="down" size={24} color="black"/>
-        </TouchableOpacity>
+        </View>
     );
 };
 
