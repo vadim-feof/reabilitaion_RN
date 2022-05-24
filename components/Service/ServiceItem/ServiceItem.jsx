@@ -19,6 +19,7 @@ const ServiceItem = ({service, index, navigation}) => {
                         <Text style={styles.code}>{service.code}</Text>
                         <Text style={styles.name}>{service.name}</Text>
                         <Text style={styles.price}>{service.price}</Text>
+                        <Text style={styles.price}>{service.description}</Text>
                     </View>
                 </View>
 

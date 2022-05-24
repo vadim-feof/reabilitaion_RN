@@ -12,6 +12,7 @@ const FormAddService = ({navigation, isEdit, editingService}) => {
             code: yup.string().typeError('Должно быть строкой').required('Пожалуйста введите код услуги'),
             name: yup.string().typeError('Должно быть строкой').required('Пожалуйста, введите название услуги'),
             price: yup.string().typeError('Должно быть строкой').required('Пожалуйста, введите стоимость услуги'),
+            description: yup.string().typeError('Должно быть строкой')
         }
     )
 
@@ -39,6 +40,7 @@ const FormAddService = ({navigation, isEdit, editingService}) => {
                     code: isEdit ? editingService.code : '',
                     name: isEdit ? editingService.name : '',
                     price: isEdit ? editingService.price : '',
+                    description:  isEdit ? editingService.description : ''
                 }}
                 validateOnBlur
                 onSubmit={(values) => {
@@ -76,6 +78,13 @@ const FormAddService = ({navigation, isEdit, editingService}) => {
                                      placeholder={'Введите стоимость услуги'}
                         />
                         {touched.price && errors.price && <Text style={styles.error}>{errors.price}</Text>}
+                        <CustomInput type={'text'}
+                                     onChangeText={handleChange('description')}
+                                     onBlur={handleBlur('description')}
+                                     value={values.description}
+                                     placeholder={'Введите описание услуги'}
+                        />
+                        {touched.description && errors.description && <Text style={styles.error}>{errors.description}</Text>}
 
                         <CustomButton onPress={handleSubmit}>
                             <Text style={styles.text}>{isEdit ? 'Изменить' : 'Добавить'}</Text>

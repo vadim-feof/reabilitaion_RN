@@ -6,7 +6,7 @@ import EditButton from "../../../components/Buttons/EditButton/EditButton";
 const ServiceDescriptionScreen = ({navigation, route}) => {
 
     const service = route.params
-    const {code, name, price} = service
+    const {code, name, price, description} = service
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -36,6 +36,7 @@ const ServiceDescriptionScreen = ({navigation, route}) => {
                 <Text style={styles.code}>{code}</Text>
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.price}>{price}</Text>
+                <Text style={styles.price}>{description}</Text>
             </View>
     );
 };

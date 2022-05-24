@@ -1,17 +1,21 @@
 import React from 'react';
 import {StyleSheet, View, Text} from "react-native";
+import { CollapseBody} from 'accordion-collapse-react-native';
 
 
 const CustomCollapseBody = (props) => {
     return (
-        <Text style={styles.header}>
-            <Text style={styles.text}>{props.children}</Text>
-        </Text>
+        <CollapseBody>
+            <Text style={styles.header}>
+                <Text style={styles.text}>{props.children}</Text>
+            </Text>
+        </CollapseBody>
+
     );
 };
 
 const styles = StyleSheet.create({
-    header:{
+    body:{
         flexDirection: "row",
         paddingVertical: 10,
         borderBottomWidth: 1,
