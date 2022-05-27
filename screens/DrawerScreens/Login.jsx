@@ -1,13 +1,16 @@
 import React from 'react';
-import {StyleSheet, Image, Text, TextInput, View} from "react-native";
+import {StyleSheet, Image, View} from "react-native";
 import logo from "../../assets/logo.png";
 import FormLogin from "../../components/Form/FormLogin";
 
-const Login = () => {
+const Login = ({navigation}) => {
+
     return (
         <View style={styles.container}>
             <Image style={styles.logo_img} source={logo}/>
-            <FormLogin/>
+            <FormLogin
+                navigation={navigation}
+            />
         </View>
     );
 };
@@ -17,6 +20,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center'
+    },
+    loader: {
+        position: 'absolute',
+        zIndex: 5
     },
     logo_img: {
         resizeMode: 'contain',

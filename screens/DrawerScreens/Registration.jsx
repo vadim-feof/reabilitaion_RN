@@ -2,11 +2,19 @@ import React from 'react';
 import {StyleSheet, View} from "react-native";
 import FormRegistration from "../../components/Form/FormRegistration";
 
-const Registration = () => {
+const Registration = ({navigation}) => {
+
+
+
+    const navigateToLogin = () => {
+        navigation.navigate('Login')
+    }
 
     return (
         <View style={styles.container}>
-            <FormRegistration/>
+            <FormRegistration
+
+            />
         </View>
     );
 };

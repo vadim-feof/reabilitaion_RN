@@ -1,10 +1,23 @@
 import $api from "./api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default class AuthService {
-    static async login({email, phone, password}) {
-        const response = await $api.post('/login', {
-            email, phone, password
-        })
+    static async login(isEmail, login, password) {
+        let loginData
+        if (isEmail) {
+            loginData = {
+                email: login,
+                password
+            }
+        }
+        else {
+            loginData = {
+                phone: login,
+                password
+            }
+        }
+        const response = await $api.post('/login', loginData)
+        await AsyncStorage.setItem('token', response.data.token)
         return response.data
     }
 
@@ -15,6 +28,6 @@ export default class AuthService {
 
     static async auth() {
         const response = await $api.get('/auth')
-
+        await AsyncStorage.setItem('token', response.data.token)
     }
 }

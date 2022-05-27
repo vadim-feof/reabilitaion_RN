@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
 
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import CustomButton from "../../components/CustomButton/CustomButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useAuth} from "../../context/AuthContext";
 
-const MyAccount = () => {
+const MyAccount = ({navigation}) => {
     const [info, setInfo ] = useState(
         {name:'Прощекальникова Геля Дмитриевна', phone: '89111111111', email: 'text@mail.ru',
             birthday: '10.08.2000', card: '123456789009876'}
     )
 
+    const {logOut} = useAuth()
 
     return (
         <View style={styles.container}>
@@ -29,6 +33,12 @@ const MyAccount = () => {
                     <Text> {info.birthday}</Text>
                 </Text>
             </View>
+            <CustomButton
+                text={'Выход'}
+                onPress={() => {
+                    logOut(() => navigation.navigate('News'))
+                }}
+            />
         </View>
     );
 };

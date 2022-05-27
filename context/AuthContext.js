@@ -1,19 +1,52 @@
-import React, {createContext, useContext, useState} from 'react';
-import {toastShow} from "../utils/toastShow";;
+import React, {createContext, useContext, useEffect, useState} from 'react';
+import AuthService from "../services/AuthService";
+import {toastShow} from "../utils/toastShow";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext(null)
 
 export const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState({})
+    const [isAuth, setIsAuth] = useState(false)
+    const [token, setToken] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
-    const loginUser = async () => {
+    useEffect(async () => {
+        const token = await AsyncStorage.getItem('token')
+        if (token) {
+            setToken(token)
+            setIsAuth(true)
+        }
+    }, [isAuth]);
+
+
+    const loginUser = async ({isEmail, login, password}, callback) => {
         try {
             setIsLoading(true)
-
+            const {user: userData} = await AuthService.login(isEmail, login, password)
+            setIsAuth(true)
+            setUser(userData)
+            toastShow('success', 'Вход выполнен')
+            callback()
         } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
+    const logOut = async (callback) => {
+        try {
+            setIsLoading(true)
+            await AsyncStorage.removeItem('token')
+            setToken('')
+            setIsAuth(false)
+            setUser({})
+            toastShow('success', 'Выход выполнен')
+            callback()
+        } catch (e) {
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
@@ -41,18 +74,6 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-    const fetchUser = async () => {
-        try {
-            setIsLoading(true)
-            //запрос
-            setUser({})
-        } catch(e) {
-            toastShow('error', 'Что-то пошло не так...', e.response.data.message)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
     const updateUser = async (specialist) => {
         try {
             setIsLoading(true)
@@ -66,7 +87,7 @@ export const AuthProvider = ({children}) => {
     }
 
     const value = {
-        user, fetchUser, updateUser
+        user, token, isLoading, loginUser, logOut, registrationUser, authUser, updateUser
     }
 
 
