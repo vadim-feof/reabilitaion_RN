@@ -1,14 +1,12 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {Alert, StyleSheet, View, Text} from "react-native";
 import FormAddNews from "../../../components/Form/FormAddNews";
-import * as ImagePicker from "expo-image-picker";
 import PictureService from "../../../services/PictureService";
 import {toastShow} from "../../../utils/toastShow";
 import BackButton from "../../../components/Buttons/BackButton/BackButton";
 import {STATIC_NEWS_UPLOAD} from "../../../services/api";
 import {takePictureFromLibrary} from "../../../utils/takePictureFromLibrary";
 
-// TODO: попробовать убрать кнопку выхода в роуты
 const CreateNewsScreen = ({navigation, route}) => {
 
     const [picture, setPicture] = useState('')

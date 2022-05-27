@@ -4,7 +4,7 @@ import NetInfo from '@react-native-community/netinfo'
 import Toast from "react-native-toast-message";
 import {toastShow} from "../utils/toastShow";
 
-export const SERVER_URL = 'http://192.168.0.101:5000'
+export const SERVER_URL = 'http://192.168.0.110:5000'
 export const API_URL = `${SERVER_URL}/api`
 export const STATIC_IMAGE_NEWS_URL = `${SERVER_URL}/image/news/`
 export const STATIC_IMAGE_SPECIALIST_URL = `${SERVER_URL}/image/specialist/`
