@@ -7,6 +7,7 @@ import UpdateNewsScreen from "../screens/StackScreens/NewsScreens/CreateNewsScre
 import CreateServiceScreen from "../screens/StackScreens/ServicesScreens/CreateServiceScreen";
 import ServiceDescriptionScreen from "../screens/StackScreens/ServicesScreens/ServiceDescriptionScreen";
 import UpdateServiceScreen from "../screens/StackScreens/ServicesScreens/UpdateServiceScreen";
+import ModalAddCategory from "../components/ModalWindows/ModalAddCategory";
 
 export const publicScreens = [
     {name: 'SpecialistDescriptionScreen', component: SpecialistDescriptionScreen, options: {title: 'О специалисте'}},
@@ -39,5 +40,6 @@ export const publicScreens = [
     {name: 'CreateServiceScreen', component: CreateServiceScreen, options: {title: 'Добавить услугу'}},
     {name: 'ServiceDescriptionScreen', component: ServiceDescriptionScreen, options: {title: 'Об услуге'}},
     {name: 'UpdateServiceScreen', component: UpdateServiceScreen, options: {title: 'Изменить услугу'}},
+
 
 ]

@@ -15,6 +15,7 @@ import Services from "../screens/DrawerScreens/Services";
 import Questions from "../screens/DrawerScreens/Questions";
 import LFK from "../components/LFK/LFK";
 import {ServicesProvider} from "../context/ServicesContext";
+import {QuestionsProvider} from "../context/QuestionsContext";
 
 export const publicScreens = [
     {name: 'News', component: (props) => <NewsProvider><News {...props}/></NewsProvider>,
@@ -52,7 +53,7 @@ export const publicScreens = [
             drawerIcon: ({color}) => <Entypo name="list" size={32} color={color} />
         }
     },
-    {name: 'Questions', component: (props) => <Questions {...props}/>,
+    {name: 'Questions', component: (props) => <QuestionsProvider><Questions {...props}/></QuestionsProvider> ,
         options: {
             title: 'Помощь',
             drawerIcon: ({color}) => <AntDesign name="questioncircleo" size={32} color={color} />

@@ -56,6 +56,7 @@ const CreateNewsScreen = ({navigation, route}) => {
         }
 
     }, [navigation, formIsEdit, picture])
+
     useEffect(() => {
         if (isEdit) {
             setPicture(editingNews.picture)
