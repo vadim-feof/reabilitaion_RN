@@ -6,31 +6,28 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useAuth} from "../../context/AuthContext";
 
 const MyAccount = ({navigation}) => {
-    const [info, setInfo ] = useState(
-        {name:'Прощекальникова Геля Дмитриевна', phone: '89111111111', email: 'text@mail.ru',
-            birthday: '10.08.2000', card: '123456789009876'}
-    )
-
-    const {logOut} = useAuth()
-
+    const {user, logOut} = useAuth()
+    console.log(user)
     return (
         <View style={styles.container}>
             <View style={styles.wrapperPhoto}>
                 <Image  style={styles.photo} source={require('../../assets/Angelina.jpg')}/>
-                <Text style={styles.name}> {info.name} </Text>
+                <Text style={styles.name}>
+                    {user.name}
+                </Text>
             </View>
             <View style={styles.info}>
                 <Text style={styles.item}>Телефон:
-                    <Text> {info.phone}</Text>
+                    <Text> {user.phone}</Text>
                 </Text>
                 <Text style={styles.item}>Почта:
-                    <Text> {info.email}</Text>
+                    <Text> {user.email}</Text>
                 </Text>
                 <Text style={styles.item}>Номер карты:
-                    <Text> {info.card}</Text>
+                    <Text> {user.card}</Text>
                 </Text>
-                <Text style={styles.item}>День рождения:
-                    <Text> {info.birthday}</Text>
+                <Text style={styles.item}>Дата рождения:
+                    <Text> {new Date(user.birthday).toLocaleDateString('ru')}</Text>
                 </Text>
             </View>
             <CustomButton

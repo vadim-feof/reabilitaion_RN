@@ -17,6 +17,7 @@ export default class AuthService {
             }
         }
         const response = await $api.post('/login', loginData)
+        console.log('RESPONSE LOGIN', response.data.token)
         await AsyncStorage.setItem('token', response.data.token)
         return response.data
     }
@@ -29,5 +30,6 @@ export default class AuthService {
     static async auth() {
         const response = await $api.get('/auth')
         await AsyncStorage.setItem('token', response.data.token)
+        return response.data
     }
 }

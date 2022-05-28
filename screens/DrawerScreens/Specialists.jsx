@@ -17,7 +17,6 @@ const Specialists = ({navigation, route}) => {
 
     useEffect(async () => {
         const type = route.params?.type
-        console.log(type)
         if (type)
             switch (type) {
                 case 'add':

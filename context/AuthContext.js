@@ -8,24 +8,19 @@ export const AuthContext = createContext(null)
 export const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState({})
-    const [isAuth, setIsAuth] = useState(false)
     const [token, setToken] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(async () => {
-        const token = await AsyncStorage.getItem('token')
-        if (token) {
-            setToken(token)
-            setIsAuth(true)
-        }
-    }, [isAuth]);
+        await authUser()
+    }, []);
 
-
+    // TODO: регистрация
     const loginUser = async ({isEmail, login, password}, callback) => {
         try {
             setIsLoading(true)
-            const {user: userData} = await AuthService.login(isEmail, login, password)
-            setIsAuth(true)
+            const {user: userData, token} = await AuthService.login(isEmail, login, password)
+            setToken(token)
             setUser(userData)
             toastShow('success', 'Вход выполнен')
             callback()
@@ -41,7 +36,6 @@ export const AuthProvider = ({children}) => {
             setIsLoading(true)
             await AsyncStorage.removeItem('token')
             setToken('')
-            setIsAuth(false)
             setUser({})
             toastShow('success', 'Выход выполнен')
             callback()
@@ -66,9 +60,17 @@ export const AuthProvider = ({children}) => {
     const authUser = async () => {
         try {
             setIsLoading(true)
-
+            const storageToken = await AsyncStorage.getItem('token')
+            if (storageToken) {
+                const {user: userData, token} = await AuthService.auth()
+                setUser(userData)
+                setToken(token)
+            }
         } catch (e) {
-
+            await AsyncStorage.removeItem('token')
+            setToken('')
+            setUser({})
+            //console.log(e)
         } finally {
             setIsLoading(false)
         }

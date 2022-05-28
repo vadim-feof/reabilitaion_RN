@@ -10,7 +10,6 @@ const Stack = createNativeStackNavigator()
 
 const StackNavigator = () => {
     const {token} = useAuth()
-    console.log('TOKEN', token)
     return (
             <NavigationContainer>
                 <StatusBar backgroundColor={'#D58B40'}/>

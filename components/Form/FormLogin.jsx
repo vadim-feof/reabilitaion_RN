@@ -32,8 +32,8 @@ const FormLogin = ({navigation}) => {
         <View>
             <Formik initialValues={{
                 isEmail: false,
-                login: '',
-                password: '',
+                login: '+79961230853',
+                password: 'pass123',
             }}
                 validateOnBlur
                 onSubmit={(values, action) => {
