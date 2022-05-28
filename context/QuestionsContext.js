@@ -54,10 +54,12 @@ export const QuestionsProvider = ({children}) => {
     const deleteQuestion = async (_id, idQuestion) => {
         try {
             setIsLoading(true)
-            const deletedQuestion = await QuestionsService.deleteQuestion(_id, idQuestion)
-            setCategory(prevCategory => prevCategory.filter(
-                CategoryItem => CategoryItem._id !== deletedQuestion._id
-            ))
+            const updatedCategory = await QuestionsService.deleteQuestion(_id, idQuestion)
+            setCategory(prevCategory => prevCategory.map(category => {
+                if (category._id === updatedCategory._id)
+                    return updatedCategory
+                return category
+            }))
             toastShow('success', 'Вопрос удален')
         } catch(e) {
             console.log(e)

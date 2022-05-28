@@ -13,10 +13,11 @@ const ModalAddCategory = ({setVisibleModal, createCategory}) => {
                 placeholder={'Введите название категории'}
                 value={text}
                 onChangeText={setText}
+
             />
             <CustomButton
                 text={'Добавить категорию'}
-                onPress={() =>  { createCategory(text)
+                onPress={() =>  {createCategory(text)
                     setText('')
                     setVisibleModal(isVisible => !isVisible)
                 }}
@@ -33,10 +34,11 @@ const ModalAddCategory = ({setVisibleModal, createCategory}) => {
 const styles = StyleSheet.create({
     modal: {
         height: 320,
+        marginHorizontal: 10,
         backgroundColor: '#e0e0e0',
         paddingTop: 30,
         marginTop: 250,
-        borderRadius: 20
+        borderRadius: 10
     }
 })
 

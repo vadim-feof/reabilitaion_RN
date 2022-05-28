@@ -1,23 +1,67 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Collapse, CollapseBody, CollapseHeader} from "accordion-collapse-react-native";
-import {FlatList, StyleSheet, Text} from "react-native";
+import {Alert, FlatList, StyleSheet, Text, View, Vibration, Modal} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import QuestionList from "./QuestionList/QuestionList";
+import {TouchableHighlight} from "react-native";
+import ModalAddCategory from "../../ModalWindows/ModalAddCategory";
+import ModalAddQuestions from "../../ModalWindows/ModalAddQuestions";
 
-const QuestionCategoryItem = ({categoryItem}) => {
+const QuestionCategoryItem = ({categoryItem, deleteCategory, addQuestion, deleteQuestion}) => {
+
+    const [visibleModal, setVisibleModal] = useState(false)
+
+    const openAlert = () => {
+        Vibration.vibrate(80)
+        Alert.alert(
+            'Выберите действие',
+            '',
+            [
+                {
+                    text: 'Отмена',
+                },
+                {
+                    text: 'Удалить категорию',
+                    onPress: () => deleteCategory(categoryItem._id)
+                },
+                {
+                    text: 'Добавить вопрос',
+                    onPress: () => setVisibleModal(isVisible => !isVisible)
+                },
+
+            ]
+        )
+    }
+
     return (
-        <Collapse>
-            <CollapseHeader style={styles.header}>
-                <Text style={styles.text}>{categoryItem.name}</Text>
-                <AntDesign name="down" size={24} color="black" />
-            </CollapseHeader>
-
-            <CollapseBody>
-                <QuestionList
-                    questionArray={categoryItem.questionArray}
+        <>
+            <Modal visible={visibleModal}
+                   transparent={true}
+            >
+                <ModalAddQuestions
+                    setVisibleModal={setVisibleModal}
+                    addQuestion={addQuestion}
+                    idCategory={categoryItem._id}
                 />
-            </CollapseBody>
-        </Collapse>
+            </Modal>
+            <Collapse handleLongPress={openAlert}>
+                <CollapseHeader >
+                        <View style={styles.header}>
+                            <Text style={styles.text}>{categoryItem.name}</Text>
+                            <AntDesign name="down" size={24} color="black"/>
+                        </View>
+                </CollapseHeader>
+
+
+                <CollapseBody>
+                    <QuestionList
+                        questionArray={categoryItem.questionArray}
+                        deleteQuestion={deleteQuestion}
+                        idCategory={categoryItem._id}
+                    />
+                </CollapseBody>
+            </Collapse>
+        </>
     );
 };
 const styles = StyleSheet.create({

@@ -1,11 +1,28 @@
 import React from 'react';
 import {Collapse, CollapseBody, CollapseHeader} from "accordion-collapse-react-native";
-import {StyleSheet, Text} from "react-native";
+import {Alert, StyleSheet, Text, Vibration} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 
-const QuestionItem = ({questionItem}) => {
+const QuestionItem = ({questionItem, deleteQuestion, idCategory}) => {
+    const openAlert = () => {
+        Vibration.vibrate(80)
+        Alert.alert(
+            'Выберите действие',
+            '',
+            [
+                {
+                    text: 'Отмена',
+                },
+                {
+                    text: 'Удалить вопрос',
+                    onPress: () => deleteQuestion(idCategory,questionItem._id)
+                },
+            ]
+        )
+    }
+
     return (
-        <Collapse>
+        <Collapse handleLongPress={openAlert}>
             <CollapseHeader style={styles.header}>
                 <Text style={styles.text}>{questionItem.question}</Text>
                 <AntDesign name="down" size={24} color="black" style={{marginRight: 25}}/>

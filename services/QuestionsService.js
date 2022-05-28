@@ -24,7 +24,7 @@ export default class QuestionsService {
     static async deleteQuestion (_id, idQuestion) {
         const response = await $api.patch(`/question/${_id}`,  /*_id категори*/
             {},
-            {params: {idQuestion}}
+            {params: {_idquestion:idQuestion}}
             )
         return response.data
     }

@@ -7,22 +7,8 @@ import QuestionCategoryList from "../../components/QuestionCategoryList/Question
 import AddButton from "../../components/Buttons/AddButton/AddButton";
 import ModalAddCategory from "../../components/ModalWindows/ModalAddCategory";
 
-// TODO: сделать модалку не на весь экран
+// TODO: добавить рефреш и валидаицю полей
 const Questions = ({navigation, route}) => {
-
-    /*const [questions, setQuestions] = useState([
-        {
-            name: '1. Общие вопросы', questionsArray: [{question:'Как нас найти', answer: 'Нас не найти'},
-                {question:'Как записаться на прием', answer: 'Никак'},
-                {question:'О нашем отделении', answer: 'Круточо'}]
-        },
-        {
-            name: '2. Вопросы по работе отделения',
-            questionsArray: [{question: 'Наше отделение', answer: 'описание отделения'},
-                {question: 'другой вопрос', answer: 'другой ответ'}]
-        },
-
-    ])*/
 
     const {category, fetchCategory, createCategory, addQuestion, deleteQuestion, deleteCategory,
         isLoading} = useQuestions()
@@ -43,12 +29,15 @@ const Questions = ({navigation, route}) => {
     }, [navigation]);
 
     if (category.length === 0)
-        return <Text>Загрузка...</Text>
+        return <Text style={{fontSize: 18, textAlign: 'center'}}>Загрузка...</Text>
 
     return (
         <View style={styles.container}>
             <QuestionCategoryList
                 category={category}
+                deleteCategory={deleteCategory}
+                addQuestion={addQuestion}
+                deleteQuestion={deleteQuestion}
             />
             <Modal visible={visibleModal}
                    transparent={true}
