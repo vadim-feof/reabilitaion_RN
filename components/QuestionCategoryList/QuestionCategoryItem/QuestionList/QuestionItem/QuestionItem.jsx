@@ -15,6 +15,22 @@ const QuestionItem = ({questionItem, deleteQuestion, idCategory}) => {
                 },
                 {
                     text: 'Удалить вопрос',
+                    onPress: confirmDelete
+                },
+            ]
+        )
+    }
+
+    const confirmDelete = () => {
+        Alert.alert(
+            'Действительно удалить?',
+            '',
+            [
+                {
+                    text: 'Отмена',
+                },
+                {
+                    text: 'Удалить вопрос',
                     onPress: () => deleteQuestion(idCategory,questionItem._id)
                 },
             ]

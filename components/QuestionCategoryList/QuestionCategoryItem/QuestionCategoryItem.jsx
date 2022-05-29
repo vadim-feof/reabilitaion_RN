@@ -22,13 +22,29 @@ const QuestionCategoryItem = ({categoryItem, deleteCategory, addQuestion, delete
                 },
                 {
                     text: 'Удалить категорию',
-                    onPress: () => deleteCategory(categoryItem._id)
+                    onPress: confirmDelete
                 },
                 {
                     text: 'Добавить вопрос',
                     onPress: () => setVisibleModal(isVisible => !isVisible)
                 },
 
+            ]
+        )
+    }
+
+    const confirmDelete = () => {
+        Alert.alert(
+            'Действительно удалить?',
+            '',
+            [
+                {
+                    text: 'Отмена',
+                },
+                {
+                    text: 'Удалить категорию',
+                    onPress: () => deleteCategory(categoryItem._id)
+                },
             ]
         )
     }

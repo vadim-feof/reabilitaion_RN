@@ -34,6 +34,8 @@ const Questions = ({navigation, route}) => {
     return (
         <View style={styles.container}>
             <QuestionCategoryList
+                refresh={fetchCategory}
+                isLoading={isLoading}
                 category={category}
                 deleteCategory={deleteCategory}
                 addQuestion={addQuestion}

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {FlatList, StyleSheet, Text} from "react-native";
+import {FlatList, RefreshControl, StyleSheet, Text} from "react-native";
 import QuestionCategoryItem from "./QuestionCategoryItem/QuestionCategoryItem";
 
 
-const QuestionCategoryList = ({category, deleteCategory, addQuestion, deleteQuestion}) => {
+const QuestionCategoryList = ({category, deleteCategory, addQuestion, deleteQuestion,  refresh, isLoading}) => {
     return (
         <FlatList
             data={category}
@@ -16,6 +16,12 @@ const QuestionCategoryList = ({category, deleteCategory, addQuestion, deleteQues
                 />
             )}
             keyExtractor={item => item._id.toString()}
+            refreshControl={<RefreshControl
+                refreshing={isLoading}
+                onRefresh={refresh}
+                title={'Отпустите для обновления'}
+                colors={['#D58B40', '#D58B40']}
+            />}
         />
     );
 };

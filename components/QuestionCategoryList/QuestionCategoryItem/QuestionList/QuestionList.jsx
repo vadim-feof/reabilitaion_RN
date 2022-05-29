@@ -1,7 +1,5 @@
 import React from 'react';
-import {Collapse, CollapseBody, CollapseHeader} from "accordion-collapse-react-native";
-import {FlatList, Text} from "react-native";
-import {AntDesign} from "@expo/vector-icons";
+import {FlatList} from "react-native";
 import QuestionItem from "./QuestionItem/QuestionItem";
 
 const QuestionList = ({questionArray, deleteQuestion, idCategory}) => {
