@@ -7,7 +7,7 @@ import {useAuth} from "../../context/AuthContext";
 
 const MyAccount = ({navigation}) => {
     const {user, logOut} = useAuth()
-    console.log(user)
+
     return (
         <View style={styles.container}>
             <View style={styles.wrapperPhoto}>

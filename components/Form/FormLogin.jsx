@@ -21,7 +21,8 @@ const FormLogin = ({navigation}) => {
                 is: true,
                 then: yup.string().email('Пожалуйста, введите правильный email')
                     .required('Пожалуйста, введите Ваш email'),
-                otherwise: yup.string().required('Пожалуйста, введите ваш номер телефона')
+                otherwise: yup.string().matches('^(\\+{1}[0-9]{11})$', 'Номер телефона должен быть в формате +71234567890')
+                    .required('Пожалуйста, введите ваш номер телефона')
             }),
             password: yup.string().typeError('Должно быть строкой')
                 .required('Укажите пароль'),
@@ -77,7 +78,11 @@ const FormLogin = ({navigation}) => {
                             />
                             <Text style={styles.label}>Войти с помощью электронной почты</Text>
                         </View>
-                        <CustomButton onPress={handleSubmit} text={'Войти'}/>
+                        <CustomButton
+                            disabled={isLoading}
+                            onPress={handleSubmit}
+                            text={'Войти'}
+                        />
                     </View>
                 )}
             </Formik>
@@ -94,7 +99,8 @@ const styles = StyleSheet.create({
     error: {
         color: 'red',
         marginLeft: 10,
-        marginTop: 5
+        marginBottom: 10,
+        fontSize: 18,
     },
     checkboxContainer: {
         flexShrink: 1,

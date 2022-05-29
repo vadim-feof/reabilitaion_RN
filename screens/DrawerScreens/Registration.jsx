@@ -4,17 +4,9 @@ import FormRegistration from "../../components/Form/FormRegistration";
 
 const Registration = ({navigation}) => {
 
-
-
-    const navigateToLogin = () => {
-        navigation.navigate('Login')
-    }
-
     return (
         <View style={styles.container}>
-            <FormRegistration
-
-            />
+            <FormRegistration navigation={navigation}/>
         </View>
     );
 };

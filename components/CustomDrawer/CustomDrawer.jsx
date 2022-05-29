@@ -21,7 +21,12 @@ const CustomDrawer = (props) => {
                     delayPressIn={70}
                     activeOpacity={0.8}
                     style={styles.item}
-                    onPress={() => navigation.navigate('MyAccount')}
+                    onPress={() => {
+                        if (token)
+                            navigation.navigate('MyAccount')
+                        else
+                            navigation.navigate('Login')
+                    }}
                 >
                     <View style={styles.profileContainer}>
                         <Image style={styles.photo} source={user.photo

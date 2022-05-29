@@ -46,12 +46,14 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-    const registrationUser = async () => {
+    const registrationUser = async (regData, callback) => {
         try {
             setIsLoading(true)
-
+            const {message} = await AuthService.registration(regData)
+            toastShow('success', message)
+            callback()
         } catch (e) {
-
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
