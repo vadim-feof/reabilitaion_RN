@@ -7,6 +7,7 @@ import UpdateNewsScreen from "../screens/StackScreens/NewsScreens/CreateNewsScre
 import CreateServiceScreen from "../screens/StackScreens/ServicesScreens/CreateServiceScreen";
 import ServiceDescriptionScreen from "../screens/StackScreens/ServicesScreens/ServiceDescriptionScreen";
 import UpdateServiceScreen from "../screens/StackScreens/ServicesScreens/UpdateServiceScreen";
+import ModalAddCategory from "../components/ModalWindows/ModalAddCategory";
 
 export const publicScreens = [
     {name: 'NewsDescriptionScreen', component: NewsDescriptionScreen, options: {title: 'Новости'}},
