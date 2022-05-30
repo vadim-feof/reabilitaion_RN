@@ -9,7 +9,14 @@ import ServiceDescriptionScreen from "../screens/StackScreens/ServicesScreens/Se
 import UpdateServiceScreen from "../screens/StackScreens/ServicesScreens/UpdateServiceScreen";
 
 export const publicScreens = [
-    {name: 'SpecialistDescriptionScreen', component: SpecialistDescriptionScreen, options: {title: 'О специалисте'}},
+    {name: 'NewsDescriptionScreen', component: NewsDescriptionScreen, options: {title: 'Новости'}},
+]
+
+export const privateScreens = [
+    {name: 'SpecialistDescriptionScreen',
+        component: SpecialistDescriptionScreen,
+        options: {title: 'О специалисте'}
+    },
     {name: 'CreateSpecialistScreen', component: CreateSpecialistScreen,
         options: {
             title: 'Добавить специалиста',
@@ -22,7 +29,7 @@ export const publicScreens = [
             gestureEnabled: false
         }
     },
-    {name: 'NewsDescriptionScreen', component: NewsDescriptionScreen, options: {title: 'Новости'}},
+
     {name: 'CreateNewsScreen', component: CreateNewsScreen,
         options: {
             title: 'Добавить новость',
@@ -36,8 +43,16 @@ export const publicScreens = [
         }
     },
 
-    {name: 'CreateServiceScreen', component: CreateServiceScreen, options: {title: 'Добавить услугу'}},
-    {name: 'ServiceDescriptionScreen', component: ServiceDescriptionScreen, options: {title: 'Об услуге'}},
-    {name: 'UpdateServiceScreen', component: UpdateServiceScreen, options: {title: 'Изменить услугу'}},
-
+    {name: 'CreateServiceScreen',
+        component: CreateServiceScreen,
+        options: {title: 'Добавить услугу'}
+    },
+    {name: 'UpdateServiceScreen',
+        component: UpdateServiceScreen,
+        options: {title: 'Изменить услугу'}
+    },
+    {name: 'ServiceDescriptionScreen',
+        component: ServiceDescriptionScreen,
+        options: {title: 'Об услуге'}
+    },
 ]

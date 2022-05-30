@@ -23,16 +23,33 @@ export const publicScreens = [
             drawerIcon: ({color}) => <Ionicons name={'newspaper-outline'} size={32} color={color}/>
         })
     },
-    {name: 'MyAccount', component: (props) => <MyAccount {...props}/>,
+    {name: 'Questions', component: (props) => <Questions {...props}/>,
         options: {
-            title: 'Личный кабинет',
-            drawerIcon: ({color}) => <MatComIcon name={'account-circle'} size={32} color={color}/>
+            title: 'Помощь',
+            drawerIcon: ({color}) => <AntDesign name="questioncircleo" size={32} color={color} />
         }
     },
+]
+
+export const authScreens = [
     {name: 'Login', component: Login,
         options: {
             title: 'Войти',
             drawerIcon: ({color}) => <MaterialIcons name={'login'} size={32} color={color}/>
+        }
+    },
+    {name: 'Registration', component: Registration, options: {
+            title: 'Регистрация',
+            drawerIcon: ({color}) => <MaterialIcons name="app-registration" size={32} color={color} />
+        }
+    },
+]
+
+export const privateScreens = [
+    {name: 'MyAccount', component: (props) => <MyAccount {...props}/>,
+        options: {
+            title: 'Личный кабинет',
+            drawerIcon: ({color}) => <MatComIcon name={'account-circle'} size={32} color={color}/>
         }
     },
     {name: 'Specialists', component: (props) => <SpecialistProvider><Specialists {...props}/></SpecialistProvider>,
@@ -41,21 +58,10 @@ export const publicScreens = [
             drawerIcon: ({color}) => <MatComIcon name="account-supervisor-outline" size={32} color={color} />,
         })
     },
-    {name: 'Registration', component: Registration, options: {
-            title: 'Регистрация',
-            drawerIcon: ({color}) => <MaterialIcons name="app-registration" size={32} color={color} />
-        }
-    },
     {name: 'Services', component: (props) => <ServicesProvider><Services {...props}/></ServicesProvider>,
         options: {
             title: 'Услуги',
             drawerIcon: ({color}) => <Entypo name="list" size={32} color={color} />
-        }
-    },
-    {name: 'Questions', component: (props) => <Questions {...props}/>,
-        options: {
-            title: 'Помощь',
-            drawerIcon: ({color}) => <AntDesign name="questioncircleo" size={32} color={color} />
         }
     },
     {name: 'LFK', component: (props) => <LFK {...props}/>,
@@ -64,8 +70,5 @@ export const publicScreens = [
             drawerIcon: ({color}) => <AntDesign name="database" size={32} color={color} />
         }
     },
-]
 
-export const privateScreens = [
-    {},
 ]

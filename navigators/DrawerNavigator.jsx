@@ -1,11 +1,15 @@
 import React from 'react';
 import CustomDrawer from "../components/CustomDrawer/CustomDrawer";
-import {publicScreens} from "../routes/DrawerRoutes";
+import {authScreens, privateScreens, publicScreens} from "../routes/DrawerRoutes";
 import {createDrawerNavigator} from "@react-navigation/drawer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useAuth} from "../context/AuthContext";
 
 const Drawer = createDrawerNavigator()
 
 const DrawerNavigator = () => {
+    const {token} = useAuth()
+
     return (
         <Drawer.Navigator
             initialRouteName='News'
@@ -21,6 +25,30 @@ const DrawerNavigator = () => {
                     {screen.component}
                 </Drawer.Screen>
             )}
+
+            {token
+                ?
+                privateScreens.map(screen =>
+                <Drawer.Screen
+                    key={screen.name}
+                    name={screen.name}
+                    options={screen.options}
+                >
+                    {screen.component}
+                </Drawer.Screen>
+                )
+                :
+                authScreens.map(
+                    screen =>
+                        <Drawer.Screen
+                            key={screen.name}
+                            name={screen.name}
+                            options={screen.options}
+                        >
+                            {screen.component}
+                        </Drawer.Screen>
+                )
+            }
         </Drawer.Navigator>
     );
 };

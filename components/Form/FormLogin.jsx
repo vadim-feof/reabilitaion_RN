@@ -5,62 +5,61 @@ import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import CheckBox from 'expo-checkbox';
 import CustomInput from "../CustomInput/CustomInput";
 import CustomButton from "../CustomButton/CustomButton";
+import {useAuth} from "../../context/AuthContext";
+import {ActivityIndicator} from "react-native";
 
-const FormLogin = () => {
+const FormLogin = ({navigation}) => {
+    const {isLoading, loginUser} = useAuth()
+
+    const navigateToNews = () => {
+        navigation.navigate('News')
+    }
+
     const validationSchema = yup.object().shape(
         {
-            telephone: yup.number().typeError('Введите верный номер телефона').required('Пожалуйста, укажите телефон'),
-            email: yup.string().email('Введите верный email').required('Пожалуйста, укажите вашу элекронную почту '),
-            password: yup.string().typeError('Должно быть строкой').required('Укажите пароль'),
+            login: yup.string().when('isEmail', {
+                is: true,
+                then: yup.string().email('Пожалуйста, введите правильный email')
+                    .required('Пожалуйста, введите Ваш email'),
+                otherwise: yup.string().matches('^(\\+{1}[0-9]{11})$', 'Номер телефона должен быть в формате +71234567890')
+                    .required('Пожалуйста, введите ваш номер телефона')
+            }),
+            password: yup.string().typeError('Должно быть строкой')
+                .required('Укажите пароль'),
         }
     )
-
-    const [isSelected, setSelection] = useState(false)
 
     return (
         <View>
             <Formik initialValues={{
-                telephone: '',
-                email: '',
-                password: '',
+                isEmail: false,
+                login: '+79961230853',
+                password: 'pass123',
             }}
                 validateOnBlur
                 onSubmit={(values, action) => {
-                    /*ФУНКЦИЯ ДОБАВЛЕНИЯ АВТОРИЗАЦИИ*/
-                    action.resetForm() /*чистка формы*/
-
+                    loginUser(values, navigateToNews)
                 }}
                 validationSchema={validationSchema}
             >
                 {({
                       values, errors, touched,
                       handleChange, handleBlur,
-                      handleSubmit,
+                      handleSubmit, setFieldValue
                   }) => (
                     <View>
-                        {
-                            isSelected
-                                ?
-                                <>
-                                    <CustomInput keyboardType={'email-address'}
-                                                 onChangeText={handleChange('email')}
-                                                 onBlur={handleBlur('email')}
-                                                 value={values.email}
-                                                 placeholder={'Email'}
-                                    />
-                                    {touched.email && errors.email && <Text style={styles.error}> {errors.email}</Text>}
-                                </>
-                                :
-                                <>
-                                    <CustomInput keyboardType={'phone-pad'}
-                                                 onChangeText={handleChange('telephone')}
-                                                 onBlur={handleBlur('telephone')}
-                                                 value={values.telephone}
-                                                 placeholder={'Введите номер телефона'}
-                                    />
-                                    {touched.telephone && errors.telephone && <Text style={styles.error}> {errors.telephone}</Text>}
-                                </>
-                        }
+                        <ActivityIndicator
+                            animating={isLoading}
+                            color={'#D58B40'}
+                            size={'large'}
+                        />
+                        <CustomInput keyboardType={values.isEmail ? 'email-address' : 'phone-pad'}
+                                     onChangeText={handleChange('login')}
+                                     onBlur={handleBlur('login')}
+                                     value={values.login}
+                                     placeholder={values.isEmail ? 'Введите Email' : 'Введите номер телефона'}
+                        />
+                        {touched.login && errors.login && <Text style={styles.error}> {errors.login}</Text>}
 
                         <CustomInput secureTextEntry={true}
                                      onChangeText={handleChange('password')}
@@ -73,13 +72,17 @@ const FormLogin = () => {
 
                         <View style={styles.checkboxContainer}>
                             <CheckBox
-                                value={isSelected}
-                                onValueChange={setSelection}
+                                value={values.isEmail}
+                                onValueChange={checkValue => setFieldValue('isEmail', checkValue)}
                                 style={styles.checkbox}
                             />
                             <Text style={styles.label}>Войти с помощью электронной почты</Text>
                         </View>
-                        <CustomButton onPress={handleSubmit} text={'Войти'}/>
+                        <CustomButton
+                            disabled={isLoading}
+                            onPress={handleSubmit}
+                            text={'Войти'}
+                        />
                     </View>
                 )}
             </Formik>
@@ -96,7 +99,8 @@ const styles = StyleSheet.create({
     error: {
         color: 'red',
         marginLeft: 10,
-        marginTop: 5
+        marginBottom: 10,
+        fontSize: 18,
     },
     checkboxContainer: {
         flexShrink: 1,
