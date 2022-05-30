@@ -24,7 +24,7 @@ export const publicScreens = [
             drawerIcon: ({color}) => <Ionicons name={'newspaper-outline'} size={32} color={color}/>
         })
     },
-    {name: 'Questions', component: (props) => <Questions {...props}/>,
+    {name: 'Questions', component: (props) => <QuestionsProvider><Questions {...props}/></QuestionsProvider> ,
         options: {
             title: 'Помощь',
             drawerIcon: ({color}) => <AntDesign name="questioncircleo" size={32} color={color} />
@@ -65,12 +65,7 @@ export const privateScreens = [
             drawerIcon: ({color}) => <Entypo name="list" size={32} color={color} />
         }
     },
-    {name: 'Questions', component: (props) => <QuestionsProvider><Questions {...props}/></QuestionsProvider> ,
-        options: {
-            title: 'Помощь',
-            drawerIcon: ({color}) => <AntDesign name="questioncircleo" size={32} color={color} />
-        }
-    },
+
     {name: 'LFK', component: (props) => <LFK {...props}/>,
         options: {
             title: 'Комплексы ЛФК',
