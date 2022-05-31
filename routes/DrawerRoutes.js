@@ -13,9 +13,10 @@ import Registration from "../screens/DrawerScreens/Registration";
 import {SpecialistProvider} from "../context/SpecialistContext";
 import Services from "../screens/DrawerScreens/Services";
 import Questions from "../screens/DrawerScreens/Questions";
-import LFK from "../components/LFK/LFK";
+import LFK from "../screens/DrawerScreens/LFK";
 import {ServicesProvider} from "../context/ServicesContext";
 import {QuestionsProvider} from "../context/QuestionsContext";
+import {LFKProvider} from "../context/LFKContext";
 
 export const publicScreens = [
     {name: 'News', component: (props) => <NewsProvider><News {...props}/></NewsProvider>,
@@ -66,7 +67,7 @@ export const privateScreens = [
         }
     },
 
-    {name: 'LFK', component: (props) => <LFK {...props}/>,
+    {name: 'LFK', component: (props) => <LFKProvider><LFK {...props}/></LFKProvider>,
         options: {
             title: 'Комплексы ЛФК',
             drawerIcon: ({color}) => <AntDesign name="database" size={32} color={color} />

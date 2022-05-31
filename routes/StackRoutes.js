@@ -8,6 +8,8 @@ import CreateServiceScreen from "../screens/StackScreens/ServicesScreens/CreateS
 import ServiceDescriptionScreen from "../screens/StackScreens/ServicesScreens/ServiceDescriptionScreen";
 import UpdateServiceScreen from "../screens/StackScreens/ServicesScreens/UpdateServiceScreen";
 import EditMyAccountScreen from "../screens/StackScreens/MyAccountScreens/EditMyAccountScreen";
+import LfkDescription from "../screens/StackScreens/LFKScreen/LFKDescription";
+import CreateLfkScreen from "../screens/StackScreens/LFKScreen/CreateLFKScreen";
 
 export const publicScreens = [
     {name: 'NewsDescriptionScreen', component: NewsDescriptionScreen, options: {title: 'Новости'}},
@@ -59,5 +61,13 @@ export const privateScreens = [
     {name: 'EditMyAccountScreen',
         component: EditMyAccountScreen,
         options: {title: 'Редактирование профиля'}
-    }
+    },
+    {name: 'LfkDescription',
+        component: LfkDescription,
+        options: {title: 'ЛФК'}
+    },
+    {name: 'CreateLfkScreen',
+        component: CreateLfkScreen,
+        options: {title: 'Добавить комплекс'}
+    },
 ]
