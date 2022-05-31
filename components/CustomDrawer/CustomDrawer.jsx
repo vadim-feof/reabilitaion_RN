@@ -10,7 +10,7 @@ const CustomDrawer = (props) => {
     const insets = useSafeAreaInsets()
     const navigation = props.navigation
     const {user, token} = useAuth()
-    const imageUrl = STATIC_IMAGE_USER_URL + user.photo
+    const imageUrl = `${STATIC_IMAGE_USER_URL}/${user._id}/${user.photo}`
     return (
         <View style={styles.container}>
             <DrawerContentScrollView

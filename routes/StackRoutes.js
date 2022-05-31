@@ -7,7 +7,7 @@ import UpdateNewsScreen from "../screens/StackScreens/NewsScreens/CreateNewsScre
 import CreateServiceScreen from "../screens/StackScreens/ServicesScreens/CreateServiceScreen";
 import ServiceDescriptionScreen from "../screens/StackScreens/ServicesScreens/ServiceDescriptionScreen";
 import UpdateServiceScreen from "../screens/StackScreens/ServicesScreens/UpdateServiceScreen";
-import ModalAddCategory from "../components/ModalWindows/ModalAddCategory";
+import EditMyAccountScreen from "../screens/StackScreens/MyAccountScreens/EditMyAccountScreen";
 
 export const publicScreens = [
     {name: 'NewsDescriptionScreen', component: NewsDescriptionScreen, options: {title: 'Новости'}},
@@ -56,4 +56,8 @@ export const privateScreens = [
         component: ServiceDescriptionScreen,
         options: {title: 'Об услуге'}
     },
+    {name: 'EditMyAccountScreen',
+        component: EditMyAccountScreen,
+        options: {title: 'Редактирование профиля'}
+    }
 ]

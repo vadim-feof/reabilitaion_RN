@@ -2,6 +2,8 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 import AuthService from "../services/AuthService";
 import {toastShow} from "../utils/toastShow";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import PictureService from "../services/PictureService";
+import {STATIC_USER_UPLOAD} from "../services/api";
 
 export const AuthContext = createContext(null)
 
@@ -15,7 +17,6 @@ export const AuthProvider = ({children}) => {
         await authUser()
     }, []);
 
-    // TODO: регистрация
     const loginUser = async ({isEmail, login, password}, callback) => {
         try {
             setIsLoading(true)
@@ -72,26 +73,66 @@ export const AuthProvider = ({children}) => {
             await AsyncStorage.removeItem('token')
             setToken('')
             setUser({})
-            //console.log(e)
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
     }
 
-    const updateUser = async (specialist) => {
+    const updateUser = async (newUserData, callback) => {
         try {
             setIsLoading(true)
-            //запрос
-            setUser({})
+            console.log(newUserData)
+            const {updatedUser} = await AuthService.update(newUserData, newUserData._id)
+            console.log('updatedUser:', updatedUser)
+            setUser(updatedUser)
+            toastShow('success', 'Профиль изменен')
+            callback()
         } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
+    const uploadPhoto = async (picture) => {
+        try {
+            setIsLoading(true)
+            const {photo} = await PictureService.uploadPicture(picture.uri,
+                `${STATIC_USER_UPLOAD}/${user._id}`)
+            setUser(prevUser => ({...prevUser, photo}))
+            toastShow('success', 'Фотография загружена')
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const removePhoto = async () => {
+        try {
+            setIsLoading(true)
+            await PictureService.removePicture(user.photo, `${STATIC_USER_UPLOAD}/${user._id}`)
+            setUser(prevUser => ({...prevUser, photo: ''}))
+            toastShow('success', 'Фотография удалена')
+        } catch (e) {
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
     }
 
     const value = {
-        user, token, isLoading, loginUser, logOut, registrationUser, authUser, updateUser
+        user,
+        token,
+        isLoading,
+        loginUser,
+        logOut,
+        registrationUser,
+        authUser,
+        updateUser,
+        uploadPhoto,
+        removePhoto
     }
 
 

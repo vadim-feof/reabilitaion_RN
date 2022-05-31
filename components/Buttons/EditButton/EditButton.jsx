@@ -14,7 +14,7 @@ const EditButton = ({color, navigate}) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginRight: 5
+        marginRight: 20
     },
 })
 

@@ -6,11 +6,15 @@ import {toastShow} from "../utils/toastShow";
 
 export const SERVER_URL = 'http://192.168.0.110:5000'
 export const API_URL = `${SERVER_URL}/api`
+
 export const STATIC_IMAGE_NEWS_URL = `${SERVER_URL}/image/news/`
 export const STATIC_IMAGE_SPECIALIST_URL = `${SERVER_URL}/image/specialist/`
 export const STATIC_IMAGE_USER_URL = `${SERVER_URL}/image/user/`
+
 export const STATIC_NEWS_UPLOAD = 'static/news'
 export const STATIC_SPECIALIST_UPLOAD = 'static/specialist'
+export const STATIC_USER_UPLOAD = 'static/user'
+
 
 const $api = axios.create({
     baseURL: API_URL,

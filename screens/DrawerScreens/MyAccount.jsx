@@ -1,17 +1,86 @@
-import React, {useState} from 'react';
-
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import React, {useLayoutEffect} from 'react';
+import {Dimensions, Image, StyleSheet, Text, View, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
 import CustomButton from "../../components/CustomButton/CustomButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useAuth} from "../../context/AuthContext";
+import EditButton from "../../components/Buttons/EditButton/EditButton";
+import {STATIC_IMAGE_USER_URL} from "../../services/api";
+import {takePictureFromLibrary} from "../../utils/takePictureFromLibrary";
 
 const MyAccount = ({navigation}) => {
-    const {user, logOut} = useAuth()
+    const {user, isLoading, uploadPhoto, removePhoto, logOut} = useAuth()
+    const imageUrl = `${STATIC_IMAGE_USER_URL}/${user._id}/${user.photo}`
+
+    const takeAndUploadPicture = async () => {
+        const picture = await takePictureFromLibrary()
+        if (!picture.cancelled) {
+            uploadPhoto(picture)
+        }
+    }
+
+    const openCheckRemovePhotoModal = () => {
+        Alert.alert(
+            'Действительно удалить фотографию?',
+            '',
+            [
+                {
+                    text: 'Отмена'
+                },
+                {
+                    text: user.photo ? 'Удалить фотографию' : '',
+                    onPress: removePhoto
+                }
+            ]
+        )
+    }
+
+    const openChangePhotoModal = () => {
+        Alert.alert(
+            'Выберите действие',
+            '',
+            [
+                {
+                    text: 'Отмена'
+                },
+                {
+                    text: user.photo ? 'Удалить фотографию' : '',
+                    onPress: openCheckRemovePhotoModal
+                },
+                {
+                    text: user.photo ? 'Изменить фотографию' : 'Загрузить фотографию',
+                    onPress: takeAndUploadPicture
+                },
+            ]
+        )
+    }
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: ({tintColor}) => <EditButton
+                color={tintColor}
+                navigate={() => navigation.navigate('EditMyAccountScreen', { isEdit: false })}
+            />
+        });
+    }, [navigation]);
 
     return (
         <View style={styles.container}>
+            <View style={styles.loader}>
+                <ActivityIndicator
+                    style={styles.loader}
+                    animating={isLoading}
+                    color={'#D58B40'}
+                    size={'large'}
+                />
+            </View>
             <View style={styles.wrapperPhoto}>
-                <Image  style={styles.photo} source={require('../../assets/Angelina.jpg')}/>
+                <TouchableOpacity onPress={openChangePhotoModal}>
+                    <Image  style={styles.photo} source={user.photo
+                        ?
+                        {uri: imageUrl}
+                        :
+                        require('../../assets/userNoPhoto.png')}
+                    />
+                </TouchableOpacity>
                 <Text style={styles.name}>
                     {user.name}
                 </Text>
@@ -49,7 +118,8 @@ const styles = StyleSheet.create({
         marginTop: 15,
         fontWeight: 'bold',
         color: '#696969',
-        fontSize: 18
+        fontSize: 18,
+        textAlign: 'center'
     },
     info: {
         marginTop: 15,
@@ -73,6 +143,14 @@ const styles = StyleSheet.create({
         height: 400,
         backgroundColor: '#DCDCDC',
         alignItems: "center"
+    },
+    loader: {
+        position: 'absolute',
+        top: 50,
+        left: 0,
+        right: 0,
+        alignItems: 'center',
+        zIndex: 5
     }
 })
 
