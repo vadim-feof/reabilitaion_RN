@@ -5,10 +5,10 @@ import * as yup from 'yup'
 import CustomInput from "../CustomInput/CustomInput";
 import CustomButton from "../CustomButton/CustomButton";
 import FitImage from "react-native-fit-image";
-import {STATIC_IMAGE_NEWS_URL} from "../../services/api";
+import {STATIC_IMAGE_LFK_URL} from "../../services/api";
 
 const FormAddLFK = ({navigation, isEdit, editingItems, takePicture, deletePicture, picture, setFormIsEdit}) => {
-    const imageUrl = STATIC_IMAGE_NEWS_URL + picture
+    const imageUrl = STATIC_IMAGE_LFK_URL + picture
     const validationSchema = yup.object().shape(
         {
             title: yup.string().typeError('Должно быть строкой').required('Обязательно для заполнения'),

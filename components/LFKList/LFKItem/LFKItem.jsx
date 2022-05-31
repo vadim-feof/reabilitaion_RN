@@ -1,30 +1,30 @@
 import React from 'react';
-import {STATIC_IMAGE_NEWS_URL} from "../../../services/api";
+import {STATIC_IMAGE_LFK_URL} from "../../../services/api";
 import {StyleSheet, Text, TouchableHighlight, View} from "react-native";
 import FitImage from "react-native-fit-image";
 
-const LfkItem = ({items, navigation}) => {
-    let content = items.content
-    if (items.content.length > 250) {
+const LfkItem = ({item, navigation}) => {
+    let content = item.content
+    if (item.content.length > 250) {
         content = content.substring(0, 250) + '...'
     }
 
-    //const imageUrl = STATIC_IMAGE_NEWS_URL + news.picture
+    const imageUrl = STATIC_IMAGE_LFK_URL + item.picture
 
     return (
         <TouchableHighlight
             delayPressIn={70}
             underlayColor={'#dddddd'}
-            onPress={() => navigation.navigate('LfkDescription', items)}
+            onPress={() => navigation.navigate('LfkDescription', item)}
             style={styles.item}
         >
             <>
-                <Text style={styles.title}>{items.title}</Text>
-                {/*<View
+                <Text style={styles.title}>{item.title}</Text>
+                {<View
                     style={{marginTop: 10}}
                 >
-                    {items.picture ? <FitImage source={{uri: imageUrl}}/> : null}
-                </View>*/}
+                    {item.picture ? <FitImage source={{uri: imageUrl}}/> : null}
+                </View>}
                 <View style={styles.description}>
                     <Text style={styles.content}>
                         {content}

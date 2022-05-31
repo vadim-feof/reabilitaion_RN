@@ -2,12 +2,12 @@ import React from 'react';
 import {FlatList, RefreshControl} from "react-native";
 import LfkItem from "./LFKItem/LFKItem";
 
-const NewsList = ({items, navigation, refresh, isLoading}) => {
+const LFKList = ({items, navigation, refresh, isLoading}) => {
     return (
         <FlatList
             data={items}
             renderItem={({item}) => (
-                <LfkItem items={item}
+                <LfkItem item={item}
                           navigation={navigation}
                 />
             )}
@@ -22,4 +22,4 @@ const NewsList = ({items, navigation, refresh, isLoading}) => {
     );
 };
 
-export default NewsList;
+export default LFKList;

@@ -1,11 +1,10 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {takePictureFromLibrary} from "../../../utils/takePictureFromLibrary";
 import PictureService from "../../../services/PictureService";
-import {STATIC_NEWS_UPLOAD} from "../../../services/api";
+import {STATIC_LFK_UPLOAD} from "../../../services/api";
 import {toastShow} from "../../../utils/toastShow";
 import {Alert, StyleSheet, View} from "react-native";
 import BackButton from "../../../components/Buttons/BackButton/BackButton";
-import FormAddNews from "../../../components/Form/FormAddNews";
 import FormAddLFK from "../../../components/Form/FormAddLFk";
 
 const CreateLfkScreen = ({navigation, route}) => {
@@ -18,7 +17,7 @@ const CreateLfkScreen = ({navigation, route}) => {
     const takePicture = async () => {
         const picture = await takePictureFromLibrary()
         if (!picture.cancelled) {
-            const {pictureFilename} = await PictureService.uploadPicture(picture.uri, STATIC_NEWS_UPLOAD)
+            const {pictureFilename} = await PictureService.uploadPicture(picture.uri, STATIC_LFK_UPLOAD)
             setPicture(pictureFilename)
             toastShow('success', 'Изображение загружено')
         }
@@ -28,7 +27,7 @@ const CreateLfkScreen = ({navigation, route}) => {
         // удалить пикчу с сервера если: не режим редактирования или это новая пикча
         if (!isEdit || isNewPicture) {
             console.log('УДАЛЕНИЕ С СЕРВЕРА')
-            await PictureService.removePicture(picture, STATIC_NEWS_UPLOAD)
+            await PictureService.removePicture(picture, STATIC_LFK_UPLOAD)
         }
         setPicture('')
         setIsNewPicture(true)
