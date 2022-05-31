@@ -8,6 +8,8 @@ import CreateServiceScreen from "../screens/StackScreens/ServicesScreens/CreateS
 import ServiceDescriptionScreen from "../screens/StackScreens/ServicesScreens/ServiceDescriptionScreen";
 import UpdateServiceScreen from "../screens/StackScreens/ServicesScreens/UpdateServiceScreen";
 import ModalAddCategory from "../components/ModalWindows/ModalAddCategory";
+import LfkDescription from "../screens/StackScreens/LFKScreen/LFKDescription";
+import CreateLfkScreen from "../screens/StackScreens/LFKScreen/CreateLFKScreen";
 
 export const publicScreens = [
     {name: 'NewsDescriptionScreen', component: NewsDescriptionScreen, options: {title: 'Новости'}},
@@ -55,5 +57,13 @@ export const privateScreens = [
     {name: 'ServiceDescriptionScreen',
         component: ServiceDescriptionScreen,
         options: {title: 'Об услуге'}
+    },
+    {name: 'LfkDescription',
+        component: LfkDescription,
+        options: {title: 'ЛФК'}
+    },
+    {name: 'CreateLfkScreen',
+        component: CreateLfkScreen,
+        options: {title: 'Добавить комплекс'}
     },
 ]
