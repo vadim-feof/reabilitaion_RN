@@ -21,8 +21,8 @@ export default class AuthService {
         return response.data
     }
 
-    static async update(newUserData, _id) {
-        const response = await $api.patch(`/user/${_id}`, newUserData, {
+    static async update(newUserData) {
+        const response = await $api.patch(`/user`, {}, {
             params: {
                 ...newUserData
             }

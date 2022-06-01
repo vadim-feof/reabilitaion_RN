@@ -82,9 +82,7 @@ export const AuthProvider = ({children}) => {
     const updateUser = async (newUserData, callback) => {
         try {
             setIsLoading(true)
-            console.log(newUserData)
-            const {updatedUser} = await AuthService.update(newUserData, newUserData._id)
-            console.log('updatedUser:', updatedUser)
+            const {updatedUser} = await AuthService.update(newUserData)
             setUser(updatedUser)
             toastShow('success', 'Профиль изменен')
             callback()
@@ -98,8 +96,7 @@ export const AuthProvider = ({children}) => {
     const uploadPhoto = async (picture) => {
         try {
             setIsLoading(true)
-            const {photo} = await PictureService.uploadPicture(picture.uri,
-                `${STATIC_USER_UPLOAD}/${user._id}`)
+            const {photo} = await PictureService.uploadPicture(picture.uri, STATIC_USER_UPLOAD)
             setUser(prevUser => ({...prevUser, photo}))
             toastShow('success', 'Фотография загружена')
         } catch (e) {
@@ -112,7 +109,7 @@ export const AuthProvider = ({children}) => {
     const removePhoto = async () => {
         try {
             setIsLoading(true)
-            await PictureService.removePicture(user.photo, `${STATIC_USER_UPLOAD}/${user._id}`)
+            await PictureService.removePicture(user.photo, STATIC_USER_UPLOAD)
             setUser(prevUser => ({...prevUser, photo: ''}))
             toastShow('success', 'Фотография удалена')
         } catch (e) {
