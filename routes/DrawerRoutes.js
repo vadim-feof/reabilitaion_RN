@@ -6,7 +6,7 @@ import MyAccount from "../screens/DrawerScreens/MyAccount";
 import {
     Ionicons,
     MaterialCommunityIcons as MatComIcon,
-    MaterialIcons, Entypo, AntDesign
+    MaterialIcons, Entypo, AntDesign, FontAwesome5
 } from "@expo/vector-icons";
 import {NewsProvider} from "../context/NewsContext";
 import Registration from "../screens/DrawerScreens/Registration";
@@ -17,6 +17,8 @@ import LFK from "../screens/DrawerScreens/LFK";
 import {ServicesProvider} from "../context/ServicesContext";
 import {QuestionsProvider} from "../context/QuestionsContext";
 import {LFKProvider} from "../context/LFKContext";
+import {AppointmentProvider} from "../context/AppointmentContext";
+import Appointment from "../screens/DrawerScreens/Appointment";
 
 export const publicScreens = [
     {name: 'News', component: (props) => <NewsProvider><News {...props}/></NewsProvider>,
@@ -74,4 +76,10 @@ export const privateScreens = [
         }
     },
 
+    {name: 'Appointment', component: (props) => <AppointmentProvider><Appointment {...props}/></AppointmentProvider>,
+        options: {
+            title: 'Мои записи',
+            drawerIcon: ({color}) => <FontAwesome5 name="list-alt" size={32} color={color} />
+        }
+    },
 ]

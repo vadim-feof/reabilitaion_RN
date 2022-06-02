@@ -1,4 +1,4 @@
-import $api, {API_URL} from './api'
+import $api from './api'
 const FormData = global.FormData
 
 export default class PictureService {
