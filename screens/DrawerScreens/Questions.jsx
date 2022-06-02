@@ -3,8 +3,8 @@ import {View, Text, FlatList, TouchableOpacity, StyleSheet, Alert, Modal} from "
 import {Collapse, CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
 import {AntDesign} from "@expo/vector-icons";
 import {useQuestions} from "../../context/QuestionsContext";
-import QuestionCategoryList from "../../components/QuestionCategoryList/QuestionCategoryList";
-import AddButton from "../../components/Buttons/AddButton/AddButton";
+import QuestionCategoryList from "../../components/Lists/QuestionCategoryList/QuestionCategoryList";
+import AddButton from "../../components/Common/Buttons/AddButton/AddButton";
 import ModalAddCategory from "../../components/ModalWindows/ModalAddCategory";
 
 // TODO: добавить рефреш и валидаицю полей

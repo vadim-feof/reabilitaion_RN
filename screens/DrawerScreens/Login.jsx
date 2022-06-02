@@ -21,10 +21,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center'
     },
-    loader: {
-        position: 'absolute',
-        zIndex: 5
-    },
     logo_img: {
         resizeMode: 'contain',
         width: 255,

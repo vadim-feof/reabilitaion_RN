@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from "react-native";
-import CustomInput from "../CustomInput/CustomInput";
-import CustomButton from "../CustomButton/CustomButton";
+import CustomInput from "../Common/CustomInput/CustomInput";
+import CustomButton from "../Common/CustomButton/CustomButton";
 import {Formik} from 'formik'
 import * as yup from 'yup'
 

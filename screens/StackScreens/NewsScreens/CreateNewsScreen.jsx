@@ -3,7 +3,7 @@ import {Alert, StyleSheet, View, Text} from "react-native";
 import FormAddNews from "../../../components/Form/FormAddNews";
 import PictureService from "../../../services/PictureService";
 import {toastShow} from "../../../utils/toastShow";
-import BackButton from "../../../components/Buttons/BackButton/BackButton";
+import BackButton from "../../../components/Common/Buttons/BackButton/BackButton";
 import {STATIC_NEWS_UPLOAD} from "../../../services/api";
 import {takePictureFromLibrary} from "../../../utils/takePictureFromLibrary";
 

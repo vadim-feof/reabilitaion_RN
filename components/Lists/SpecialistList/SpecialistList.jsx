@@ -3,17 +3,17 @@ import React from 'react';
 import {FlatList, RefreshControl} from 'react-native';
 import SpecialistItem from "./SpecialistItem/SpecialistItem";
 
-const SpecialistList = ({specialists, navigation, refresh, isLoading}) => {
+const SpecialistList = ({specialists, onPressItem, refresh, isLoading}) => {
     return (
         <FlatList
             data={specialists}
             renderItem={({item}) => (
                 <SpecialistItem
                     specialist={item}
-                    navigation={navigation}
+                    onPress={() => onPressItem(item)}
                 />
             )}
-            keyExtractor={doctor => doctor.name}
+            keyExtractor={specialist => specialist._id}
             refreshControl={<RefreshControl
                 refreshing={isLoading}
                 onRefresh={refresh}

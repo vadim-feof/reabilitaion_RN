@@ -4,7 +4,7 @@ import PictureService from "../../../services/PictureService";
 import {STATIC_LFK_UPLOAD} from "../../../services/api";
 import {toastShow} from "../../../utils/toastShow";
 import {Alert, StyleSheet, View} from "react-native";
-import BackButton from "../../../components/Buttons/BackButton/BackButton";
+import BackButton from "../../../components/Common/Buttons/BackButton/BackButton";
 import FormAddLFK from "../../../components/Form/FormAddLFk";
 
 const CreateLfkScreen = ({navigation, route}) => {

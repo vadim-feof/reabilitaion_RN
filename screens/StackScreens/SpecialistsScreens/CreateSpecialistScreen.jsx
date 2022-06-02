@@ -5,7 +5,7 @@ import {takePictureFromLibrary} from "../../../utils/takePictureFromLibrary";
 import PictureService from "../../../services/PictureService";
 import {STATIC_SPECIALIST_UPLOAD} from "../../../services/api";
 import {toastShow} from "../../../utils/toastShow";
-import BackButton from "../../../components/Buttons/BackButton/BackButton";
+import BackButton from "../../../components/Common/Buttons/BackButton/BackButton";
 
 const CreateSpecialistScreen = ({navigation, route}) => {
 

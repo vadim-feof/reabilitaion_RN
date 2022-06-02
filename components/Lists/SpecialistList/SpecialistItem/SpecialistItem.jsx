@@ -1,18 +1,18 @@
 import React from 'react';
 import {StyleSheet, Image, Text, View, TouchableHighlight, Dimensions} from 'react-native';
-import {STATIC_IMAGE_SPECIALIST_URL} from "../../../services/api";
+import {STATIC_IMAGE_SPECIALIST_URL} from "../../../../services/api";
 
-const SpecialistItem = ({specialist, navigation}) => {
+const SpecialistItem = ({specialist, onPress}) => {
 
     const imageUrl = STATIC_IMAGE_SPECIALIST_URL + specialist.photo
     return (
         <TouchableHighlight
             delayPressIn={70}
             underlayColor={'#dddddd'}
-            onPress={() => navigation.navigate('SpecialistDescriptionScreen', specialist)}
+            onPress={onPress}
         >
             <View style={styles.item}>
-                <Image style={styles.photo} source={specialist.photo ? {uri: imageUrl} : require('../../../assets/doctorNoPhoto.png')}/>
+                <Image style={styles.photo} source={specialist.photo ? {uri: imageUrl} : require('../../../../assets/doctorNoPhoto.png')}/>
                 <View style={styles.description}>
                     <Text style={styles.name}>{specialist.name}</Text>
                     <Text style={styles.position}>{specialist.position}</Text>

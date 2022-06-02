@@ -3,8 +3,8 @@ import * as yup from 'yup'
 import {Formik} from "formik";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import CheckBox from 'expo-checkbox';
-import CustomInput from "../CustomInput/CustomInput";
-import CustomButton from "../CustomButton/CustomButton";
+import CustomInput from "../Common/CustomInput/CustomInput";
+import CustomButton from "../Common/CustomButton/CustomButton";
 import {useAuth} from "../../context/AuthContext";
 import {ActivityIndicator} from "react-native";
 

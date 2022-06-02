@@ -4,8 +4,8 @@ import {Alert, FlatList, StyleSheet, Text, View, Vibration, Modal} from "react-n
 import {AntDesign} from "@expo/vector-icons";
 import QuestionList from "./QuestionList/QuestionList";
 import {TouchableHighlight} from "react-native";
-import ModalAddCategory from "../../ModalWindows/ModalAddCategory";
-import ModalAddQuestions from "../../ModalWindows/ModalAddQuestions";
+import ModalAddCategory from "../../../ModalWindows/ModalAddCategory";
+import ModalAddQuestions from "../../../ModalWindows/ModalAddQuestions";
 
 const QuestionCategoryItem = ({categoryItem, deleteCategory, addQuestion, deleteQuestion}) => {
 

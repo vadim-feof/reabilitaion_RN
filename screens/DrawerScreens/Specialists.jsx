@@ -1,8 +1,8 @@
 import React, {useLayoutEffect, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
-import SpecialistList from "../../components/SpecialistList/SpecialistList";
+import SpecialistList from "../../components/Lists/SpecialistList/SpecialistList";
 import {useSpecialist} from "../../context/SpecialistContext";
-import AddButton from "../../components/Buttons/AddButton/AddButton";
+import AddButton from "../../components/Common/Buttons/AddButton/AddButton";
 import {toastShow} from "../../utils/toastShow";
 
 
@@ -49,7 +49,7 @@ const Specialists = ({navigation, route}) => {
         <View style={styles.container}>
             <SpecialistList
                 specialists={specialists}
-                navigation={navigation}
+                onPressItem={(specialist) => navigation.navigate('SpecialistDescriptionScreen', specialist)}
                 refresh={fetchSpecialist}
                 isLoading={isLoading}
             />

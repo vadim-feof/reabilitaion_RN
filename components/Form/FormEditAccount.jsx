@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView, ActivityIndicator} from "react-native";
 import {Formik} from "formik";
-import CustomInput from "../CustomInput/CustomInput";
+import CustomInput from "../Common/CustomInput/CustomInput";
 import * as yup from 'yup'
-import CustomButton from "../CustomButton/CustomButton";
+import CustomButton from "../Common/CustomButton/CustomButton";
 import {useAuth} from "../../context/AuthContext";
 import DatePicker from "../DatePicker";
 import {upperFirstLetter} from "../../utils/upperFirstLetter";

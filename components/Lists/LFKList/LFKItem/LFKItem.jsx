@@ -1,33 +1,30 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableHighlight} from "react-native";
+import {STATIC_IMAGE_LFK_URL} from "../../../../services/api";
+import {StyleSheet, Text, TouchableHighlight, View} from "react-native";
 import FitImage from "react-native-fit-image";
-import {STATIC_IMAGE_NEWS_URL} from "../../../services/api";
 
-const NewsItem = ({news, navigation}) => {
-    let content = news.content
-    if (news.content.length > 250) {
+const LfkItem = ({item, navigation}) => {
+    let content = item.content
+    if (item.content.length > 250) {
         content = content.substring(0, 250) + '...'
     }
 
-    const imageUrl = STATIC_IMAGE_NEWS_URL + news.picture
+    const imageUrl = STATIC_IMAGE_LFK_URL + item.picture
 
     return (
         <TouchableHighlight
             delayPressIn={70}
             underlayColor={'#dddddd'}
-            onPress={() => navigation.navigate('NewsDescriptionScreen', news)}
+            onPress={() => navigation.navigate('LfkDescription', item)}
             style={styles.item}
         >
             <>
-                <Text style={styles.date}>
-                    {new Date(news.date).toLocaleDateString('ru')}
-                </Text>
-                <Text style={styles.title}>{news.title}</Text>
-                <View
+                <Text style={styles.title}>{item.title}</Text>
+                {<View
                     style={{marginTop: 10}}
                 >
-                    {news.picture ? <FitImage source={{uri: imageUrl}}/> : null}
-                </View>
+                    {item.picture ? <FitImage source={{uri: imageUrl}}/> : null}
+                </View>}
                 <View style={styles.description}>
                     <Text style={styles.content}>
                         {content}
@@ -37,6 +34,7 @@ const NewsItem = ({news, navigation}) => {
         </TouchableHighlight>
     );
 };
+
 
 const styles = StyleSheet.create({
     item: {
@@ -68,5 +66,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
     }
 })
-
-export default NewsItem;
+export default LfkItem;

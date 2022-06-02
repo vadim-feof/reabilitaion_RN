@@ -1,7 +1,7 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {View, Text, StyleSheet} from "react-native";
-import ServiceList from "../../components/Service/ServiceList";
-import AddButton from "../../components/Buttons/AddButton/AddButton";
+import ServiceList from "../../components/Lists/ServiceList/ServiceList";
+import AddButton from "../../components/Common/Buttons/AddButton/AddButton";
 import {useSpecialist} from "../../context/SpecialistContext";
 import {toastShow} from "../../utils/toastShow";
 import {useServices} from "../../context/ServicesContext";

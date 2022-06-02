@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import {Formik} from "formik";
-import CustomInput from "../CustomInput/CustomInput";
-import CustomButton from "../CustomButton/CustomButton";
+import CustomInput from "../Common/CustomInput/CustomInput";
+import CustomButton from "../Common/CustomButton/CustomButton";
 import * as yup from "yup";
 
 const FormAddService = ({navigation, isEdit, editingService}) => {

@@ -3,11 +3,14 @@ import {View, ScrollView, Text} from "react-native";
 import {Formik} from "formik";
 import * as yup from "yup";
 import DatePicker from "../DatePicker";
-import CustomInput from "../CustomInput/CustomInput";
+import CustomInput from "../Common/CustomInput/CustomInput";
 import {useCreateAppointment} from "../../context/CreateAppointmentContext";
-import CustomButton from "../CustomButton/CustomButton";
+import CustomButton from "../Common/CustomButton/CustomButton";
 import ServicesModal from "../ModalWindows/ServicesModal/ServicesModal";
-import ServiceItem from "../Service/ServiceItem/ServiceItem";
+import ServiceItem from "../Lists/ServiceList/ServiceItem/ServiceItem";
+import SpecialistsModal from "../ModalWindows/SpecialistsModal/ServicesModal";
+import SpecialistItem from "../Lists/SpecialistList/SpecialistItem/SpecialistItem";
+import Loader from "../Common/Loader";
 
 const FormCreateAppointment = () => {
     const validationSchema = yup.object().shape(
@@ -24,13 +27,13 @@ const FormCreateAppointment = () => {
         fetchServices()
     }, []);
 
-
     return (
         <Formik
             initialValues={{
                 idService: '',
                 service: {},
                 idSpecialist: '',
+                specialist: {},
                 desiredTime: Date.now(),
                 desiredDate: Date.now(),
                 comment: '',
@@ -49,7 +52,9 @@ const FormCreateAppointment = () => {
                   handleChange, handleBlur,
                   handleSubmit}) => {
 
-                const openSelectServiceModal = () => {
+                const openServicesModal = () => {
+                    setFieldValue('idSpecialist', '')
+                    setFieldValue('specialist', {})
                     setFieldValue('modals.visibleServicesModal', true)
                 }
 
@@ -57,12 +62,24 @@ const FormCreateAppointment = () => {
                     setFieldValue('modals.visibleServicesModal', false)
                 }
 
-                const openSelectSpecialistModal = () => {
-
+                const openSpecialistsModal = () => {
+                    setFieldValue('modals.visibleSpecialistsModal', true)
                 }
+
+                const closeSpecialistsModal = () => {
+                    setFieldValue('modals.visibleSpecialistsModal', false)
+                }
+
+                useEffect(() => {
+                    if (values.idService)
+                        fetchSpecialistsByService(values.idService)
+                }, [values.idService]);
 
                 return (
                     <ScrollView>
+                        <Loader
+                            isLoading={isLoading}
+                        />
                         <ServicesModal
                             services={services}
                             visible={values.modals.visibleServicesModal}
@@ -75,28 +92,50 @@ const FormCreateAppointment = () => {
                             refresh={fetchServices}
                             isLoading={isLoading}
                         />
+                        <SpecialistsModal
+                            specialists={specialists}
+                            visible={values.modals.visibleSpecialistsModal}
+                            onPressItem={(specialist) => {
+                                setFieldValue('idSpecialist', specialist._id)
+                                setFieldValue('specialist', specialist)
+                                closeSpecialistsModal()
+                            }}
+                            closeModal={closeSpecialistsModal}
+                            refresh={() => fetchSpecialistsByService(values.idService)}
+                            isLoading={isLoading}
+                        />
                         <View>
-                            {
-                                values.idService
+                        {
+                            values.idService
+                            ?
+                            <View>
+                                <ServiceItem
+                                    service={values.service}
+                                    onPress={openServicesModal}
+                                    index={0}
+                                />
+                                {
+                                    values.idSpecialist
                                     ?
-                                    <View>
-                                        <ServiceItem
-                                            service={values.service}
-                                            onPress={openSelectServiceModal}
-                                            index={0}
-                                        />
-                                        <CustomButton
-                                            text={'Выберите специалиста'}
-                                            onPress={openSelectSpecialistModal}
-                                        />
-                                    </View>
+                                    <SpecialistItem
+                                        specialist={values.specialist}
+                                        onPress={openSpecialistsModal}
+                                    />
                                     :
                                     <CustomButton
                                         disabled={isLoading}
-                                        text={'Выберите услугу'}
-                                        onPress={openSelectServiceModal}
+                                        text={'Выберите специалиста'}
+                                        onPress={openSpecialistsModal}
                                     />
-                            }
+                                }
+                            </View>
+                            :
+                            <CustomButton
+                                disabled={isLoading}
+                                text={'Выберите услугу'}
+                                onPress={openServicesModal}
+                            />
+                        }
                         </View>
                         <View>
                             <DatePicker

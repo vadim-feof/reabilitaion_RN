@@ -1,10 +1,11 @@
 import React, {useLayoutEffect} from 'react';
 import {Dimensions, Image, StyleSheet, Text, View, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
-import CustomButton from "../../components/CustomButton/CustomButton";
+import CustomButton from "../../components/Common/CustomButton/CustomButton";
 import {useAuth} from "../../context/AuthContext";
-import EditButton from "../../components/Buttons/EditButton/EditButton";
+import EditButton from "../../components/Common/Buttons/EditButton/EditButton";
 import {STATIC_IMAGE_USER_URL} from "../../services/api";
 import {takePictureFromLibrary} from "../../utils/takePictureFromLibrary";
+import Loader from "../../components/Common/Loader";
 
 const MyAccount = ({navigation}) => {
     const {user, isLoading, uploadPhoto, removePhoto, logOut} = useAuth()
@@ -64,14 +65,9 @@ const MyAccount = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.loader}>
-                <ActivityIndicator
-                    style={styles.loader}
-                    animating={isLoading}
-                    color={'#D58B40'}
-                    size={'large'}
-                />
-            </View>
+            <Loader
+                isLoading={isLoading}
+            />
             <View style={styles.wrapperPhoto}>
                 <TouchableOpacity onPress={openChangePhotoModal}>
                     <Image  style={styles.photo} source={user.photo

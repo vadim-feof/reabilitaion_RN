@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, ScrollView} from "react-native";
 import {Formik} from 'formik'
 import * as yup from 'yup'
-import CustomInput from "../CustomInput/CustomInput";
-import CustomButton from "../CustomButton/CustomButton";
+import CustomInput from "../Common/CustomInput/CustomInput";
+import CustomButton from "../Common/CustomButton/CustomButton";
 import FitImage from "react-native-fit-image";
 import {STATIC_IMAGE_LFK_URL} from "../../services/api";
 

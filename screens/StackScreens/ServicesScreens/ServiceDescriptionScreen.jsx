@@ -1,7 +1,7 @@
 import React, {useLayoutEffect} from 'react';
 import {View, Text, StyleSheet} from "react-native";
-import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
-import EditButton from "../../../components/Buttons/EditButton/EditButton";
+import DeleteButton from "../../../components/Common/Buttons/DeleteButton/DeleteButton";
+import EditButton from "../../../components/Common/Buttons/EditButton/EditButton";
 
 const ServiceDescriptionScreen = ({navigation, route}) => {
 

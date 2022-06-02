@@ -1,7 +1,7 @@
 import React, {useLayoutEffect} from 'react';
 import {STATIC_IMAGE_LFK_URL} from "../../../services/api";
-import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
-import EditButton from "../../../components/Buttons/EditButton/EditButton";
+import DeleteButton from "../../../components/Common/Buttons/DeleteButton/DeleteButton";
+import EditButton from "../../../components/Common/Buttons/EditButton/EditButton";
 import LFK from "../../DrawerScreens/LFK"
 import CreateLfkScreen from "../LFKScreen/CreateLFKScreen"
 import {ScrollView, StyleSheet, Text} from "react-native";

@@ -1,8 +1,8 @@
 import React, {useEffect, useLayoutEffect} from 'react';
 import {StyleSheet, View} from "react-native";
-import NewsList from "../../components/NewsList/NewsList";
+import NewsList from "../../components/Lists/NewsList/NewsList";
 import {useNews} from "../../context/NewsContext";
-import AddButton from "../../components/Buttons/AddButton/AddButton";
+import AddButton from "../../components/Common/Buttons/AddButton/AddButton";
 import {toastShow} from "../../utils/toastShow";
 
 // TODO: progressbar for picture upload

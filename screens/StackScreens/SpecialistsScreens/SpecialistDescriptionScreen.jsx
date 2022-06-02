@@ -1,7 +1,7 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
-import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
-import EditButton from "../../../components/Buttons/EditButton/EditButton";
+import DeleteButton from "../../../components/Common/Buttons/DeleteButton/DeleteButton";
+import EditButton from "../../../components/Common/Buttons/EditButton/EditButton";
 import {STATIC_IMAGE_SPECIALIST_URL} from "../../../services/api";
 import FitImage from "react-native-fit-image";
 import {useServices} from "../../../context/ServicesContext";

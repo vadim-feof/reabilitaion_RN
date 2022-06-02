@@ -1,19 +1,19 @@
 import React from 'react';
 import {Modal, Text} from "react-native";
 import CustomButton from "../../Common/CustomButton/CustomButton";
-import ServiceList from "../../Lists/ServiceList/ServiceList";
+import SpecialistList from "../../Lists/SpecialistList/SpecialistList";
 
-const ServicesModal = ({services, onPressItem, visible, closeModal, isLoading, refresh}) => {
+const SpecialistsModal = ({specialists, onPressItem, visible, closeModal, isLoading, refresh}) => {
 
     return (
         <Modal
             visible={visible}
             transparent={false}
         >
-            <Text>Выберите услугу:</Text>
-            <ServiceList
-                services={services}
-                onPressItem={(service) => onPressItem(service)}
+            <Text>Выберите специалиста:</Text>
+            <SpecialistList
+                specialists={specialists}
+                onPressItem={(specialist) => onPressItem(specialist)}
                 isLoading={isLoading}
                 refresh={refresh}
             />
@@ -25,4 +25,4 @@ const ServicesModal = ({services, onPressItem, visible, closeModal, isLoading, r
     );
 };
 
-export default ServicesModal;
+export default SpecialistsModal;

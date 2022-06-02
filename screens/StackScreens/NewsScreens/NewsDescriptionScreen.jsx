@@ -1,8 +1,8 @@
 import React, {useLayoutEffect} from 'react';
 import {StyleSheet, Text, ScrollView} from "react-native";
 import FitImage from "react-native-fit-image";
-import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
-import EditButton from "../../../components/Buttons/EditButton/EditButton";
+import DeleteButton from "../../../components/Common/Buttons/DeleteButton/DeleteButton";
+import EditButton from "../../../components/Common/Buttons/EditButton/EditButton";
 import {STATIC_IMAGE_NEWS_URL} from "../../../services/api";
 
 const NewsDescriptionScreen = ({route, navigation}) => {
