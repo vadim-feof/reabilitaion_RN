@@ -22,9 +22,10 @@ const StackNavigator = () => {
                         <Stack.Screen
                             key={screen.name}
                             name={screen.name}
-                            component={screen.component}
                             options={screen.options}
-                        />
+                        >
+                            {screen.component}
+                        </Stack.Screen>
                     )}
 
                     {token
@@ -33,9 +34,10 @@ const StackNavigator = () => {
                             <Stack.Screen
                                 key={screen.name}
                                 name={screen.name}
-                                component={screen.component}
                                 options={screen.options}
-                            />
+                            >
+                                {screen.component}
+                            </Stack.Screen>
                         )
                         :
                         null

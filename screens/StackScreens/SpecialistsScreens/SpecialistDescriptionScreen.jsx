@@ -1,15 +1,23 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
 import DeleteButton from "../../../components/Buttons/DeleteButton/DeleteButton";
 import EditButton from "../../../components/Buttons/EditButton/EditButton";
 import {STATIC_IMAGE_SPECIALIST_URL} from "../../../services/api";
 import FitImage from "react-native-fit-image";
+import {useServices} from "../../../context/ServicesContext";
+import ServicesModal from "../../../components/ModalWindows/ServicesModal/ServicesModal";
 
 const SpecialistDescriptionScreen = ({navigation, route}) => {
 
     const specialist = route.params
     const {name, position, description, photo} = specialist
     const imageUrl = STATIC_IMAGE_SPECIALIST_URL + specialist.photo
+
+    const {services, isLoading, fetchServices} = useServices()
+    const [visibleModal, setVisibleModal] = useState(false)
+    useEffect(() => {
+        fetchServices()
+    }, [])
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -37,6 +45,16 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
 
     return (
         <View style={styles.container}>
+            <ServicesModal
+                isLoading={isLoading}
+                refresh={fetchServices}
+                services={services}
+                onPressItem={(service) => {
+                    /*открытие алера*/
+                }}
+                closeModal={() => setVisibleModal(false)}
+                visible={visibleModal}
+            />
             <View style={styles.description}>
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.position}>{position}</Text>

@@ -10,6 +10,7 @@ import UpdateServiceScreen from "../screens/StackScreens/ServicesScreens/UpdateS
 import EditMyAccountScreen from "../screens/StackScreens/MyAccountScreens/EditMyAccountScreen";
 import LfkDescription from "../screens/StackScreens/LFKScreen/LFKDescription";
 import CreateLfkScreen from "../screens/StackScreens/LFKScreen/CreateLFKScreen";
+import {ServicesProvider} from "../context/ServicesContext";
 
 export const publicScreens = [
     {name: 'NewsDescriptionScreen', component: NewsDescriptionScreen, options: {title: 'Новости'}},
@@ -17,7 +18,10 @@ export const publicScreens = [
 
 export const privateScreens = [
     {name: 'SpecialistDescriptionScreen',
-        component: SpecialistDescriptionScreen,
+        component: (props) => (
+            <ServicesProvider>
+                <SpecialistDescriptionScreen {...props}/>
+            </ServicesProvider>),
         options: {title: 'О специалисте'}
     },
     {name: 'CreateSpecialistScreen', component: CreateSpecialistScreen,
