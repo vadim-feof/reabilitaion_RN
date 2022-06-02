@@ -24,4 +24,9 @@ export default class SpecialistService {
         const response = await $api.delete(`/specialist/${_id}`)
         return response.data
     }
+
+    static async getByService(_idService) {
+        const response = await $api.get(`/specialist/service/${_idService}`)
+        return response.data
+    }
 }

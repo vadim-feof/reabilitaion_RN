@@ -19,6 +19,8 @@ import {QuestionsProvider} from "../context/QuestionsContext";
 import {LFKProvider} from "../context/LFKContext";
 import {AppointmentProvider} from "../context/AppointmentContext";
 import Appointment from "../screens/DrawerScreens/Appointment";
+import {CreateAppointmentProvider} from "../context/CreateAppointmentContext";
+import CreateAppointment from "../screens/DrawerScreens/CreateAppointment";
 
 export const publicScreens = [
     {name: 'News', component: (props) => <NewsProvider><News {...props}/></NewsProvider>,
@@ -79,6 +81,13 @@ export const privateScreens = [
     {name: 'Appointment', component: (props) => <AppointmentProvider><Appointment {...props}/></AppointmentProvider>,
         options: {
             title: 'Мои записи',
+            drawerIcon: ({color}) => <FontAwesome5 name="list-alt" size={32} color={color} />
+        }
+    },
+
+    {name: 'CreateAppointment', component: (props) => <CreateAppointmentProvider><CreateAppointment {...props}/></CreateAppointmentProvider>,
+        options: {
+            title: 'Записаться к специалисту',
             drawerIcon: ({color}) => <FontAwesome5 name="list-alt" size={32} color={color} />
         }
     },

@@ -20,19 +20,6 @@ export const AppointmentProvider = ({children}) => {
         }
     }
 
-    const createAppointment = async (newAppointment) => {
-        try {
-            setIsLoading(true)
-            const createdAppointment = await AppointmentService.create(newAppointment)
-            setAppointments(prevAppointments => [...prevAppointments, createdAppointment])
-            toastShow('success', 'Запись создана')
-        } catch (e) {
-            console.log(e)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
     const cancelAppointmentByUser = async (_idAppointment) => {
         try {
             setIsLoading(true)
@@ -53,7 +40,6 @@ export const AppointmentProvider = ({children}) => {
         appointments,
         isLoading,
         fetchUserAppointments,
-        createAppointment,
         cancelAppointmentByUser
     }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TouchableHighlight, View} from "react-native";
 
-const ServiceItem = ({service, index, navigation}) => {
+const ServiceItem = ({service, index, onPress}) => {
 
     const itemClass = [styles.item]
     if (index % 2 === 0) {
@@ -12,14 +12,13 @@ const ServiceItem = ({service, index, navigation}) => {
         <TouchableHighlight
             delayPressIn={70}
             underlayColor={'#dddddd'}
-            onPress={() => navigation.navigate('ServiceDescriptionScreen', service)}
+            onPress={onPress}
         >
                 <View style={itemClass}>
                     <View style={styles.description}>
                         <Text style={styles.code}>{service.code}</Text>
                         <Text style={styles.name}>{service.name}</Text>
                         <Text style={styles.price}>{service.price}</Text>
-                        <Text style={styles.price}>{service.description}</Text>
                     </View>
                 </View>
 

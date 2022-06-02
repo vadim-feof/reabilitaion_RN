@@ -50,7 +50,7 @@ const Services = ({navigation, route}) => {
         <View style={styles.container}>
             <ServiceList
                 services={services}
-                navigation={navigation}
+                onPressItem={(service) => navigation.navigate('ServiceDescriptionScreen', service)}
                 refresh={fetchServices}
                 isLoading={isLoading}
             />
