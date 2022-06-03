@@ -6,6 +6,8 @@ import LFK from "../../DrawerScreens/LFK"
 import CreateLfkScreen from "../LFKScreen/CreateLFKScreen"
 import {ScrollView, StyleSheet, Text} from "react-native";
 import FitImage from "react-native-fit-image";
+import {useAuth} from "../../../context/AuthContext";
+import {checkAdminRole} from "../../../utils/checkAdminRole";
 
 const LfkDescription = ({route, navigation}) => {
 
@@ -13,30 +15,39 @@ const LfkDescription = ({route, navigation}) => {
     const {title, content, picture} = lfkItem
     const imageUrl = STATIC_IMAGE_LFK_URL + lfkItem.picture
 
+    const {user} = useAuth()
+
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: ({tintColor}) => (
-                <>
-                    <DeleteButton
-                        color={tintColor}
-                        navigate={() => navigation.navigate('LFK', {
-                                type: 'delete',
-                                _id: lfkItem._id
-                            }
-                        )}
-                    />
-                    <EditButton
-                        color={tintColor}
-                        navigate={() => navigation.navigate('CreateLfkScreen', {
-                                editingItems: lfkItem,
-                                isEdit: true
-                            }
-                        )}
-                    />
-                </>
-            )
-        });
-    }, [navigation]);
+        if (checkAdminRole(user.roles)) {
+            navigation.setOptions({
+                headerRight: ({tintColor}) => (
+                    <>
+                        <DeleteButton
+                            color={tintColor}
+                            navigate={() => navigation.navigate('LFK', {
+                                    type: 'delete',
+                                    _id: lfkItem._id
+                                }
+                            )}
+                        />
+                        <EditButton
+                            color={tintColor}
+                            navigate={() => navigation.navigate('CreateLfkScreen', {
+                                    editingItems: lfkItem,
+                                    isEdit: true
+                                }
+                            )}
+                        />
+                    </>
+                )
+            });
+        }
+        else {
+            navigation.setOptions({
+                headerRight: null
+            });
+        }
+    }, [navigation, user.roles]);
 
     return (
         <ScrollView

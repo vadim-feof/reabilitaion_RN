@@ -4,9 +4,13 @@ import {toastShow} from "../../utils/toastShow";
 import AddButton from "../../components/Common/Buttons/AddButton/AddButton";
 import {useLFK} from "../../context/LFKContext";
 import LFKList from "../../components/Lists/LFKList/LFKList";
+import {useAuth} from "../../context/AuthContext";
+import {checkAdminRole} from "../../utils/checkAdminRole";
 
 const Lfk = ({navigation, route}) => {
     const {items, fetchItems, addItems, updateItems, removeItems, isLoading} = useLFK()
+
+    const {user} = useAuth()
 
     useEffect(async () => {
         await fetchItems()
@@ -34,13 +38,20 @@ const Lfk = ({navigation, route}) => {
     }, [route.params])
 
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: ({tintColor}) => <AddButton
-                color={tintColor}
-                navigate={() => navigation.navigate('CreateLfkScreen', { isEdit: false })}
-            />
-        });
-    }, [navigation]);
+        if (checkAdminRole(user.roles)) {
+            navigation.setOptions({
+                headerRight: ({tintColor}) => <AddButton
+                    color={tintColor}
+                    navigate={() => navigation.navigate('CreateLfkScreen', { isEdit: false })}
+                />
+            });
+        }
+        else {
+            navigation.setOptions({
+                headerRight: null
+            });
+        }
+    }, [navigation, user.roles]);
     return (
         <View style={styles.container}>
             <LFKList items={items}
