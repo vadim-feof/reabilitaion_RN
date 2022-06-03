@@ -5,16 +5,18 @@ import QuestionCategoryItem from "./QuestionCategoryItem/QuestionCategoryItem";
 import ListEmptyText from "../../Common/ListEmptyText";
 
 
-const QuestionCategoryList = ({category, deleteCategory, addQuestion, deleteQuestion,  refresh, isLoading}) => {
+const QuestionCategoryList = ({adminAccess, category, deleteCategory, addQuestion, deleteQuestion,  refresh, isLoading}) => {
     return (
         <FlatList
             data={category}
             removeClippedSubviews={false}
             renderItem={({item}) => (
-                <QuestionCategoryItem categoryItem={item}
-                                      deleteCategory={deleteCategory}
-                                      addQuestion={addQuestion}
-                                      deleteQuestion={deleteQuestion}
+                <QuestionCategoryItem
+                    adminAccess={adminAccess}
+                    categoryItem={item}
+                    deleteCategory={deleteCategory}
+                    addQuestion={addQuestion}
+                    deleteQuestion={deleteQuestion}
                 />
             )}
             keyExtractor={item => item._id.toString()}

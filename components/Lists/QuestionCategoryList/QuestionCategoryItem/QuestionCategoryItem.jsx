@@ -7,11 +7,14 @@ import {TouchableHighlight} from "react-native";
 import ModalAddCategory from "../../../ModalWindows/ModalAddCategory";
 import ModalAddQuestions from "../../../ModalWindows/ModalAddQuestions";
 
-const QuestionCategoryItem = ({categoryItem, deleteCategory, addQuestion, deleteQuestion}) => {
+const QuestionCategoryItem = ({adminAccess, categoryItem, deleteCategory, addQuestion, deleteQuestion}) => {
 
     const [visibleModal, setVisibleModal] = useState(false)
 
     const openAlert = () => {
+        if (!adminAccess)
+            return
+
         Vibration.vibrate(80)
         Alert.alert(
             'Выберите действие',
@@ -53,7 +56,6 @@ const QuestionCategoryItem = ({categoryItem, deleteCategory, addQuestion, delete
         <>
             <Modal visible={visibleModal}
                    transparent={true}
-                   keyboardAvoidingBehavior={Platform.OS === 'android' ? 'height' : 'padding'}
             >
                 <ModalAddQuestions
                     setVisibleModal={setVisibleModal}
@@ -72,6 +74,7 @@ const QuestionCategoryItem = ({categoryItem, deleteCategory, addQuestion, delete
 
                 <CollapseBody>
                     <QuestionList
+                        adminAccess={adminAccess}
                         questionArray={categoryItem.questionArray}
                         deleteQuestion={deleteQuestion}
                         idCategory={categoryItem._id}

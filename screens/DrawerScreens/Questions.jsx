@@ -6,6 +6,8 @@ import {useQuestions} from "../../context/QuestionsContext";
 import QuestionCategoryList from "../../components/Lists/QuestionCategoryList/QuestionCategoryList";
 import AddButton from "../../components/Common/Buttons/AddButton/AddButton";
 import ModalAddCategory from "../../components/ModalWindows/ModalAddCategory";
+import {useAuth} from "../../context/AuthContext";
+import {checkAdminRole} from "../../utils/checkAdminRole";
 
 // TODO: добавить рефреш и валидаицю полей
 const Questions = ({navigation, route}) => {
@@ -15,25 +17,32 @@ const Questions = ({navigation, route}) => {
 
     const [visibleModal, setVisibleModal] = useState(false)
 
+    const {user} = useAuth()
+
     useEffect(async () => {
         await fetchCategory()
     }, [])
 
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: ({tintColor}) => <AddButton
-                color={tintColor}
-                navigate={() => setVisibleModal(true)}
-            />
-        });
-    }, [navigation]);
-
-    if (category.length === 0)
-        return <Text style={{fontSize: 18, textAlign: 'center'}}>Загрузка...</Text>
+        if (checkAdminRole(user.roles)) {
+            navigation.setOptions({
+                headerRight: ({tintColor}) => <AddButton
+                    color={tintColor}
+                    navigate={() => setVisibleModal(true)}
+                />
+            });
+        }
+        else {
+            navigation.setOptions({
+                headerRight: null
+            });
+        }
+    }, [navigation, user.roles]);
 
     return (
         <View style={styles.container}>
             <QuestionCategoryList
+                adminAccess={checkAdminRole(user.roles)}
                 refresh={fetchCategory}
                 isLoading={isLoading}
                 category={category}

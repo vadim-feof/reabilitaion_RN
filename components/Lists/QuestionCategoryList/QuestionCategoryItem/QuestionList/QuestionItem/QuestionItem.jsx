@@ -3,8 +3,11 @@ import {Collapse, CollapseBody, CollapseHeader} from "accordion-collapse-react-n
 import {Alert, StyleSheet, Text, Vibration} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 
-const QuestionItem = ({questionItem, deleteQuestion, idCategory}) => {
+const QuestionItem = ({adminAccess, questionItem, deleteQuestion, idCategory}) => {
     const openAlert = () => {
+        if (!adminAccess)
+            return
+
         Vibration.vibrate(80)
         Alert.alert(
             'Выберите действие',
