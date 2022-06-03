@@ -4,14 +4,14 @@ import {getAppointmentStatus} from "../../../../utils/getAppointmentStatus";
 import StatusText from "./StatusText";
 import StatusBlock from "./StatusBlock";
 
-const AppointmentItem = ({appointment, cancel}) => {
+const AppointmentItem = ({appointment, onPress}) => {
 
     const {Specialist, Service} = appointment
 
     return (
         <TouchableHighlight delayPressIn={70}
                             underlayColor={'#dddddd'}
-                            onPress={() => {}}
+                            onPress={() => onPress(appointment)}
         >
             <View style={styles.wrapper}>
                 <StatusBlock
@@ -26,6 +26,17 @@ const AppointmentItem = ({appointment, cancel}) => {
                     </Text>
                     <Text style={[styles.text]}>
                         Стоимость: {Service.price}
+                    </Text>
+                    <Text style={[styles.text]}>
+                        Дата: {new Date(appointment.desiredDate).toLocaleDateString('ru-RU')}
+                    </Text>
+                    <Text style={[styles.text]}>
+                        Время: {new Date(appointment.desiredTime)
+                            .toLocaleTimeString('ru-RU',{
+                                hour: "2-digit",
+                                minute: "2-digit"
+                            }
+                        )}
                     </Text>
                     <View style={styles.statusWrapper}>
                         <Text style={[styles.text, styles.statusText]}>

@@ -26,7 +26,7 @@ const StatusText = ({textStyle, statusText}) => {
 
 const styles = StyleSheet.create({
     processStyle: {
-        color: '#D9D9D9'
+        color: '#8c8c8c'
     },
     viewedStyle: {
         color: '#58AC24'

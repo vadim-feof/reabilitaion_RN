@@ -23,14 +23,15 @@ export const AppointmentProvider = ({children}) => {
     const cancelAppointmentByUser = async (_idAppointment) => {
         try {
             setIsLoading(true)
-            const cancelledAppointment = await AppointmentService.cancelByUser(_idAppointment)
+            const {cancelledAppointment} = await AppointmentService.cancelByUser(_idAppointment)
             setAppointments(prevAppointments => prevAppointments.map(appointment => {
                 if (appointment._id === cancelledAppointment._id)
                     return cancelledAppointment
                 return appointment
             }))
+            toastShow('success', 'Запись отменена')
         } catch (e) {
-
+            console.log(e)
         } finally {
             setIsLoading(false)
         }
