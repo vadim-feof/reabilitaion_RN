@@ -2,34 +2,45 @@ import React, {useLayoutEffect} from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import DeleteButton from "../../../components/Common/Buttons/DeleteButton/DeleteButton";
 import EditButton from "../../../components/Common/Buttons/EditButton/EditButton";
+import {useAuth} from "../../../context/AuthContext";
+import {checkAdminRole} from "../../../utils/checkAdminRole";
 
 const ServiceDescriptionScreen = ({navigation, route}) => {
 
     const service = route.params
     const {code, name, price, description} = service
 
+    const {user} = useAuth()
+
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: ({tintColor}) => (
-                <>
-                    <DeleteButton
-                        color={tintColor}
-                        navigate={() => navigation.navigate('Services', {
-                            type: 'delete',
-                            _id: route.params._id
-                        })}
-                    />
-                    <EditButton
-                        color={tintColor}
-                        navigate={() => navigation.navigate('UpdateServiceScreen', {
-                                editingService: service
-                            }
-                        )}
-                    />
-                </>
-            )
-        });
-    }, [navigation]);
+        if (checkAdminRole(user.roles)) {
+            navigation.setOptions({
+                headerRight: ({tintColor}) => (
+                    <>
+                        <DeleteButton
+                            color={tintColor}
+                            navigate={() => navigation.navigate('Services', {
+                                type: 'delete',
+                                _id: route.params._id
+                            })}
+                        />
+                        <EditButton
+                            color={tintColor}
+                            navigate={() => navigation.navigate('UpdateServiceScreen', {
+                                    editingService: service
+                                }
+                            )}
+                        />
+                    </>
+                )
+            });
+        }
+        else {
+            navigation.setOptions({
+                headerRight: null
+            });
+        }
+    }, [navigation, user.roles]);
 
     return (
             <View style={styles.description}>

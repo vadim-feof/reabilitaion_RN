@@ -4,11 +4,14 @@ import ServiceList from "../../components/Lists/ServiceList/ServiceList";
 import AddButton from "../../components/Common/Buttons/AddButton/AddButton";
 import {toastShow} from "../../utils/toastShow";
 import {useServices} from "../../context/ServicesContext";
+import {useAuth} from "../../context/AuthContext";
+import {checkAdminRole} from "../../utils/checkAdminRole";
 
 const Services = ({navigation, route}) => {
 
     const {services, addService, updateService, removeService, isLoading, fetchServices} = useServices()
 
+    const {user} = useAuth()
 
     useEffect(async () => {
        await fetchServices()
@@ -37,13 +40,20 @@ const Services = ({navigation, route}) => {
     }, [route.params])
 
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: ({tintColor}) => <AddButton
-                color={tintColor}
-                navigate={() => navigation.navigate('CreateServiceScreen', { isEdit: false })}
-            />
-        });
-    }, [navigation]);
+        if (checkAdminRole(user.roles)) {
+            navigation.setOptions({
+                headerRight: ({tintColor}) => <AddButton
+                    color={tintColor}
+                    navigate={() => navigation.navigate('CreateServiceScreen', { isEdit: false })}
+                />
+            });
+        }
+        else {
+            navigation.setOptions({
+                headerRight: null
+            });
+        }
+    }, [navigation, user.roles]);
 
     return (
         <View style={styles.container}>
