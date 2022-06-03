@@ -24,4 +24,20 @@ export default class ServicesService {
         const response = await $api.delete(`/services/${_id}`)
         return response.data
     }
+
+    static async addServiceToSpec (_idService, _idSpecialist) {
+        const response = await $api.patch(`/specialist/service/${_idSpecialist}`,
+            {},
+            {params: {_idService}}
+        )
+        return response.data
+    }
+
+    static async deleteServiceFromSpec (_idService, _idSpecialist) {
+        const response = await $api.delete(`/specialist/service/${_idSpecialist}`,
+            {params: {_idService}}
+        )
+        return response.data
+    }
+
 }

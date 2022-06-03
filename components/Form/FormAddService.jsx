@@ -86,8 +86,10 @@ const FormAddService = ({navigation, isEdit, editingService}) => {
                         />
                         {touched.description && errors.description && <Text style={styles.error}>{errors.description}</Text>}
 
-                        <CustomButton onPress={handleSubmit}>
-                            <Text style={styles.text}>{isEdit ? 'Изменить' : 'Добавить'}</Text>
+                        <CustomButton
+                            onPress={handleSubmit}
+                            text={isEdit ? 'Изменить' : 'Добавить'}
+                        >
                         </CustomButton>
                     </View>
                 )}

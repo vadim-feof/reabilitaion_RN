@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Text} from "react-native";
+import {Modal, StyleSheet, Text} from "react-native";
 import CustomButton from "../../Common/CustomButton/CustomButton";
 import ServiceList from "../../Lists/ServiceList/ServiceList";
 
@@ -10,7 +10,7 @@ const ServicesModal = ({services, onPressItem, visible, closeModal, isLoading, r
             visible={visible}
             transparent={false}
         >
-            <Text>Выберите услугу:</Text>
+            <Text style={styles.header}>Выберите услугу:</Text>
             <ServiceList
                 services={services}
                 onPressItem={(service) => onPressItem(service)}
@@ -24,5 +24,14 @@ const ServicesModal = ({services, onPressItem, visible, closeModal, isLoading, r
         </Modal>
     );
 };
+
+const styles = StyleSheet.create({
+    header: {
+        fontWeight: 'bold',
+        fontSize: 24,
+        textAlign: "center",
+        marginVertical: 15
+    },
+})
 
 export default ServicesModal;

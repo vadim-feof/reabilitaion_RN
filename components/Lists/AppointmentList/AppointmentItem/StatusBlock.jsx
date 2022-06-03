@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#D9D9D9'
     },
     viewedStyle: {
-        backgroundColor: '#ff4747'
+        backgroundColor: '#58AC24'
     },
     cancelledStyle: {
-        backgroundColor: '#58AC24'
+        backgroundColor: '#ff4747'
     }
 })
 

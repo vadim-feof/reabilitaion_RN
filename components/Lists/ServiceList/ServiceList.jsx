@@ -1,5 +1,4 @@
 import React from 'react';
-import SpecialistItem from "../SpecialistList/SpecialistItem/SpecialistItem";
 import {FlatList, RefreshControl} from "react-native";
 import ServiceItem from "./ServiceItem/ServiceItem";
 
