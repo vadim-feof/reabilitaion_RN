@@ -17,8 +17,12 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
     const {name, position, description, photo} = specialist
     const imageUrl = STATIC_IMAGE_SPECIALIST_URL + specialist.photo
 
-    const {services, isLoading, fetchServices} = useServices()
+    const {services, isLoading, fetchServices, addServiceToSpec, deleteServiceFromSpec} = useServices()
+
     const [visibleModal, setVisibleModal] = useState(false)
+
+    const [specialistServices, setSpecialistServices] = useState(specialist.Services)
+
     useEffect(() => {
         fetchServices()
     }, [])
@@ -58,7 +62,7 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
                 },
                 {
                     text: 'Удалить услугу у специалиста',
-                    onPress: confirmDelete(idService, idSpec)
+                    onPress: () => confirmDelete(idService, idSpec)
                 },
             ]
         )
@@ -76,7 +80,10 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
                 },
                 {
                     text: 'Удалить',
-                    onPress: () => console.log(idService, idSpec)
+                    onPress: async () => {
+                        const {Services} = await deleteServiceFromSpec(idService, idSpec)
+                        setSpecialistServices(Services)
+                    }
                 },
             ]
         )
@@ -99,7 +106,7 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
         )
     }
 
-    const confirmAdd = (idService) => {
+    const confirmAdd = (idService, idSpec) => {
         Vibration.vibrate(80)
         Alert.alert(
             'Действительно добавить?',
@@ -110,7 +117,10 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
                 },
                 {
                     text: 'Добавить услугу',
-                    onPress: () => console.log(idService)
+                    onPress: async () => {
+                        const {Services} = await addServiceToSpec(idService, idSpec)
+                        setSpecialistServices(Services)
+                    }
                 },
             ]
         )
@@ -124,8 +134,9 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
                     refresh={fetchServices}
                     services={services}
                     onPressItem={(service) => {
-                        confirmAdd(service._id)
-                        setVisibleModal(isVisible => !isVisible)}}
+                        confirmAdd(service._id, specialist._id)
+                        setVisibleModal(isVisible => !isVisible)
+                    }}
                     closeModal={() => setVisibleModal(false)}
                     visible={visibleModal}
                 />
@@ -151,13 +162,17 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
                     </CollapseHeader>
 
                     <CollapseBody>
-                        <ServiceList
-                            services={specialist.Services}
-                            onPressItem={(service) => openAlertDelete(service._id, specialist._id)}
-                            isLoading={false}
-                            refresh={() => {
-                            }}
-                        />
+                        {
+                            specialistServices.length === 0
+                                ? <Text style={[styles.header, styles.text]}> Услуги отсутствуют</Text>
+                                : <ServiceList
+                                    services={specialistServices}
+                                    onPressItem={(service) => openAlertDelete(service._id, specialist._id)}
+                                    isLoading={false}
+                                    refresh={() => {
+                                    }}
+                                />
+                        }
                     </CollapseBody>
                 </Collapse>
             </View>

@@ -65,13 +65,41 @@ export const ServicesProvider = ({children}) => {
         }
     }
 
+    const addServiceToSpec = async (_idService, _idSpecialist) => {
+        try {
+            setIsLoading(true)
+            const {updatedSpecialist} = await ServicesService.addServiceToSpec(_idService, _idSpecialist)
+            toastShow('success', 'Услуга добавлена к специалисту')
+            return updatedSpecialist
+        } catch(e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const deleteServiceFromSpec = async (_idService, _idSpecialist) => {
+        try {
+            setIsLoading(true)
+            const {updatedSpecialist} =await ServicesService.deleteServiceFromSpec(_idService, _idSpecialist)
+            toastShow('success', 'Услуга удалена')
+            return updatedSpecialist
+        } catch(e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     const value = {
         services,
         fetchServices,
         addService,
         updateService,
         removeService,
-        isLoading
+        isLoading,
+        addServiceToSpec,
+        deleteServiceFromSpec
     }
     return <ServicesContext.Provider value={value}>
         {children}

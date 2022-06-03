@@ -8,19 +8,6 @@ const AppointmentItem = ({appointment, cancel}) => {
 
     const {Specialist, Service} = appointment
 
-    const statusStyle = (statusText) => {
-        switch (statusText) {
-            case 'process':
-                return 'на рассмотрении'
-            case 'viewed':
-                return 'рассмотрена'
-            case 'cancelled':
-                return 'отменена'
-            default:
-                return statusText
-        }
-    }
-
     return (
         <TouchableHighlight delayPressIn={70}
                             underlayColor={'#dddddd'}
