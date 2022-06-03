@@ -4,36 +4,47 @@ import FitImage from "react-native-fit-image";
 import DeleteButton from "../../../components/Common/Buttons/DeleteButton/DeleteButton";
 import EditButton from "../../../components/Common/Buttons/EditButton/EditButton";
 import {STATIC_IMAGE_NEWS_URL} from "../../../services/api";
+import {useAuth} from "../../../context/AuthContext";
+import {checkAdminRole} from "../../../utils/checkAdminRole";
 
 const NewsDescriptionScreen = ({route, navigation}) => {
 
     const news = route.params
     const {title, content, date, picture} = news
     const imageUrl = STATIC_IMAGE_NEWS_URL + news.picture
+
+    const {user} = useAuth()
+
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: ({tintColor}) => (
-                <>
-                    <DeleteButton
-                        color={tintColor}
-                        navigate={() => navigation.navigate('News', {
-                                type: 'delete',
-                                _id: news._id
-                            }
-                        )}
-                    />
-                    <EditButton
-                        color={tintColor}
-                        navigate={() => navigation.navigate('UpdateNewsScreen', {
-                                editingNews: news,
-                                isEdit: true
-                            }
-                        )}
-                    />
-                </>
-            )
-        });
-    }, [navigation]);
+        if (checkAdminRole(user.roles)) {
+            navigation.setOptions({
+                headerRight: ({tintColor}) => (
+                    <>
+                        <DeleteButton
+                            color={tintColor}
+                            navigate={() => navigation.navigate('News', {
+                                    type: 'delete',
+                                    _id: news._id
+                                }
+                            )}
+                        />
+                        <EditButton
+                            color={tintColor}
+                            navigate={() => navigation.navigate('UpdateNewsScreen', {
+                                    editingNews: news,
+                                    isEdit: true
+                                }
+                            )}
+                        />
+                    </>
+                )
+            });
+        } else {
+            navigation.setOptions({
+                headerRight: null
+            })
+        }
+    }, [navigation, user.roles]);
 
 
 

@@ -4,11 +4,15 @@ import NewsList from "../../components/Lists/NewsList/NewsList";
 import {useNews} from "../../context/NewsContext";
 import AddButton from "../../components/Common/Buttons/AddButton/AddButton";
 import {toastShow} from "../../utils/toastShow";
+import {useAuth} from "../../context/AuthContext";
+import {checkAdminRole} from "../../utils/checkAdminRole";
+import {useIsFocused} from "@react-navigation/native";
 
 // TODO: progressbar for picture upload
 const News = ({navigation, route}) => {
 
     const {news, addNews, updateNews, removeNews, isLoading, fetchNews} = useNews()
+    const {user} = useAuth()
 
     useEffect(async () => {
         await fetchNews()
@@ -36,13 +40,21 @@ const News = ({navigation, route}) => {
     }, [route.params])
 
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: ({tintColor}) => <AddButton
-                color={tintColor}
-                navigate={() => navigation.navigate('CreateNewsScreen', { isEdit: false })}
-            />
-        });
-    }, [navigation]);
+        if (checkAdminRole(user.roles)) {
+            navigation.setOptions({
+                headerRight: ({tintColor}) => <AddButton
+                    color={tintColor}
+                    navigate={() => navigation.navigate('CreateNewsScreen', { isEdit: false })}
+                />
+            });
+        }
+        else {
+            navigation.setOptions({
+                headerRight: null
+            });
+        }
+
+    }, [navigation, user.roles]);
 
     return (
         <View style={styles.container}>
