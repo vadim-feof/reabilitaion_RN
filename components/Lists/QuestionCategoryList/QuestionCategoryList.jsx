@@ -9,6 +9,7 @@ const QuestionCategoryList = ({category, deleteCategory, addQuestion, deleteQues
     return (
         <FlatList
             data={category}
+            removeClippedSubviews={false}
             renderItem={({item}) => (
                 <QuestionCategoryItem categoryItem={item}
                                       deleteCategory={deleteCategory}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Collapse, CollapseBody, CollapseHeader} from "accordion-collapse-react-native";
-import {Alert, FlatList, StyleSheet, Text, View, Vibration, Modal} from "react-native";
+import {Alert, FlatList, StyleSheet, Text, View, Vibration, Modal, Platform} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import QuestionList from "./QuestionList/QuestionList";
 import {TouchableHighlight} from "react-native";
@@ -53,6 +53,7 @@ const QuestionCategoryItem = ({categoryItem, deleteCategory, addQuestion, delete
         <>
             <Modal visible={visibleModal}
                    transparent={true}
+                   keyboardAvoidingBehavior={Platform.OS === 'android' ? 'height' : 'padding'}
             >
                 <ModalAddQuestions
                     setVisibleModal={setVisibleModal}
