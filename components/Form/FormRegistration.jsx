@@ -5,7 +5,7 @@ import CustomInput from "../Common/CustomInput/CustomInput";
 import * as yup from 'yup'
 import CustomButton from "../Common/CustomButton/CustomButton";
 import {useAuth} from "../../context/AuthContext";
-import DatePicker from "../DatePicker";
+import BirthdayPicker from "../BirthdayPicker";
 import {upperFirstLetter} from "../../utils/upperFirstLetter";
 
 const FormRegistration = ({navigation}) => {
@@ -102,7 +102,7 @@ const FormRegistration = ({navigation}) => {
                                 {touched.patronymic && errors.patronymic &&
                                     <Text style={styles.error}> {errors.patronymic}</Text>}
                                 <Text style={styles.headerText}>Дата рождения:</Text>
-                                <DatePicker
+                                <BirthdayPicker
                                     value={values.birthday}
                                     setValue={(birthday) => setFieldValue('birthday', birthday)}
                                 />

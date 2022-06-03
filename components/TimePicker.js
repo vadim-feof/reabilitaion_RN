@@ -3,23 +3,22 @@ import {View, TextInput, StyleSheet, Pressable, Platform} from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AntDesign } from '@expo/vector-icons';
 
-const DatePicker = ({value, setValue}) => {
+const TimePicker = ({value, setValue}) => {
     const [visible, setVisible] = useState(false)
 
     return (
         <View>
             <Pressable onPress={() => setVisible(visible => !visible)}>
-                <View pointerEvents={'none'} style={styles.birthDayPicker}>
+                <View pointerEvents={'none'} style={styles.TimePicker}>
                     <TextInput
                         style={{fontSize: 20}}
-                        value={new Date(value).toLocaleDateString('ru-RU', {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric"
+                        value={new Date(value).toLocaleTimeString('ru-RU', {
+                            hour: "2-digit",
+                            minute: "2-digit"
                         })}
                         editable={true}
                     />
-                    <AntDesign name="calendar" size={28} color="black" />
+                    <AntDesign name="clockcircleo" size={28} color="black" />
                 </View>
             </Pressable>
             <View>
@@ -27,10 +26,10 @@ const DatePicker = ({value, setValue}) => {
                     ?
                     <DateTimePicker
                         style={{width: '100%'}}
-                        value={value}
-                        mode={'date'}
+                        value={new Date(value)}
+                        mode={'time'}
                         is24Hour={true}
-                        display={'default'}
+                        display={'clock'}
                         textColor={'black'}
                         locale={'ru-RU'}
                         onChange={(event, selectedDate) => {
@@ -53,7 +52,7 @@ const DatePicker = ({value, setValue}) => {
 };
 
 const styles = StyleSheet.create({
-    birthDayPicker: {
+    TimePicker: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderWidth: 1,
@@ -66,4 +65,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default DatePicker;
+export default TimePicker;

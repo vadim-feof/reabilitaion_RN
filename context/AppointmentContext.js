@@ -12,7 +12,7 @@ export const AppointmentProvider = ({children}) => {
         try {
             setIsLoading(true)
             const fetchedAppointments = await AppointmentService.getByUser()
-            setAppointments(fetchedAppointments)
+            setAppointments(fetchedAppointments.reverse())
         } catch (e) {
             console.log(e)
         } finally {

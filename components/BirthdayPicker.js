@@ -3,7 +3,7 @@ import {View, TextInput, StyleSheet, Pressable, Platform} from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AntDesign } from '@expo/vector-icons';
 
-const DatePicker = ({value, setValue}) => {
+const BirthdayPicker = ({value, setValue}) => {
     const [visible, setVisible] = useState(false)
 
     return (
@@ -27,10 +27,12 @@ const DatePicker = ({value, setValue}) => {
                     ?
                     <DateTimePicker
                         style={{width: '100%'}}
+                        minimumDate={new Date(1920, 0, 1)}
+                        maximumDate={new Date()}
                         value={value}
                         mode={'date'}
                         is24Hour={true}
-                        display={'default'}
+                        display={'spinner'}
                         textColor={'black'}
                         locale={'ru-RU'}
                         onChange={(event, selectedDate) => {
@@ -66,4 +68,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default DatePicker;
+export default BirthdayPicker;

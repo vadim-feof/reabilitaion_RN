@@ -6,7 +6,9 @@ const CreateAppointment = ({navigation}) => {
     return (
         <View style={styles.container}>
             <FormCreateAppointment
-
+                navigation={() => {
+                    navigation.navigate('Appointment')
+                }}
             />
         </View>
     );

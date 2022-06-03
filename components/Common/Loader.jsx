@@ -1,11 +1,11 @@
 import React from 'react';
 import {ActivityIndicator, View, StyleSheet} from "react-native";
 
-const Loader = ({isLoading}) => {
+const Loader = () => {
     return (
-        <View style={styles.loader}>
+        <View style={styles.loader} pointerEvents={'none'}>
             <ActivityIndicator
-                animating={isLoading}
+                animating={true}
                 color={'#D58B40'}
                 size={'large'}
             />

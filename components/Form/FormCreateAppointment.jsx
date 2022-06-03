@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
-import {View, ScrollView, Text} from "react-native";
+import {View, ScrollView, Text, StyleSheet, Alert} from "react-native";
 import {Formik} from "formik";
 import * as yup from "yup";
-import DatePicker from "../DatePicker";
 import CustomInput from "../Common/CustomInput/CustomInput";
 import {useCreateAppointment} from "../../context/CreateAppointmentContext";
 import CustomButton from "../Common/CustomButton/CustomButton";
@@ -11,8 +10,10 @@ import ServiceItem from "../Lists/ServiceList/ServiceItem/ServiceItem";
 import SpecialistsModal from "../ModalWindows/SpecialistsModal/ServicesModal";
 import SpecialistItem from "../Lists/SpecialistList/SpecialistItem/SpecialistItem";
 import Loader from "../Common/Loader";
+import TimePicker from "../TimePicker";
+import DatePicker from "../DatePicker";
 
-const FormCreateAppointment = () => {
+const FormCreateAppointment = ({navigation}) => {
     const validationSchema = yup.object().shape(
         {
             idService: yup.string().required('Выберите услугу'),
@@ -22,6 +23,29 @@ const FormCreateAppointment = () => {
 
     const {services, specialists, isLoading,
         fetchServices, fetchSpecialistsByService, createAppointment} = useCreateAppointment()
+
+    const openConfirmAppointment = (values) => {
+        const newAppointment = {
+            _idService: values.idService,
+            _idSpecialist: values.idSpecialist,
+            desiredTime: values.desiredTime,
+            desiredDate: values.desiredDate,
+            comment: values.comment
+        }
+        Alert.alert(
+            'Подтверждаете запись?',
+            '',
+            [
+                {
+                    text: 'Подтверждаю',
+                    onPress: () => createAppointment(newAppointment, navigation),
+                },
+                {
+                    text: 'Отмена'
+                }
+            ]
+        )
+    }
 
     useEffect(() => {
         fetchServices()
@@ -34,17 +58,18 @@ const FormCreateAppointment = () => {
                 service: {},
                 idSpecialist: '',
                 specialist: {},
-                desiredTime: Date.now(),
-                desiredDate: Date.now(),
+                desiredTime: new Date().setHours(12, 0, 0),
+                desiredDate: new Date(),
                 comment: '',
                 modals: {
                    visibleServicesModal: false,
                    visibleSpecialistsModal: false
                 }
             }}
-            validateOnBlur
+            validateOnBlur={true}
+            validateOnChange={false}
             onSubmit={(values, action) => {
-                createAppointment(values)
+                openConfirmAppointment(values)
             }}
             validationSchema={validationSchema}
         >
@@ -77,9 +102,7 @@ const FormCreateAppointment = () => {
 
                 return (
                     <ScrollView>
-                        <Loader
-                            isLoading={isLoading}
-                        />
+                        {isLoading ? <Loader/> : null}
                         <ServicesModal
                             services={services}
                             visible={values.modals.visibleServicesModal}
@@ -104,15 +127,14 @@ const FormCreateAppointment = () => {
                             refresh={() => fetchSpecialistsByService(values.idService)}
                             isLoading={isLoading}
                         />
-                        <View>
                         {
                             values.idService
                             ?
-                            <View>
+                            <>
                                 <ServiceItem
                                     service={values.service}
                                     onPress={openServicesModal}
-                                    index={0}
+                                    index={1}
                                 />
                                 {
                                     values.idSpecialist
@@ -122,34 +144,41 @@ const FormCreateAppointment = () => {
                                         onPress={openSpecialistsModal}
                                     />
                                     :
-                                    <CustomButton
-                                        disabled={isLoading}
-                                        text={'Выберите специалиста'}
-                                        onPress={openSpecialistsModal}
-                                    />
+                                    <>
+                                        <CustomButton
+                                            disabled={isLoading}
+                                            text={'Выберите специалиста'}
+                                            onPress={openSpecialistsModal}
+                                        />
+                                        {!values.idSpecialist && errors.idSpecialist ?
+                                            <Text style={styles.error}>{errors.idSpecialist}</Text> : null}
+                                    </>
                                 }
-                            </View>
+                            </>
                             :
-                            <CustomButton
-                                disabled={isLoading}
-                                text={'Выберите услугу'}
-                                onPress={openServicesModal}
-                            />
+                            <>
+                                <CustomButton
+                                    disabled={isLoading}
+                                    text={'Выберите услугу'}
+                                    onPress={openServicesModal}
+                                />
+                                {!values.idService && errors.idService ?
+                                    <Text style={styles.error}>{errors.idService}</Text> : null}
+                            </>
                         }
-                        </View>
-                        <View>
-                            <DatePicker
-                                value={values.desiredDate}
-                                setValue={(date) => setFieldValue('desiredDate', date)}
-                            />
-                        </View>
-                        <View>
-                            <DatePicker
-                                value={values.desiredTime}
-                                setValue={(time) => setFieldValue('desiredTime', time)}
-                            />
-                        </View>
+                        <DatePicker
+                            value={values.desiredDate}
+                            setValue={(date) => setFieldValue('desiredDate', date)}
+                        />
+                        <TimePicker
+                            value={values.desiredTime}
+                            setValue={(time) => {
+                                console.log(time)
+                                setFieldValue('desiredTime', time)
+                            }}
+                        />
                         <CustomInput
+                            multiline={true}
                             type={'text'}
                             onChangeText={handleChange('comment')}
                             onBlur={handleBlur('comment')}
@@ -167,5 +196,14 @@ const FormCreateAppointment = () => {
         </Formik>
     );
 };
+
+const styles = StyleSheet.create({
+    error: {
+        color: 'red',
+        marginLeft: 10,
+        marginBottom: 10,
+        fontSize: 18,
+    },
+})
 
 export default FormCreateAppointment;

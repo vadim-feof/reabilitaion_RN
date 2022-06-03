@@ -29,7 +29,7 @@ const ServiceItem = ({service, index, onPress}) => {
 
 const styles = StyleSheet.create({
     greyItem: {
-        backgroundColor: '#F3F3F3'
+        backgroundColor: '#f8f8f8'
     },
     item: {
         flexDirection: "row",

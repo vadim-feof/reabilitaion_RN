@@ -65,9 +65,7 @@ const MyAccount = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <Loader
-                isLoading={isLoading}
-            />
+            {isLoading ? <Loader/> : null}
             <View style={styles.wrapperPhoto}>
                 <TouchableOpacity onPress={openChangePhotoModal}>
                     <Image  style={styles.photo} source={user.photo
