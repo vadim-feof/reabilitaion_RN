@@ -21,6 +21,7 @@ import {AppointmentProvider} from "../context/AppointmentContext";
 import Appointment from "../screens/DrawerScreens/Appointment";
 import {CreateAppointmentProvider} from "../context/CreateAppointmentContext";
 import CreateAppointment from "../screens/DrawerScreens/CreateAppointment";
+import AllAppointment from "../screens/DrawerScreens/AllAppointment";
 
 export const publicScreens = [
     {name: 'News', component: (props) => <NewsProvider><News {...props}/></NewsProvider>,
@@ -88,6 +89,15 @@ export const privateScreens = [
     {name: 'CreateAppointment', component: (props) => <CreateAppointmentProvider><CreateAppointment {...props}/></CreateAppointmentProvider>,
         options: {
             title: 'Записаться к специалисту',
+            drawerIcon: ({color}) => <FontAwesome5 name="list-alt" size={32} color={color} />
+        }
+    },
+]
+
+export const adminScreens = [
+    {name: 'AllAppointment', component: (props) => <AppointmentProvider><AllAppointment {...props}/></AppointmentProvider>,
+        options: {
+            title: 'Все записи',
             drawerIcon: ({color}) => <FontAwesome5 name="list-alt" size={32} color={color} />
         }
     },

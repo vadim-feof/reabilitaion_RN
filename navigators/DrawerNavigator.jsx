@@ -1,14 +1,15 @@
 import React from 'react';
 import CustomDrawer from "../components/CustomDrawer/CustomDrawer";
-import {authScreens, privateScreens, publicScreens} from "../routes/DrawerRoutes";
+import {adminScreens, authScreens, privateScreens, publicScreens} from "../routes/DrawerRoutes";
 import {createDrawerNavigator} from "@react-navigation/drawer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useAuth} from "../context/AuthContext";
+import {checkAdminRole} from "../utils/checkAdminRole";
 
 const Drawer = createDrawerNavigator()
 
 const DrawerNavigator = () => {
-    const {token} = useAuth()
+    const {token, user} = useAuth()
 
     return (
         <Drawer.Navigator
@@ -48,6 +49,22 @@ const DrawerNavigator = () => {
                             {screen.component}
                         </Drawer.Screen>
                 )
+            }
+
+            {checkAdminRole(user.roles)
+            ?
+            adminScreens.map(
+                screen =>
+                    <Drawer.Screen
+                        key={screen.name}
+                        name={screen.name}
+                        options={screen.options}
+                    >
+                        {screen.component}
+                    </Drawer.Screen>
+            )
+            :
+            null
             }
         </Drawer.Navigator>
     );

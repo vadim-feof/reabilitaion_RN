@@ -37,11 +37,60 @@ export const AppointmentProvider = ({children}) => {
         }
     }
 
+    const fetchAllAppointments = async () => {
+        try {
+            setIsLoading(true)
+            const fetchedAppointments = await AppointmentService.getAll()
+            setAppointments(fetchedAppointments.reverse())
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const cancelAppointmentByAdmin = async (_idAppointment) => {
+        try {
+            setIsLoading(true)
+            const {cancelledAppointment} = await AppointmentService.cancelByAdmin(_idAppointment)
+            setAppointments(prevAppointments => prevAppointments.map(appointment => {
+                if (appointment._id === cancelledAppointment._id)
+                    return cancelledAppointment
+                return appointment
+            }))
+            toastShow('success', 'Запись отменена')
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const viewAppointmentByAdmin = async (_idAppointment) => {
+        try {
+            setIsLoading(true)
+            const {viewedAppointment} = await AppointmentService.viewByAdmin(_idAppointment)
+            setAppointments(prevAppointments => prevAppointments.map(appointment => {
+                if (appointment._id === viewedAppointment._id)
+                    return viewedAppointment
+                return appointment
+            }))
+            toastShow('success', 'Запись просмотрена')
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     const value = {
         appointments,
         isLoading,
         fetchUserAppointments,
-        cancelAppointmentByUser
+        cancelAppointmentByUser,
+        cancelAppointmentByAdmin,
+        viewAppointmentByAdmin,
+        fetchAllAppointments
     }
 
 
