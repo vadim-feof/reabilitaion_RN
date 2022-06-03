@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList, RefreshControl} from "react-native";
 import LfkItem from "./LFKItem/LFKItem";
+import ListEmptyText from "../../Common/ListEmptyText";
 
 const LFKList = ({items, navigation, refresh, isLoading}) => {
     return (
@@ -18,6 +19,15 @@ const LFKList = ({items, navigation, refresh, isLoading}) => {
                 title={'Отпустите для обновления'}
                 colors={['#D58B40', '#D58B40']}
             />}
+            ListEmptyComponent={
+                !isLoading
+                    ?
+                    <ListEmptyText
+                        text={'На данный момент нет ЛФК комплексов'}
+                    />
+                    :
+                    null
+            }
         />
     );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 
 import {FlatList, RefreshControl} from 'react-native';
 import SpecialistItem from "./SpecialistItem/SpecialistItem";
+import ListEmptyText from "../../Common/ListEmptyText";
 
 const SpecialistList = ({specialists, onPressItem, refresh, isLoading}) => {
     return (
@@ -20,6 +21,15 @@ const SpecialistList = ({specialists, onPressItem, refresh, isLoading}) => {
                 title={'Отпустите для обновления'}
                 colors={['#D58B40', '#D58B40']}
             />}
+            ListEmptyComponent={
+                !isLoading
+                    ?
+                    <ListEmptyText
+                        text={'На данный момент специалистов нет'}
+                    />
+                    :
+                    null
+            }
         />
     );
 };

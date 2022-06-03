@@ -1,6 +1,7 @@
 import React from 'react';
-import {FlatList, RefreshControl} from "react-native";
+import {FlatList, RefreshControl, Text} from "react-native";
 import ServiceItem from "./ServiceItem/ServiceItem";
+import ListEmptyText from "../../Common/ListEmptyText";
 
 const ServiceList = ({services, onPressItem, refresh, isLoading}) => {
     return (
@@ -20,6 +21,15 @@ const ServiceList = ({services, onPressItem, refresh, isLoading}) => {
                 title={'Отпустите для обновления'}
                 colors={['#D58B40', '#D58B40']}
             />}
+            ListEmptyComponent={
+                !isLoading
+                    ?
+                    <ListEmptyText
+                        text={'На данный момент услуг нет'}
+                    />
+                    :
+                    null
+            }
         />
     );
 };

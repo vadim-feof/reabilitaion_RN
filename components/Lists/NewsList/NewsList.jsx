@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList, RefreshControl} from "react-native";
 import NewsItem from "./NewsItem/NewsItem";
+import ListEmptyText from "../../Common/ListEmptyText";
 
 const NewsList = ({news, navigation, refresh, isLoading}) => {
     return (
@@ -18,6 +19,15 @@ const NewsList = ({news, navigation, refresh, isLoading}) => {
                 title={'Отпустите для обновления'}
                 colors={['#D58B40', '#D58B40']}
             />}
+            ListEmptyComponent={
+                !isLoading
+                    ?
+                    <ListEmptyText
+                        text={'На данный момент нет новостей'}
+                    />
+                    :
+                    null
+            }
         />
     );
 };

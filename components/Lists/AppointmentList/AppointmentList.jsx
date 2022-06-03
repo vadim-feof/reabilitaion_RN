@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList, RefreshControl} from "react-native";
 import AppointmentItem from "./AppointmentItem/AppointmentItem";
+import ListEmptyText from "../../Common/ListEmptyText";
 
 const AppointmentList = ({appointments, refresh, isLoading}) => {
     return (
@@ -19,6 +20,15 @@ const AppointmentList = ({appointments, refresh, isLoading}) => {
                     title={'Отпустите для обновления'}
                     colors={['#D58B40', '#D58B40']}
                 />
+            }
+            ListEmptyComponent={
+                !isLoading
+                ?
+                <ListEmptyText
+                    text={'На данный момент у вас нет записей'}
+                />
+                :
+                null
             }
         />
     );
