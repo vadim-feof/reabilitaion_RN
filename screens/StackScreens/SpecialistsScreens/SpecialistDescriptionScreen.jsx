@@ -10,6 +10,8 @@ import {Collapse, CollapseBody, CollapseHeader} from "accordion-collapse-react-n
 import {AntDesign} from "@expo/vector-icons";
 import ServiceList from "../../../components/Lists/ServiceList/ServiceList";
 import {ScrollView} from "react-native";
+import {useAuth} from "../../../context/AuthContext";
+import {checkAdminRole} from "../../../utils/checkAdminRole";
 
 const SpecialistDescriptionScreen = ({navigation, route}) => {
 
@@ -20,6 +22,8 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
     const {services, isLoading, fetchServices, addServiceToSpec, deleteServiceFromSpec} = useServices()
 
     const [visibleModal, setVisibleModal] = useState(false)
+
+    const {user} = useAuth()
 
     const [specialistServices, setSpecialistServices] = useState(specialist.Services)
 
@@ -32,30 +36,40 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
     }, [])
 
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: ({tintColor}) => (
-                <>
-                    <DeleteButton
-                        color={tintColor}
-                        navigate={() => navigation.navigate('Specialists', {
-                            type: 'delete',
-                            _id: route.params._id
-                        })}
-                    />
-                    <EditButton
-                        color={tintColor}
-                        navigate={() => navigation.navigate('UpdateSpecialistScreen', {
-                                editingSpecialist: specialist,
-                                isEdit: true
-                            }
-                        )}
-                    />
-                </>
-            )
-        });
-    }, [navigation]);
+        if (checkAdminRole(user.roles)) {
+            navigation.setOptions({
+                headerRight: ({tintColor}) => (
+                    <>
+                        <DeleteButton
+                            color={tintColor}
+                            navigate={() => navigation.navigate('Specialists', {
+                                type: 'delete',
+                                _id: route.params._id
+                            })}
+                        />
+                        <EditButton
+                            color={tintColor}
+                            navigate={() => navigation.navigate('UpdateSpecialistScreen', {
+                                    editingSpecialist: specialist,
+                                    isEdit: true
+                                }
+                            )}
+                        />
+                    </>
+                )
+            });
+        }
+        else {
+            navigation.setOptions({
+                headerRight: null
+            });
+        }
+    }, [navigation, user.roles]);
 
     const openAlertDelete = (idService, idSpec) => {
+        if (!checkAdminRole(user.roles))
+            return
+
         Vibration.vibrate(80)
         Alert.alert(
             'Выберите действие',
@@ -94,6 +108,9 @@ const SpecialistDescriptionScreen = ({navigation, route}) => {
     }
 
     const openAlertAdd = () => {
+        if (!checkAdminRole(user.roles))
+            return
+
         Vibration.vibrate(80)
         Alert.alert(
             'Выберите действие',

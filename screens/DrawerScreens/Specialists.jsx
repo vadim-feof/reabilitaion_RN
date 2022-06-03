@@ -4,12 +4,16 @@ import SpecialistList from "../../components/Lists/SpecialistList/SpecialistList
 import {useSpecialist} from "../../context/SpecialistContext";
 import AddButton from "../../components/Common/Buttons/AddButton/AddButton";
 import {toastShow} from "../../utils/toastShow";
+import {useAuth} from "../../context/AuthContext";
+import {checkAdminRole} from "../../utils/checkAdminRole";
 
 
 // TODO: добавить изменение специалистов как с новостями
 const Specialists = ({navigation, route}) => {
 
     const {specialists, addSpecialist, updateSpecialist, removeSpecialist, isLoading, fetchSpecialist} = useSpecialist()
+
+    const {user} = useAuth()
 
     useEffect(async () => {
         await fetchSpecialist()
@@ -37,13 +41,20 @@ const Specialists = ({navigation, route}) => {
     }, [route.params])
 
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: ({tintColor}) => <AddButton
-                color={tintColor}
-                navigate={() => navigation.navigate('CreateSpecialistScreen', { isEdit: false})}
-            />
-        });
-    }, [navigation]);
+        if (checkAdminRole(user.roles)) {
+            navigation.setOptions({
+                headerRight: ({tintColor}) => <AddButton
+                    color={tintColor}
+                    navigate={() => navigation.navigate('CreateSpecialistScreen', { isEdit: false})}
+                />
+            });
+        }
+        else {
+            navigation.setOptions({
+                headerRight: null
+            });
+        }
+    }, [navigation, user.roles]);
 
     return (
         <View style={styles.container}>
