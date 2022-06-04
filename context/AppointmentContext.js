@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from "react";
+import {createContext, useContext, useMemo, useState} from "react";
 import AppointmentService from "../services/AppointmentService";
 import {toastShow} from "../utils/toastShow";
 
@@ -6,7 +6,17 @@ export const AppointmentContext = createContext(null)
 
 export const AppointmentProvider = ({children}) => {
     const [appointments, setAppointments] = useState([])
+    const [filter, setFilter] = useState('process')
     const [isLoading, setIsLoading] = useState(false)
+
+    const filteredAppointments = useMemo(() => {
+        if (filter) {
+            return filterAppointments(filter)
+        }
+        else {
+            return appointments
+        }
+    }, [appointments, filter])
 
     const fetchUserAppointments = async () => {
         try {
@@ -83,9 +93,18 @@ export const AppointmentProvider = ({children}) => {
         }
     }
 
+    function filterAppointments(filter) {
+        return appointments.filter(appointment => {
+            if (appointment.appointmentStatus === filter)
+                return true
+        })
+    }
+
     const value = {
         appointments,
+        filteredAppointments,
         isLoading,
+        setFilter,
         fetchUserAppointments,
         cancelAppointmentByUser,
         cancelAppointmentByAdmin,

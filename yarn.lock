@@ -4715,6 +4715,11 @@ react-native-ionicons@^4.6.5:
   resolved "https://registry.yarnpkg.com/react-native-ionicons/-/react-native-ionicons-4.6.5.tgz#b792ec8896381e67ff237eba955e38afe7ceb7a4"
   integrity sha512-s2Ia7M5t609LE9LWygMj3ALVPUlKhK7R9XcMb67fP4EYJv0oLcwg5pc+8ftv9XXaUuTW/WgL3zJlBYxAvtvMJg==
 
+react-native-material-menu@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-material-menu/-/react-native-material-menu-2.0.0.tgz#139f407a52fbc0d47e5351d50ac769e05812da5c"
+  integrity sha512-SmO9PLE3E469EPbVWZqvdu6JGPPZIm7YjqDcWs2PPoY0k7w2V9tFo3BmmLXNzNZDCVCAi+PPSsL7h/5WkfHcSg==
+
 react-native-reanimated@~2.3.1:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.3.3.tgz#73de8ea495e59a091d848741e7037ac55d0235c4"

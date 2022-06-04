@@ -31,6 +31,7 @@
     "react-native-fit-image": "^1.5.5",
     "react-native-gesture-handler": "~2.1.0",
     "react-native-ionicons": "^4.6.5",
+    "react-native-material-menu": "^2.0.0",
     "react-native-reanimated": "~2.3.1",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",

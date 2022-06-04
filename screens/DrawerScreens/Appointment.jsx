@@ -1,18 +1,34 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from "react-native";
 import AppointmentList from "../../components/Lists/AppointmentList/AppointmentList";
 import {useAppointment} from "../../context/AppointmentContext";
 import {useIsFocused} from "@react-navigation/native";
+import FilterAppointmentMenu from "../../components/Filters/FilterAppointmentMenu";
 
-const Appointment = () => {
+const Appointment = ({navigation}) => {
     const isFocused = useIsFocused();
-    const {appointments, isLoading, fetchUserAppointments, cancelAppointmentByUser} = useAppointment()
+    const {filteredAppointments, setFilter, isLoading,
+        fetchUserAppointments, cancelAppointmentByUser} = useAppointment()
 
     useEffect(async () => {
         if (isFocused) {
             await fetchUserAppointments()
         }
     }, [isFocused])
+
+    const [visibleMenu, setVisibleMenu] = useState(false);
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: ({tintColor}) => (
+                    <FilterAppointmentMenu
+                        setFilter={setFilter}
+                        color={tintColor}
+                        visible={visibleMenu}
+                        setVisible={setVisibleMenu}
+                    />
+            )
+        })
+    }, [navigation, visibleMenu])
 
     const openCancelAppointment = (_idAppointment) => {
         Alert.alert(
@@ -53,7 +69,7 @@ const Appointment = () => {
                     if (appointment.appointmentStatus === 'process')
                         openCancelAppointment(appointment._id)
                 }}
-                appointments={appointments}
+                appointments={filteredAppointments}
                 isLoading={isLoading}
                 refresh={fetchUserAppointments}
             />

@@ -26,7 +26,7 @@ const AppointmentList = ({appointments, refresh, isLoading, onPressItem}) => {
                 !isLoading
                 ?
                 <ListEmptyText
-                    text={'На данный момент у вас нет записей'}
+                    text={'На данный момент у вас нет записей\nили выберите другой фильтр'}
                 />
                 :
                 null
