@@ -70,6 +70,7 @@ const FormCreateAppointment = ({navigation}) => {
             validateOnChange={false}
             onSubmit={(values, action) => {
                 openConfirmAppointment(values)
+                action.resetForm()
             }}
             validationSchema={validationSchema}
         >

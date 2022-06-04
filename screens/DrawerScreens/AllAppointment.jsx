@@ -3,8 +3,9 @@ import {Alert, StyleSheet, View} from "react-native";
 import AppointmentList from "../../components/Lists/AppointmentList/AppointmentList";
 import {useAppointment} from "../../context/AppointmentContext";
 import {useIsFocused} from "@react-navigation/native";
+import AllAppointmentList from "../../components/Lists/AllAppointmentList/AllAppointmentList";
 
-const AllAppointment = () => {
+const AllAppointment = ({navigation}) => {
     const isFocused = useIsFocused();
     const {appointments, isLoading, cancelAppointmentByAdmin,
         viewAppointmentByAdmin, fetchAllAppointments} = useAppointment()
@@ -49,10 +50,8 @@ const AllAppointment = () => {
 
     return (
         <View style={styles.container}>
-            <AppointmentList
-                onPressItem={(appointment) => {
-                    openDialogAppointment(appointment._id)
-                }}
+            <AllAppointmentList
+                onPressItem={(appointment) => navigation.navigate('UserAppointmentDescription', appointment)}
                 appointments={appointments}
                 isLoading={isLoading}
                 refresh={fetchAllAppointments}
