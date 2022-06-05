@@ -4,7 +4,7 @@ import {FlatList, RefreshControl} from "react-native";
 import ListEmptyText from "../../Common/ListEmptyText";
 import AllAppointmentItem from "./AllAppointmentItem/AllAppointmentItem";
 
-const AllAppointmentList = ({appointments, refresh, isLoading, onPressItem}) => {
+const AllAppointmentList = ({appointments, refresh, isLoading, onPressItem, onLongPressItem}) => {
     return (
         <FlatList
             data={appointments}
@@ -12,6 +12,7 @@ const AllAppointmentList = ({appointments, refresh, isLoading, onPressItem}) => 
                 <AllAppointmentItem
                     appointment={item}
                     onPress={() => onPressItem(item)}
+                    onLongPress={() => onLongPressItem(item)}
                 />
             )}
             keyExtractor={item => item._id}

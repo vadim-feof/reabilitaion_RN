@@ -4,7 +4,7 @@ import {Text} from "react-native";
 import StatusBlock from "../../AppointmentList/AppointmentItem/StatusBlock";
 import StatusText from "../../AppointmentList/AppointmentItem/StatusText";
 
-const AllAppointmentItem = ({appointment, onPress}) => {
+const AllAppointmentItem = ({appointment, onPress, onLongPress}) => {
 
     const {Specialist, Service, User} = appointment
 
@@ -12,6 +12,7 @@ const AllAppointmentItem = ({appointment, onPress}) => {
         <TouchableHighlight delayPressIn={70}
                             underlayColor={'#dddddd'}
                             onPress={onPress}
+                            onLongPress={onLongPress}
         >
             <View style={styles.wrapper}>
                 <StatusBlock
