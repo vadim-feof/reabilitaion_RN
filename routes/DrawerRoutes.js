@@ -39,13 +39,13 @@ export const publicScreens = [
 ]
 
 export const authScreens = [
-    {name: 'Login', component: Login,
+    {name: 'Login', component: (props) => <Login {...props}/>,
         options: {
             title: 'Войти',
             drawerIcon: ({color}) => <MaterialIcons name={'login'} size={32} color={color}/>
         }
     },
-    {name: 'Registration', component: Registration, options: {
+    {name: 'Registration', component: (props) => <Registration {...props}/>, options: {
             title: 'Регистрация',
             drawerIcon: ({color}) => <MaterialIcons name="app-registration" size={32} color={color} />
         }

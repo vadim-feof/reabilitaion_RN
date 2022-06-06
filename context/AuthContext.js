@@ -87,6 +87,18 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    const resetPassword = async (login) => {
+        try {
+            setIsLoading(true)
+            const {message} = await AuthService.resetPassword(login)
+            toastShow('success', 'Восстановление пароля', message)
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     const authUser = async () => {
         try {
             setIsLoading(true)
@@ -158,7 +170,8 @@ export const AuthProvider = ({children}) => {
         uploadPhoto,
         removePhoto,
         sendEmailCode,
-        verifyEmailCode
+        verifyEmailCode,
+        resetPassword
     }
 
 

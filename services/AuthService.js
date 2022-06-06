@@ -49,6 +49,13 @@ export default class AuthService {
         return response.data
     }
 
+    static async resetPassword(login) {
+        const response = await $api.get('/user/reset', {
+            params: {login}
+        })
+        return response.data
+    }
+
     static async auth() {
         const response = await $api.get('/auth')
         await AsyncStorage.setItem('token', response.data.token)

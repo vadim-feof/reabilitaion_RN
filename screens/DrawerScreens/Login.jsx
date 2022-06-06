@@ -1,15 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Image, View} from "react-native";
 import logo from "../../assets/logo.png";
 import FormLogin from "../../components/Form/FormLogin";
+import CustomButton from "../../components/Common/CustomButton/CustomButton";
+import ResetPassModal from "../../components/ModalWindows/ResetPassModal";
 
 const Login = ({navigation}) => {
 
+    const [visibleResetPassModal, setVisibleResetPassModal] = useState(false)
+
     return (
         <View style={styles.container}>
+            <ResetPassModal
+                visible={visibleResetPassModal}
+                setVisible={setVisibleResetPassModal}
+            />
             <Image style={styles.logo_img} source={logo}/>
             <FormLogin
                 navigation={navigation}
+            />
+            <CustomButton
+                text={'Забыл пароль'}
+                onPress={() => setVisibleResetPassModal(true)}
             />
         </View>
     );

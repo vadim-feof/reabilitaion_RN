@@ -7,6 +7,8 @@ import CustomInput from "../Common/CustomInput/CustomInput";
 import CustomButton from "../Common/CustomButton/CustomButton";
 import {useAuth} from "../../context/AuthContext";
 import {ActivityIndicator} from "react-native";
+import ErrorText from "../Common/ErrorText";
+import CustomCheckBox from "../Common/CustomCheckBox";
 
 const FormLogin = ({navigation}) => {
     const {isLoading, loginUser} = useAuth()
@@ -33,8 +35,8 @@ const FormLogin = ({navigation}) => {
         <View>
             <Formik initialValues={{
                 isEmail: false,
-                login: '+79961230853',
-                password: 'pass123',
+                login: '+7',
+                password: '',
             }}
                 validateOnBlur
                 onSubmit={(values, action) => {
@@ -59,7 +61,8 @@ const FormLogin = ({navigation}) => {
                                      value={values.login}
                                      placeholder={values.isEmail ? 'Введите Email' : 'Введите номер телефона'}
                         />
-                        {touched.login && errors.login && <Text style={styles.error}> {errors.login}</Text>}
+                        {touched.login && errors.login &&
+                            <ErrorText>{errors.login}</ErrorText>}
 
                         <CustomInput secureTextEntry={true}
                                      onChangeText={handleChange('password')}
@@ -68,16 +71,14 @@ const FormLogin = ({navigation}) => {
                                      placeholder={'Введите пароль'}
 
                         />
-                        {touched.password && errors.password && <Text style={styles.error}> {errors.password}</Text>}
+                        {touched.password && errors.password &&
+                            <ErrorText>{errors.password}</ErrorText>}
 
-                        <View style={styles.checkboxContainer}>
-                            <CheckBox
-                                value={values.isEmail}
-                                onValueChange={checkValue => setFieldValue('isEmail', checkValue)}
-                                style={styles.checkbox}
-                            />
-                            <Text style={styles.label}>Войти с помощью электронной почты</Text>
-                        </View>
+                        <CustomCheckBox
+                            text={'Войти с помощью электронной почты'}
+                            setValue={value => setFieldValue('isEmail', value)}
+                            value={values.isEmail}
+                        />
                         <CustomButton
                             disabled={isLoading}
                             onPress={handleSubmit}

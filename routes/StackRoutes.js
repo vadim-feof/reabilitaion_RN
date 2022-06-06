@@ -25,26 +25,26 @@ export const privateScreens = [
             </ServicesProvider>),
         options: {title: 'О специалисте'}
     },
-    {name: 'CreateSpecialistScreen', component: CreateSpecialistScreen,
+    {name: 'CreateSpecialistScreen', component: (props) => <CreateSpecialistScreen {...props}/>,
         options: {
             title: 'Добавить специалиста',
             gestureEnabled: false
         }
     },
-    {name: 'UpdateSpecialistScreen', component: UpdateSpecialistScreen,
+    {name: 'UpdateSpecialistScreen', component: (props) => <UpdateSpecialistScreen {...props}/>,
         options: {
             title: 'Изменить специалиста',
             gestureEnabled: false
         }
     },
 
-    {name: 'CreateNewsScreen', component: CreateNewsScreen,
+    {name: 'CreateNewsScreen', component: (props) => <CreateNewsScreen {...props}/>,
         options: {
             title: 'Добавить новость',
             gestureEnabled: false
         }
     },
-    {name: 'UpdateNewsScreen', component: UpdateNewsScreen,
+    {name: 'UpdateNewsScreen', component: (props) => <UpdateNewsScreen {...props}/>,
         options: {
             title: 'Изменить новость',
             gestureEnabled: false
@@ -52,27 +52,27 @@ export const privateScreens = [
     },
 
     {name: 'CreateServiceScreen',
-        component: CreateServiceScreen,
+        component: (props) => <CreateServiceScreen {...props}/>,
         options: {title: 'Добавить услугу'}
     },
     {name: 'UpdateServiceScreen',
-        component: UpdateServiceScreen,
+        component: (props) => <UpdateServiceScreen {...props}/>,
         options: {title: 'Изменить услугу'}
     },
     {name: 'ServiceDescriptionScreen',
-        component: ServiceDescriptionScreen,
+        component: (props) => <ServiceDescriptionScreen {...props}/>,
         options: {title: 'Об услуге'}
     },
     {name: 'EditMyAccountScreen',
-        component: EditMyAccountScreen,
+        component: (props) => <EditMyAccountScreen {...props}/>,
         options: {title: 'Редактирование профиля'}
     },
     {name: 'LfkDescription',
-        component: LfkDescription,
+        component: (props) => <LfkDescription {...props}/>,
         options: {title: 'ЛФК'}
     },
     {name: 'CreateLfkScreen',
-        component: CreateLfkScreen,
+        component: (props) => <CreateLfkScreen {...props}/>,
         options: {title: 'Добавить комплекс'}
     },
     {name: 'UserAppointmentDescription',
