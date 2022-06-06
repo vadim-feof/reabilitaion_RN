@@ -35,6 +35,20 @@ export default class AuthService {
         return response.data
     }
 
+    static async sendEmailCode(email) {
+        const response = await $api.get('/email/sendcode', {
+            params: {email}
+        })
+        return response.data
+    }
+
+    static async verifyEmailCode(email, code) {
+        const response = await $api.get('/email/verifycode', {
+            params: {email, code}
+        })
+        return response.data
+    }
+
     static async auth() {
         const response = await $api.get('/auth')
         await AsyncStorage.setItem('token', response.data.token)

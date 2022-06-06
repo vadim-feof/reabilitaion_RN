@@ -4,6 +4,7 @@ import {toastShow} from "../utils/toastShow";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import PictureService from "../services/PictureService";
 import {STATIC_USER_UPLOAD} from "../services/api";
+import {Alert} from "react-native";
 
 export const AuthContext = createContext(null)
 
@@ -53,6 +54,33 @@ export const AuthProvider = ({children}) => {
             const {message} = await AuthService.registration(regData)
             toastShow('success', message)
             callback()
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const sendEmailCode = async (email, cb) => {
+        try {
+            setIsLoading(true)
+            await AuthService.sendEmailCode(email)
+            cb()
+            toastShow('success', 'Код отправлен',
+                'Если письмо не дошло, проверьте папку СПАМ или отправьте код повторно')
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const verifyEmailCode = async (email, code, cb) => {
+        try {
+            setIsLoading(true)
+            await AuthService.verifyEmailCode(email, code)
+            cb()
+            toastShow('success', 'Код проверен.', 'Продолжите регистрацию.')
         } catch (e) {
             console.log(e)
         } finally {
@@ -129,7 +157,9 @@ export const AuthProvider = ({children}) => {
         authUser,
         updateUser,
         uploadPhoto,
-        removePhoto
+        removePhoto,
+        sendEmailCode,
+        verifyEmailCode
     }
 
 

@@ -51,7 +51,7 @@ $api.interceptors.response.use((response) => {
             break
         case 'ERR_BAD_REQUEST':
             toastShow('error', 'Что-то пошло не так.',
-                `${error.response.data.message} ${error.code}`)
+                `${error.response.data.message}`)
             break
         default:
             toastShow('error', 'Неизвестная ошибка.', `${error.code}`)
