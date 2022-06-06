@@ -7,6 +7,7 @@ import {STATIC_IMAGE_USER_URL} from "../../services/api";
 import {takePictureFromLibrary} from "../../utils/takePictureFromLibrary";
 import Loader from "../../components/Common/Loader";
 import ChangeEmailModal from "../../components/ModalWindows/ChangeEmailModal";
+import ChangePassModal from "../../components/ModalWindows/ChangePassModal";
 
 const MyAccount = ({navigation}) => {
     const {user, isLoading, uploadPhoto, removePhoto, logOut} = useAuth()
@@ -20,6 +21,7 @@ const MyAccount = ({navigation}) => {
     }
 
     const [visibleEmailModal, setVisibleEmailModal] = useState(false)
+    const [visiblePassModal, setVisiblePassModal] = useState(false)
 
     const openCheckRemovePhotoModal = () => {
         Alert.alert(
@@ -73,6 +75,10 @@ const MyAccount = ({navigation}) => {
                 visible={visibleEmailModal}
                 setVisible={setVisibleEmailModal}
             />
+            <ChangePassModal
+                visible={visiblePassModal}
+                setVisible={setVisiblePassModal}
+            />
             <View style={styles.wrapperPhoto}>
                 <TouchableOpacity onPress={openChangePhotoModal}>
                     <Image  style={styles.photo} source={user.photo
@@ -108,7 +114,7 @@ const MyAccount = ({navigation}) => {
             <CustomButton
                 disabled={isLoading}
                 text={'Сменить пароль'}
-                onPress={() => {}}
+                onPress={() => setVisiblePassModal(true)}
             />
             <CustomButton
                 disabled={isLoading}
@@ -117,6 +123,7 @@ const MyAccount = ({navigation}) => {
                     logOut(() => navigation.navigate('News'))
                 }}
             />
+            <View style={{height: 100}}/>
         </ScrollView>
     );
 };
