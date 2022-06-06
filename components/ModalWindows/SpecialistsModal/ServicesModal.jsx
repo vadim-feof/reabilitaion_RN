@@ -9,6 +9,7 @@ const SpecialistsModal = ({specialists, onPressItem, visible, closeModal, isLoad
         <Modal
             visible={visible}
             transparent={false}
+            animationType={'fade'}
         >
             {specialists.length === 0
                 ?
