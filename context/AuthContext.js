@@ -80,7 +80,6 @@ export const AuthProvider = ({children}) => {
             setIsLoading(true)
             await AuthService.verifyEmailCode(email, code)
             cb()
-            toastShow('success', 'Код проверен.', 'Продолжите регистрацию.')
         } catch (e) {
             console.log(e)
         } finally {

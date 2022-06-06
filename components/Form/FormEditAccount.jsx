@@ -31,10 +31,6 @@ const FormEditAccount = ({navigation}) => {
 
             telephone: yup.string().matches('^(\\+{1}[0-9]{11})$', 'Номер телефона должен быть в формате +71234567890')
                 .required('Пожалуйста, введите ваш телефон'),
-
-            email: yup.string().email('Введите верный email')
-                .required('Пожалуйста, введите вашу электронную почту'),
-
         }
     )
 
@@ -47,7 +43,6 @@ const FormEditAccount = ({navigation}) => {
                 birthday: new Date(user.birthday),
                 numCard: user.card,
                 telephone: user.phone,
-                email: user.email,
             }}
                     validateOnBlur
                     onSubmit={(values, action) => {
@@ -55,7 +50,6 @@ const FormEditAccount = ({navigation}) => {
                             _id: user._id,
                             name: `${upperFirstLetter(values.secondName)} ${upperFirstLetter(values.name)} ${upperFirstLetter(values.patronymic)}`,
                             phone: values.telephone,
-                            email: values.email,
                             birthday: values.birthday,
                             card: values.numCard
                         }
@@ -71,29 +65,29 @@ const FormEditAccount = ({navigation}) => {
                         <ScrollView>
                             <Text style={styles.headerText}>ФИО:</Text>
                             <View>
-                                <CustomInput type={'text'}
-                                             onChangeText={handleChange('secondName')}
-                                             onBlur={handleBlur('secondName')}
-                                             value={values.secondName}
-                                             placeholder={'Фамилия'}
+                                <CustomInput
+                                    onChangeText={handleChange('secondName')}
+                                    onBlur={handleBlur('secondName')}
+                                    value={values.secondName}
+                                    placeholder={'Фамилия'}
                                 />
                                 {touched.secondName && errors.secondName &&
-                                    <Text style={styles.error}> {errors.secondName}</Text>}
-                                <CustomInput type={'text'}
-                                             onChangeText={handleChange('name')}
-                                             onBlur={handleBlur('name')}
-                                             value={values.name}
-                                             placeholder={'Имя'}
+                                    <Text style={styles.error}>{errors.secondName}</Text>}
+                                <CustomInput
+                                    onChangeText={handleChange('name')}
+                                    onBlur={handleBlur('name')}
+                                    value={values.name}
+                                    placeholder={'Имя'}
                                 />
-                                {touched.name && errors.name && <Text style={styles.error}> {errors.name}</Text>}
-                                <CustomInput type={'text'}
-                                             onChangeText={handleChange('patronymic')}
-                                             onBlur={handleBlur('patronymic')}
-                                             value={values.patronymic}
-                                             placeholder={'Отчество'}
+                                {touched.name && errors.name && <Text style={styles.error}>{errors.name}</Text>}
+                                <CustomInput
+                                    onChangeText={handleChange('patronymic')}
+                                    onBlur={handleBlur('patronymic')}
+                                    value={values.patronymic}
+                                    placeholder={'Отчество'}
                                 />
                                 {touched.patronymic && errors.patronymic &&
-                                    <Text style={styles.error}> {errors.patronymic}</Text>}
+                                    <Text style={styles.error}>{errors.patronymic}</Text>}
                                 <Text style={styles.headerText}>Дата рождения:</Text>
                                 <BirthdayPicker
                                     value={values.birthday}
@@ -101,34 +95,28 @@ const FormEditAccount = ({navigation}) => {
                                 />
 
                             </View>
-                            <Text style={styles.headerText}>Номер телефона и амбулаторной карты:</Text>
+                            <Text style={styles.headerText}>Номер телефона:</Text>
                             <View style={styles.border}>
-                                <CustomInput keyboardType={'phone-pad'}
-                                             onChangeText={handleChange('telephone')}
-                                             onBlur={handleBlur('telephone')}
-                                             value={values.telephone}
-                                             placeholder={'Телефон'}
+                                <CustomInput
+                                    keyboardType={'phone-pad'}
+                                    onChangeText={handleChange('telephone')}
+                                    onBlur={handleBlur('telephone')}
+                                    value={values.telephone}
+                                    placeholder={'Телефон'}
                                 />
                                 {touched.telephone && errors.telephone &&
-                                    <Text style={styles.error}> {errors.telephone}</Text>}
-                                <CustomInput type={'email-address'}
-                                             onChangeText={handleChange('email')}
-                                             onBlur={handleBlur('email')}
-                                             value={values.email}
-                                             placeholder={'Email'}
-                                />
-                                {touched.email && errors.email && <Text style={styles.error}> {errors.email}</Text>}
+                                    <Text style={styles.error}>{errors.telephone}</Text>}
                             </View>
                             <Text style={styles.headerText}>Номер амбулаторной карты:</Text>
                             <View>
-                                <CustomInput type={'text'}
-                                             onChangeText={handleChange('numCard')}
-                                             onBlur={handleBlur('numCard')}
-                                             value={values.numCard}
-                                             placeholder={'Номер амбулаторной карты'}
+                                <CustomInput
+                                    onChangeText={handleChange('numCard')}
+                                    onBlur={handleBlur('numCard')}
+                                    value={values.numCard}
+                                    placeholder={'Номер амбулаторной карты'}
                                 />
                                 {touched.numCard && errors.numCard &&
-                                    <Text style={styles.error}> {errors.numCard}</Text>}
+                                    <Text style={styles.error}>{errors.numCard}</Text>}
                             </View>
                             <CustomButton
                                 disabled={isLoading}

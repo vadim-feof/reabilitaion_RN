@@ -1,11 +1,12 @@
-import React, {useLayoutEffect} from 'react';
-import {Dimensions, Image, StyleSheet, Text, View, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
+import React, {useLayoutEffect, useState} from 'react';
+import {Dimensions, Image, StyleSheet, Text, View, TouchableOpacity, Alert, ScrollView} from 'react-native';
 import CustomButton from "../../components/Common/CustomButton/CustomButton";
 import {useAuth} from "../../context/AuthContext";
 import EditButton from "../../components/Common/Buttons/EditButton/EditButton";
 import {STATIC_IMAGE_USER_URL} from "../../services/api";
 import {takePictureFromLibrary} from "../../utils/takePictureFromLibrary";
 import Loader from "../../components/Common/Loader";
+import ChangeEmailModal from "../../components/ModalWindows/ChangeEmailModal";
 
 const MyAccount = ({navigation}) => {
     const {user, isLoading, uploadPhoto, removePhoto, logOut} = useAuth()
@@ -17,6 +18,8 @@ const MyAccount = ({navigation}) => {
             uploadPhoto(picture)
         }
     }
+
+    const [visibleEmailModal, setVisibleEmailModal] = useState(false)
 
     const openCheckRemovePhotoModal = () => {
         Alert.alert(
@@ -58,14 +61,18 @@ const MyAccount = ({navigation}) => {
         navigation.setOptions({
             headerRight: ({tintColor}) => <EditButton
                 color={tintColor}
-                navigate={() => navigation.navigate('EditMyAccountScreen', { isEdit: false })}
+                navigate={() => navigation.navigate('EditMyAccountScreen')}
             />
         });
     }, [navigation]);
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             {isLoading ? <Loader/> : null}
+            <ChangeEmailModal
+                visible={visibleEmailModal}
+                setVisible={setVisibleEmailModal}
+            />
             <View style={styles.wrapperPhoto}>
                 <TouchableOpacity onPress={openChangePhotoModal}>
                     <Image  style={styles.photo} source={user.photo
@@ -94,12 +101,23 @@ const MyAccount = ({navigation}) => {
                 </Text>
             </View>
             <CustomButton
+                disabled={isLoading}
+                text={'Сменить электронную почту'}
+                onPress={() => setVisibleEmailModal(true)}
+            />
+            <CustomButton
+                disabled={isLoading}
+                text={'Сменить пароль'}
+                onPress={() => {}}
+            />
+            <CustomButton
+                disabled={isLoading}
                 text={'Выход'}
                 onPress={() => {
                     logOut(() => navigation.navigate('News'))
                 }}
             />
-        </View>
+        </ScrollView>
     );
 };
 

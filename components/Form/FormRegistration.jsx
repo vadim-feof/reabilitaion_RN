@@ -7,6 +7,7 @@ import CustomButton from "../Common/CustomButton/CustomButton";
 import {useAuth} from "../../context/AuthContext";
 import BirthdayPicker from "../BirthdayPicker";
 import {upperFirstLetter} from "../../utils/upperFirstLetter";
+import {toastShow} from "../../utils/toastShow";
 
 const FormRegistration = ({navigation}) => {
     const {registrationUser, sendEmailCode, verifyEmailCode, isLoading} = useAuth()
@@ -51,16 +52,16 @@ const FormRegistration = ({navigation}) => {
     return (
         <View>
             <Formik initialValues={{
-                secondName: 'Балясов',
-                name: 'Вадим',
-                patronymic: 'Александрович',
+                secondName: '',
+                name: '',
+                patronymic: '',
                 birthday: new Date(1990, 1, 1),
-                numCard: '33/11111',
-                telephone: '+79121231212',
+                numCard: '',
+                telephone: '+7',
                 email: '',
+                password: '',
+                confirmPassword: '',
                 code: '',
-                password: 'pass123',
-                confirmPassword: 'pass123',
                 isCodeSend: false,
                 isCodeVerify: false,
 
@@ -97,6 +98,7 @@ const FormRegistration = ({navigation}) => {
 
                     const setIsCodeVerify = () => {
                         setFieldValue('isCodeVerify', true)
+                        toastShow('success', 'Код проверен.', 'Продолжите регистрацию.')
                     }
 
                     const verifyCode = () => {
@@ -162,8 +164,8 @@ const FormRegistration = ({navigation}) => {
                                 <CustomInput
                                     keyboardType={'email-address'}
                                     onChangeText={(text) => {
-                                    changeEmail()
-                                    handleChange('email')(text)
+                                        changeEmail()
+                                        handleChange('email')(text)
                                     }}
                                     onBlur={handleBlur('email')}
                                     value={values.email}
@@ -184,6 +186,7 @@ const FormRegistration = ({navigation}) => {
                                             {touched.code && errors.code &&
                                                 <Text style={styles.error}>{errors.code}</Text>}
                                             <CustomButton
+                                                disabled={isLoading}
                                                 text={'Проверить код активации'}
                                                 onPress={verifyCode}
                                             />
@@ -195,13 +198,14 @@ const FormRegistration = ({navigation}) => {
                                     !values.isCodeVerify
                                     ?
                                         <CustomButton
+                                            disabled={isLoading}
                                             text={values.isCodeSend ? 'Отправить код повторно' : 'Отправить код на почту'}
                                             onPress={sendCode}
                                         />
                                     :
                                         null
                                 }
-                                {errors.isCodeVerify ? <Text style={styles.error}>{errors.isCodeVerify}</Text> : null}
+                                {!errors.email && errors.isCodeVerify ? <Text style={styles.error}>{errors.isCodeVerify}</Text> : null}
                             </View>
                             <Text style={styles.headerText}>Пожалуйста, введите номер вашей амбулаторной карты:</Text>
                             <View>
