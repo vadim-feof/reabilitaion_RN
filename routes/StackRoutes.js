@@ -11,6 +11,7 @@ import EditMyAccountScreen from "../screens/StackScreens/MyAccountScreens/EditMy
 import LfkDescription from "../screens/StackScreens/LFKScreen/LFKDescription";
 import CreateLfkScreen from "../screens/StackScreens/LFKScreen/CreateLFKScreen";
 import {ServicesProvider} from "../context/ServicesContext";
+import UserAppointmentDescription from "../screens/StackScreens/UserAppointmentDescription/UserAppointmentDescription";
 
 export const publicScreens = [
     {name: 'NewsDescriptionScreen', component: NewsDescriptionScreen, options: {title: 'Новости'}},
@@ -74,4 +75,9 @@ export const privateScreens = [
         component: CreateLfkScreen,
         options: {title: 'Добавить комплекс'}
     },
+    {name: 'UserAppointmentDescription',
+        component: (props) => <UserAppointmentDescription {...props}/>,
+        options: {title: 'Данные о записи'}
+    },
+
 ]
