@@ -19,11 +19,11 @@ const AllAppointmentItem = ({appointment, onPress, onLongPress}) => {
                     statusText={appointment.appointmentStatus}
                 />
                 <View style={styles.description}>
-                    <Text style={[styles.text, styles.name]}>{
-                        Specialist.name}
+                    <Text style={[styles.text, styles.name]}>
+                        {Specialist ? Specialist.name : 'Нет информации о специалисте'}
                     </Text>
                     <Text style={[styles.text, styles.name]}>
-                        {Service.name}
+                        {Service ? Service.name : 'Нет информации об услуге'}
                     </Text>
                     <Text style={[styles.text]}>
                         Дата: {new Date(appointment.desiredDate).toLocaleDateString('ru-RU')}
@@ -39,13 +39,13 @@ const AllAppointmentItem = ({appointment, onPress, onLongPress}) => {
                     <View style={styles.statusWrapper}>
                         <Text  style={[styles.text, styles.name]}>Пациент: </Text>
                         <Text style={[styles.text]}>
-                            {User.name}
+                            {User ? User.name : 'Нет информации о пользователе'}
                         </Text>
                     </View>
                     <View style={styles.statusWrapper}>
                         <Text  style={[styles.text, styles.name]}>Телефон: </Text>
                         <Text style={[styles.text]}>
-                            {User.phone}
+                            {User ? User.phone : 'Нет информации о номере телефона'}
                         </Text>
                     </View>
 
