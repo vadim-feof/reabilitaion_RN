@@ -6,7 +6,7 @@ import MyAccount from "../screens/DrawerScreens/MyAccount";
 import {
     Ionicons,
     MaterialCommunityIcons as MatComIcon,
-    MaterialIcons, Entypo, AntDesign, FontAwesome5
+    MaterialIcons, Entypo, AntDesign, FontAwesome5, MaterialCommunityIcons
 } from "@expo/vector-icons";
 import {NewsProvider} from "../context/NewsContext";
 import Registration from "../screens/DrawerScreens/Registration";
@@ -82,14 +82,14 @@ export const privateScreens = [
     {name: 'Appointment', component: (props) => <AppointmentProvider><Appointment {...props}/></AppointmentProvider>,
         options: {
             title: 'Мои записи',
-            drawerIcon: ({color}) => <FontAwesome5 name="list-alt" size={32} color={color} />
+            drawerIcon: ({color}) => <MaterialCommunityIcons name="clipboard-outline" size={32} color={color} />
         }
     },
 
     {name: 'CreateAppointment', component: (props) => <CreateAppointmentProvider><CreateAppointment {...props}/></CreateAppointmentProvider>,
         options: {
             title: 'Записаться к специалисту',
-            drawerIcon: ({color}) => <FontAwesome5 name="list-alt" size={32} color={color} />
+            drawerIcon: ({color}) => <MaterialCommunityIcons name="clipboard-edit-outline" size={32} color={color} />
         }
     },
 ]
@@ -98,7 +98,7 @@ export const adminScreens = [
     {name: 'AllAppointment', component: (props) => <AppointmentProvider><AllAppointment {...props}/></AppointmentProvider>,
         options: {
             title: 'Все записи',
-            drawerIcon: ({color}) => <FontAwesome5 name="list-alt" size={32} color={color} />
+            drawerIcon: ({color}) => <MaterialCommunityIcons name="clipboard-multiple-outline" size={32} color={color}/>
         }
     },
 ]

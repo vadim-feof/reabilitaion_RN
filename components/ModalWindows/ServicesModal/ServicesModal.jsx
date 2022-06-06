@@ -9,6 +9,7 @@ const ServicesModal = ({services, onPressItem, visible, closeModal, isLoading, r
         <Modal
             visible={visible}
             transparent={false}
+            animationType={'fade'}
         >
             <Text style={styles.header}>Выберите услугу:</Text>
             <ServiceList

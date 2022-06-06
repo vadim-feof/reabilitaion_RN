@@ -94,10 +94,9 @@ export const AppointmentProvider = ({children}) => {
     }
 
     function filterAppointments(filter) {
-        return appointments.filter(appointment => {
-            if (appointment.appointmentStatus === filter)
-                return true
-        })
+        return appointments.filter(appointment =>
+            appointment.appointmentStatus === filter
+        )
     }
 
     const value = {

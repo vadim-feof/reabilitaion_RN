@@ -1,13 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {Alert, StyleSheet, Vibration, View} from "react-native";
 import AppointmentList from "../../components/Lists/AppointmentList/AppointmentList";
 import {useAppointment} from "../../context/AppointmentContext";
 import {useIsFocused} from "@react-navigation/native";
 import AllAppointmentList from "../../components/Lists/AllAppointmentList/AllAppointmentList";
+import FilterAppointmentMenu from "../../components/Filters/FilterAppointmentMenu";
 
 const AllAppointment = ({navigation}) => {
     const isFocused = useIsFocused();
-    const {appointments, isLoading, cancelAppointmentByAdmin,
+    const {filteredAppointments, setFilter, appointments, isLoading, cancelAppointmentByAdmin,
         viewAppointmentByAdmin, fetchAllAppointments} = useAppointment()
 
     useEffect(async () => {
@@ -15,6 +16,20 @@ const AllAppointment = ({navigation}) => {
             await fetchAllAppointments()
         }
     }, [isFocused])
+
+    const [visibleMenu, setVisibleMenu] = useState(false);
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: ({tintColor}) => (
+                <FilterAppointmentMenu
+                    setFilter={setFilter}
+                    color={tintColor}
+                    visible={visibleMenu}
+                    setVisible={setVisibleMenu}
+                />
+            )
+        })
+    }, [navigation, visibleMenu])
 
     const openDialogAppointment = (_idAppointment) => {
         Vibration.vibrate(80)
@@ -75,7 +90,7 @@ const AllAppointment = ({navigation}) => {
         <View style={styles.container}>
             <AllAppointmentList
                 onPressItem={(appointment) => navigation.navigate('UserAppointmentDescription', appointment)}
-                appointments={appointments}
+                appointments={filteredAppointments}
                 isLoading={isLoading}
                 refresh={fetchAllAppointments}
                 onLongPressItem={(appointment) =>
