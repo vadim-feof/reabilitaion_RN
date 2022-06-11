@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "reabilitation",
+    "name": "Реабилитация РКОД Казань",
     "slug": "reabilitation",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "ru.oncort.rehabilitation"
     },
     "web": {
       "favicon": "./assets/favicon.png"
