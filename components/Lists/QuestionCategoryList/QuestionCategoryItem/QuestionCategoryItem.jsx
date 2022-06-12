@@ -54,21 +54,18 @@ const QuestionCategoryItem = ({adminAccess, categoryItem, deleteCategory, addQue
 
     return (
         <>
-            <Modal visible={visibleModal}
-                   transparent={true}
-            >
-                <ModalAddQuestions
-                    setVisibleModal={setVisibleModal}
-                    addQuestion={addQuestion}
-                    idCategory={categoryItem._id}
-                />
-            </Modal>
+            <ModalAddQuestions
+                setVisibleModal={setVisibleModal}
+                addQuestion={addQuestion}
+                idCategory={categoryItem._id}
+                visible={visibleModal}
+            />
             <Collapse handleLongPress={openAlert}>
-                <CollapseHeader >
-                        <View style={styles.header}>
-                            <Text style={styles.text}>{categoryItem.name}</Text>
-                            <AntDesign name="down" size={24} color="black"/>
-                        </View>
+                <CollapseHeader>
+                    <View style={styles.header}>
+                        <Text style={styles.text}>{categoryItem.name}</Text>
+                        <AntDesign name="down" size={24} color="black"/>
+                    </View>
                 </CollapseHeader>
 
 

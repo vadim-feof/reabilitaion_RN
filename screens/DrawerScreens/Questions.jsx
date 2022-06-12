@@ -50,14 +50,13 @@ const Questions = ({navigation, route}) => {
                 addQuestion={addQuestion}
                 deleteQuestion={deleteQuestion}
             />
-            <Modal visible={visibleModal}
-                   transparent={true}
-            >
+
                 <ModalAddCategory
                     setVisibleModal={setVisibleModal}
                     createCategory={createCategory}
+                    visible={visibleModal}
                 />
-            </Modal>
+
         </View>
     );
 };
