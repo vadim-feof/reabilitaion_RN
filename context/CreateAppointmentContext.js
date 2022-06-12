@@ -39,7 +39,6 @@ export const CreateAppointmentProvider = ({children}) => {
     const createAppointment = async (appointmentData, cb) => {
         try {
             setIsLoading(true)
-            console.log(appointmentData)
             const appointment = await AppointmentService.create(appointmentData)
             toastShow('success', 'Запись создана')
             cb()

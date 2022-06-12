@@ -24,7 +24,7 @@ const FormCreateAppointment = ({navigation}) => {
     const {services, specialists, isLoading,
         fetchServices, fetchSpecialistsByService, createAppointment} = useCreateAppointment()
 
-    const openConfirmAppointment = (values) => {
+    const openConfirmAppointment = (values, cb) => {
         const newAppointment = {
             _idService: values.idService,
             _idSpecialist: values.idSpecialist,
@@ -38,7 +38,10 @@ const FormCreateAppointment = ({navigation}) => {
             [
                 {
                     text: 'Подтверждаю',
-                    onPress: () => createAppointment(newAppointment, navigation),
+                    onPress: () => {
+                        createAppointment(newAppointment, navigation)
+                        cb()
+                    },
                 },
                 {
                     text: 'Отмена'
@@ -69,8 +72,7 @@ const FormCreateAppointment = ({navigation}) => {
             validateOnBlur={true}
             validateOnChange={false}
             onSubmit={(values, action) => {
-                openConfirmAppointment(values)
-                action.resetForm()
+                openConfirmAppointment(values, () => action.resetForm())
             }}
             validationSchema={validationSchema}
         >

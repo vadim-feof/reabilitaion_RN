@@ -54,43 +54,40 @@ const FormAddService = ({navigation, isEdit, editingService}) => {
                       handleSubmit,
                   }) => (
                     <View>
-                        <CustomInput type={'text'}
-                                     onChangeText={handleChange('code')}
-                                     onBlur={handleBlur('code')}
-                                     value={values.code}
-                                     placeholder={'Введите код услуги'}
-                                     multiline
-
+                        <CustomInput
+                            onChangeText={handleChange('code')}
+                            onBlur={handleBlur('code')}
+                            value={values.code}
+                            placeholder={'Введите код услуги'}
                         />
                         {touched.code && errors.code && <Text style={styles.error}> {errors.code}</Text>}
-                        <CustomInput type={'text'}
-                                     onChangeText={handleChange('name')}
-                                     onBlur={handleBlur('name')}
-                                     value={values.name}
-                                     placeholder={'Введите название услуги'}
-                                     multiline
+                        <CustomInput
+                            onChangeText={handleChange('name')}
+                            onBlur={handleBlur('name')}
+                            value={values.name}
+                            placeholder={'Введите название услуги'}
                         />
                         {touched.name && errors.name && <Text style={styles.error}>{errors.name}</Text>}
-                        <CustomInput type={'text'}
-                                     onChangeText={handleChange('price')}
-                                     onBlur={handleBlur('price')}
-                                     value={values.price}
-                                     placeholder={'Введите стоимость услуги'}
+                        <CustomInput
+                            onChangeText={handleChange('price')}
+                            onBlur={handleBlur('price')}
+                            value={values.price}
+                            placeholder={'Введите стоимость услуги'}
                         />
                         {touched.price && errors.price && <Text style={styles.error}>{errors.price}</Text>}
-                        <CustomInput type={'text'}
-                                     onChangeText={handleChange('description')}
-                                     onBlur={handleBlur('description')}
-                                     value={values.description}
-                                     placeholder={'Введите описание услуги'}
+                        <CustomInput
+                            multiline={true}
+                            onChangeText={handleChange('description')}
+                            onBlur={handleBlur('description')}
+                            value={values.description}
+                            placeholder={'Введите описание услуги'}
                         />
                         {touched.description && errors.description && <Text style={styles.error}>{errors.description}</Text>}
 
                         <CustomButton
                             onPress={handleSubmit}
                             text={isEdit ? 'Изменить' : 'Добавить'}
-                        >
-                        </CustomButton>
+                        />
                     </View>
                 )}
             </Formik>

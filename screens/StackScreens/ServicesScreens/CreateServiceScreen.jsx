@@ -1,5 +1,4 @@
 import React from 'react';
-import FormAddSpecialist from "../../../components/Form/FormAddSpecialist";
 import {StyleSheet, View} from "react-native";
 import FormAddService from "../../../components/Form/FormAddService";
 

@@ -9,7 +9,7 @@ import FilterAppointmentMenu from "../../components/Filters/FilterAppointmentMen
 const AllAppointment = ({navigation}) => {
     const isFocused = useIsFocused();
     const {filteredAppointments, setFilter, appointments, isLoading, cancelAppointmentByAdmin,
-        viewAppointmentByAdmin, fetchAllAppointments} = useAppointment()
+        confirmAppointmentByAdmin, fetchAllAppointments} = useAppointment()
 
     useEffect(async () => {
         if (isFocused) {
@@ -45,7 +45,7 @@ const AllAppointment = ({navigation}) => {
                     onPress: () => openConfirmCancel(_idAppointment)
                 },
                 {
-                    text: 'Рассмотреть запись',
+                    text: 'Подтвердить запись',
                     onPress: () => openConfirmViewed(_idAppointment)
                 },
             ]
@@ -71,7 +71,7 @@ const AllAppointment = ({navigation}) => {
 
     const openConfirmViewed = (_idAppointment) => {
         Alert.alert(
-            'Действительно рассмотреть запись?',
+            'Действительно подтвердить запись?',
             '',
             [
                 {
@@ -79,7 +79,7 @@ const AllAppointment = ({navigation}) => {
                 },
                 {
                     text: 'Да',
-                    onPress: () => viewAppointmentByAdmin(_idAppointment)
+                    onPress: () => confirmAppointmentByAdmin(_idAppointment)
                 },
 
             ]

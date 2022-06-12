@@ -8,8 +8,8 @@ const StatusBlock = ({statusText}) => {
         case 'process':
             statusStyles = styles.processStyle
             break
-        case 'viewed':
-            statusStyles = styles.viewedStyle
+        case 'confirmed':
+            statusStyles = styles.confirmedStyle
             break
         case 'cancelled':
             statusStyles = styles.cancelledStyle
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     processStyle: {
         backgroundColor: '#D9D9D9'
     },
-    viewedStyle: {
+    confirmedStyle: {
         backgroundColor: '#58AC24'
     },
     cancelledStyle: {

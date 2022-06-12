@@ -28,8 +28,8 @@ export default class AppointmentService {
         return response.data
     }
 
-    static async viewByAdmin(_idAppointment) {
-        const response = await $api.patch(`/appointment/view/${_idAppointment}`)
+    static async confirmByAdmin(_idAppointment) {
+        const response = await $api.patch(`/appointment/confirm/${_idAppointment}`)
         return response.data
     }
 }

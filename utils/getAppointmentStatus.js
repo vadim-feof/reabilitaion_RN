@@ -4,8 +4,8 @@ export const getAppointmentStatus = (statusText) => {
     switch (statusText) {
         case 'process':
             return 'на рассмотрении'
-        case 'viewed':
-            return 'рассмотрена'
+        case 'confirmed':
+            return 'подтверждена'
         case 'cancelled':
             return 'отменена'
         default:
