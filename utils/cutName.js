@@ -3,7 +3,6 @@ export const cutName = (userName) => {
     if (!userName)
         return
     const nameArray = userName.split(' ')
-    console.log(nameArray)
     let cutUserName = ''
     if (nameArray.length === 2)
         cutUserName = `${nameArray[0]} ${nameArray[1][0]}.`

@@ -11,7 +11,8 @@ export const takePictureFromLibrary = async () => {
     const picture = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         base64: false,
-        presentationStyle: 0
+        presentationStyle: 0,
+        quality: 0.4
     })
     return picture
 }
