@@ -3,8 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetInfo from '@react-native-community/netinfo'
 import Toast from "react-native-toast-message";
 import {toastShow} from "../utils/toastShow";
-// https://damp-bayou-29928.herokuapp.com
-export const SERVER_URL = 'http://192.168.0.110:5000'
+
+export const SERVER_URL = 'https://damp-bayou-29928.herokuapp.com'
 export const API_URL = `${SERVER_URL}/api`
 
 export const STATIC_IMAGE_NEWS_URL = `${SERVER_URL}/image/news/`

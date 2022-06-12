@@ -1,26 +1,27 @@
 import React from 'react';
-import {ActivityIndicator, View, StyleSheet} from "react-native";
+import {ActivityIndicator, View, StyleSheet, Modal} from "react-native";
 
 const Loader = () => {
     return (
-        <View style={styles.loader} pointerEvents={'none'}>
-            <ActivityIndicator
-                animating={true}
-                color={'#D58B40'}
-                size={'large'}
-            />
-        </View>
+        <Modal visible={true} transparent={true}>
+            <View style={styles.loader} pointerEvents={'none'}>
+                <ActivityIndicator
+                    animating={true}
+                    color={'#D58B40'}
+                    size={'large'}
+                />
+            </View>
+        </Modal>
     );
 };
 
 const styles = StyleSheet.create({
     loader: {
-        position: 'absolute',
-        top: 50,
-        left: 0,
-        right: 0,
+        flex: 1,
         alignItems: 'center',
-        zIndex: 5
+        justifyContent: 'center',
+        zIndex: 5,
+        backgroundColor: 'rgba(0,0,0,0.3)'
     }
 })
 

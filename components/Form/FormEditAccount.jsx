@@ -7,6 +7,8 @@ import CustomButton from "../Common/CustomButton/CustomButton";
 import {useAuth} from "../../context/AuthContext";
 import BirthdayPicker from "../BirthdayPicker";
 import {upperFirstLetter} from "../../utils/upperFirstLetter";
+import ErrorText from "../Common/ErrorText";
+import Loader from "../Common/Loader";
 
 const FormEditAccount = ({navigation}) => {
     const {user, updateUser, isLoading} = useAuth()
@@ -23,8 +25,7 @@ const FormEditAccount = ({navigation}) => {
             name: yup.string().matches('^([А-Яа-яA-Za-z-\S]+)$', 'Введите имя без пробелов')
                 .required('Пожалуйста, укажите имя'),
 
-            patronymic: yup.string().matches('^([А-Яа-яA-Za-z-\S]+)$', 'Введите отчество без пробелов')
-                .required('Пожалуйста, укажите отчество'),
+            patronymic: yup.string().matches('^([А-Яа-яA-Za-z-\S]+)$', 'Введите отчество без пробелов'),
 
             numCard: yup.string().matches('^([0-9]{2}\/[0-9]{6})$', 'Номер карты должен быть в формате XX/XXXXXX')
                 .required('Пожалуйста, укажите номер амбулаторной карты'),
@@ -39,7 +40,7 @@ const FormEditAccount = ({navigation}) => {
             <Formik initialValues={{
                 secondName: fioArray[0],
                 name: fioArray[1],
-                patronymic: fioArray[2],
+                patronymic: fioArray[2] || '',
                 birthday: new Date(user.birthday),
                 numCard: user.card,
                 telephone: user.phone,
@@ -48,7 +49,7 @@ const FormEditAccount = ({navigation}) => {
                     onSubmit={(values, action) => {
                         const regData = {
                             _id: user._id,
-                            name: `${upperFirstLetter(values.secondName)} ${upperFirstLetter(values.name)} ${upperFirstLetter(values.patronymic)}`,
+                            name: `${upperFirstLetter(values.secondName)} ${upperFirstLetter(values.name)} ${upperFirstLetter(values.patronymic)}`.trim(),
                             phone: values.telephone,
                             birthday: values.birthday,
                             card: values.numCard
@@ -63,6 +64,7 @@ const FormEditAccount = ({navigation}) => {
 
                     return (
                         <ScrollView>
+                            {isLoading ? <Loader/> : null}
                             <Text style={styles.headerText}>ФИО:</Text>
                             <View>
                                 <CustomInput
@@ -72,14 +74,15 @@ const FormEditAccount = ({navigation}) => {
                                     placeholder={'Фамилия'}
                                 />
                                 {touched.secondName && errors.secondName &&
-                                    <Text style={styles.error}>{errors.secondName}</Text>}
+                                    <ErrorText>{errors.secondName}</ErrorText>}
                                 <CustomInput
                                     onChangeText={handleChange('name')}
                                     onBlur={handleBlur('name')}
                                     value={values.name}
                                     placeholder={'Имя'}
                                 />
-                                {touched.name && errors.name && <Text style={styles.error}>{errors.name}</Text>}
+                                {touched.name && errors.name &&
+                                    <ErrorText>{errors.name}</ErrorText>}
                                 <CustomInput
                                     onChangeText={handleChange('patronymic')}
                                     onBlur={handleBlur('patronymic')}
@@ -87,7 +90,7 @@ const FormEditAccount = ({navigation}) => {
                                     placeholder={'Отчество'}
                                 />
                                 {touched.patronymic && errors.patronymic &&
-                                    <Text style={styles.error}>{errors.patronymic}</Text>}
+                                    <ErrorText>{errors.patronymic}</ErrorText>}
                                 <Text style={styles.headerText}>Дата рождения:</Text>
                                 <BirthdayPicker
                                     value={values.birthday}
@@ -105,7 +108,7 @@ const FormEditAccount = ({navigation}) => {
                                     placeholder={'Телефон'}
                                 />
                                 {touched.telephone && errors.telephone &&
-                                    <Text style={styles.error}>{errors.telephone}</Text>}
+                                    <ErrorText>{errors.telephone}</ErrorText>}
                             </View>
                             <Text style={styles.headerText}>Номер амбулаторной карты:</Text>
                             <View>
@@ -116,17 +119,12 @@ const FormEditAccount = ({navigation}) => {
                                     placeholder={'Номер амбулаторной карты'}
                                 />
                                 {touched.numCard && errors.numCard &&
-                                    <Text style={styles.error}>{errors.numCard}</Text>}
+                                    <ErrorText>{errors.numCard}</ErrorText>}
                             </View>
                             <CustomButton
                                 disabled={isLoading}
                                 onPress={handleSubmit}
                                 text={'Изменить данные'}
-                            />
-                            <ActivityIndicator
-                                animating={isLoading}
-                                color={'#D58B40'}
-                                size={'large'}
                             />
                             <View style={{height: 100}}/>
                         </ScrollView>
