@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableHighlight} from "react-native";
 import FitImage from "react-native-fit-image";
 import {STATIC_IMAGE_NEWS_URL} from "../../../../services/api";
+import moment from "moment";
 
 const NewsItem = ({news, navigation}) => {
     let content = news.content
@@ -20,7 +21,7 @@ const NewsItem = ({news, navigation}) => {
         >
             <>
                 <Text style={styles.date}>
-                    {new Date(news.date).toLocaleDateString('ru')}
+                    {moment(news.date).format('L')}
                 </Text>
                 <Text style={styles.title}>{news.title}</Text>
                 <View

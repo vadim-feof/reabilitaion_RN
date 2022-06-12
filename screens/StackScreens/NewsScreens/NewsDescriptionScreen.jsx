@@ -6,6 +6,7 @@ import EditButton from "../../../components/Common/Buttons/EditButton/EditButton
 import {STATIC_IMAGE_NEWS_URL} from "../../../services/api";
 import {useAuth} from "../../../context/AuthContext";
 import {checkAdminRole} from "../../../utils/checkAdminRole";
+import moment from "moment";
 
 const NewsDescriptionScreen = ({route, navigation}) => {
 
@@ -52,7 +53,7 @@ const NewsDescriptionScreen = ({route, navigation}) => {
         <ScrollView
             contentContainerStyle={styles.container}
         >
-            <Text style={styles.date}>{new Date(date).toLocaleDateString('ru')}</Text>
+            <Text style={styles.date}>{moment(news.date).format('L')}</Text>
             <Text style={styles.title}>{title}</Text>
             {picture ? <FitImage style={styles.photo} source={{uri: imageUrl}}/> : null}
             <Text style={styles.content}>{content}</Text>
