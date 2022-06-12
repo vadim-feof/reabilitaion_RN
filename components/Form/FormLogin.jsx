@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import * as yup from 'yup'
 import {Formik} from "formik";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import CheckBox from 'expo-checkbox';
+import {StyleSheet, View} from "react-native";
 import CustomInput from "../Common/CustomInput/CustomInput";
 import CustomButton from "../Common/CustomButton/CustomButton";
 import {useAuth} from "../../context/AuthContext";
 import {ActivityIndicator} from "react-native";
 import ErrorText from "../Common/ErrorText";
 import CustomCheckBox from "../Common/CustomCheckBox";
+import Loader from "../Common/Loader";
 
 const FormLogin = ({navigation}) => {
     const {isLoading, loginUser} = useAuth()
@@ -50,11 +50,7 @@ const FormLogin = ({navigation}) => {
                       handleSubmit, setFieldValue
                   }) => (
                     <View>
-                        <ActivityIndicator
-                            animating={isLoading}
-                            color={'#D58B40'}
-                            size={'large'}
-                        />
+                        {isLoading ? <Loader /> : null}
                         <CustomInput keyboardType={values.isEmail ? 'email-address' : 'phone-pad'}
                                      onChangeText={handleChange('login')}
                                      onBlur={handleBlur('login')}

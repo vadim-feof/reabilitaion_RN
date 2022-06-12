@@ -76,16 +76,16 @@ export const AppointmentProvider = ({children}) => {
         }
     }
 
-    const viewAppointmentByAdmin = async (_idAppointment) => {
+    const confirmAppointmentByAdmin = async (_idAppointment) => {
         try {
             setIsLoading(true)
-            const {viewedAppointment} = await AppointmentService.viewByAdmin(_idAppointment)
+            const {confirmedAppointment} = await AppointmentService.confirmByAdmin(_idAppointment)
             setAppointments(prevAppointments => prevAppointments.map(appointment => {
-                if (appointment._id === viewedAppointment._id)
-                    return viewedAppointment
+                if (appointment._id === confirmedAppointment._id)
+                    return confirmedAppointment
                 return appointment
             }))
-            toastShow('success', 'Запись просмотрена')
+            toastShow('success', 'Запись подтверждена')
         } catch (e) {
             console.log(e)
         } finally {
@@ -107,7 +107,7 @@ export const AppointmentProvider = ({children}) => {
         fetchUserAppointments,
         cancelAppointmentByUser,
         cancelAppointmentByAdmin,
-        viewAppointmentByAdmin,
+        confirmAppointmentByAdmin,
         fetchAllAppointments
     }
 

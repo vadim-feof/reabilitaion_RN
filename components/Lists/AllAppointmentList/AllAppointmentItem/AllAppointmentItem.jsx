@@ -3,6 +3,7 @@ import {StyleSheet, TouchableHighlight, View} from "react-native";
 import {Text} from "react-native";
 import StatusBlock from "../../AppointmentList/AppointmentItem/StatusBlock";
 import StatusText from "../../AppointmentList/AppointmentItem/StatusText";
+import moment from "moment";
 
 const AllAppointmentItem = ({appointment, onPress, onLongPress}) => {
 
@@ -26,15 +27,10 @@ const AllAppointmentItem = ({appointment, onPress, onLongPress}) => {
                         {Service ? Service.name : 'Нет информации об услуге'}
                     </Text>
                     <Text style={[styles.text]}>
-                        Дата: {new Date(appointment.desiredDate).toLocaleDateString('ru-RU')}
+                        Дата: {moment(appointment.desiredDate).format('LL')}
                     </Text>
                     <Text style={[styles.text]}>
-                        Время: {new Date(appointment.desiredTime)
-                        .toLocaleTimeString('ru-RU',{
-                                hour: "2-digit",
-                                minute: "2-digit"
-                            }
-                        )}
+                        Время: {moment(appointment.desiredTime).format('LT')}
                     </Text>
                     <View style={styles.statusWrapper}>
                         <Text  style={[styles.text, styles.name]}>Пациент: </Text>

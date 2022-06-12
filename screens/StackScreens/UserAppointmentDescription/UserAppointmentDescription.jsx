@@ -5,6 +5,7 @@ import SpecialistItem from "../../../components/Lists/SpecialistList/SpecialistI
 import ServiceItem from "../../../components/Lists/ServiceList/ServiceItem/ServiceItem";
 import {getAppointmentStatus} from "../../../utils/getAppointmentStatus";
 import StatusText from "../../../components/Lists/AppointmentList/AppointmentItem/StatusText";
+import moment from "moment";
 
 
 const UserAppointmentDescription = ({route}) => {
@@ -28,7 +29,7 @@ const UserAppointmentDescription = ({route}) => {
                     <Text style={styles.text}>ФИО: {User.name}</Text>
                     <Text style={styles.text} dataDetectorType ='phoneNumber'>Телефон: {User.phone}</Text>
                     <Text style={styles.text} dataDetectorType ='email'>Email: {User.email}</Text>
-                    <Text style={styles.text}>Дата рождения: {new Date(User.birthday).toLocaleDateString('ru')}</Text>
+                    <Text style={styles.text}>Дата рождения: {moment(User.birthday).format('LL')}</Text>
                     <Text style={styles.text}>Номер карты: {User.card}</Text>
                 </View>
             </View>
@@ -39,15 +40,10 @@ const UserAppointmentDescription = ({route}) => {
             <View style={styles.info}>
                 <Text style={styles.header}>Данные записи</Text>
                 <Text style={[styles.text]}>
-                    Дата: {new Date(appointment.desiredDate).toLocaleDateString('ru-RU')}
+                    Дата: {moment(appointment.desiredDate).format('LL')}
                 </Text>
                 <Text style={[styles.text]}>
-                    Время: {new Date(appointment.desiredTime)
-                    .toLocaleTimeString('ru-RU',{
-                            hour: "2-digit",
-                            minute: "2-digit"
-                        }
-                    )}
+                    Время: {moment(appointment.desiredTime).format('LT')}
                 </Text>
                 <Text style={styles.text}>Статус: <StatusText
                     textStyle={styles.text}

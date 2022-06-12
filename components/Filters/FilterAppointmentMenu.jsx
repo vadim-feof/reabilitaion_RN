@@ -21,7 +21,7 @@ const FilterAppointmentMenu = ({visible, setVisible, setFilter, color}) => {
         >
             <MenuItem onPress={() => onPressMenuItem('')}>Все записи</MenuItem>
             <MenuItem onPress={() => onPressMenuItem('process')}>На рассмотрении</MenuItem>
-            <MenuItem onPress={() => onPressMenuItem('viewed')}>Рассмотренные</MenuItem>
+            <MenuItem onPress={() => onPressMenuItem('confirmed')}>Подтвержденные</MenuItem>
             <MenuItem onPress={() => onPressMenuItem('cancelled')}>Отмененные</MenuItem>
         </Menu>
     );
