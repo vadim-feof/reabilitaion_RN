@@ -12,7 +12,7 @@ export const LFKProvider = ({children}) => {
         try {
             setIsLoading(true)
             const fetchedItems = await LFKService.getAll()
-            setItems([...fetchedItems.reverse()])
+            setItems([...fetchedItems])
         } catch(e) {
             console.log(e)
         } finally {
@@ -24,7 +24,7 @@ export const LFKProvider = ({children}) => {
         try {
             setIsLoading(true)
             const addedItems = await LFKService.create(newItems)
-            setItems(prevItems => [addedItems, ...prevItems])
+            setItems(prevItems => [...prevItems, addedItems])
             toastShow('success', 'Комплекс ЛФК добавлен')
         } catch(e) {
             console.log(e)
