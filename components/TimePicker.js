@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, TextInput, StyleSheet, Pressable, Platform} from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AntDesign } from '@expo/vector-icons';
+import moment from "moment";
 
 const TimePicker = ({value, setValue}) => {
     const [visible, setVisible] = useState(false)
@@ -12,10 +13,7 @@ const TimePicker = ({value, setValue}) => {
                 <View pointerEvents={'none'} style={styles.TimePicker}>
                     <TextInput
                         style={{fontSize: 20}}
-                        value={new Date(value).toLocaleTimeString('ru-RU', {
-                            hour: "2-digit",
-                            minute: "2-digit"
-                        })}
+                        value={moment(value).format('LT')}
                         editable={true}
                     />
                     <AntDesign name="clockcircleo" size={28} color="black" />

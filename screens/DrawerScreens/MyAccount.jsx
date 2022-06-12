@@ -8,6 +8,7 @@ import {takePictureFromLibrary} from "../../utils/takePictureFromLibrary";
 import Loader from "../../components/Common/Loader";
 import ChangeEmailModal from "../../components/ModalWindows/ChangeEmailModal";
 import ChangePassModal from "../../components/ModalWindows/ChangePassModal";
+import moment from "moment";
 
 const MyAccount = ({navigation}) => {
     const {user, isLoading, uploadPhoto, removePhoto, logOut} = useAuth()
@@ -103,7 +104,7 @@ const MyAccount = ({navigation}) => {
                     <Text> {user.card}</Text>
                 </Text>
                 <Text style={styles.item}>Дата рождения:
-                    <Text> {new Date(user.birthday).toLocaleDateString('ru')}</Text>
+                    <Text> {moment(user.birthday).format('LL')}</Text>
                 </Text>
             </View>
             <CustomButton
@@ -137,18 +138,19 @@ const styles = StyleSheet.create({
         marginTop: 15,
         fontWeight: 'bold',
         color: '#696969',
-        fontSize: 18,
+        fontSize: 20,
         textAlign: 'center'
     },
     info: {
         marginTop: 15,
         marginLeft: 30,
+        marginBottom: 20,
     },
     item: {
-        marginTop: 7,
-        fontSize: 18,
+        marginTop: 10,
+        fontSize: 20,
         fontWeight: 'bold',
-        color: '#696969'
+        color: '#696969',
     },
     photo: {
         width: 300,

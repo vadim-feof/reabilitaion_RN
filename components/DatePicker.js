@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, TextInput, StyleSheet, Pressable, Platform} from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AntDesign } from '@expo/vector-icons';
+import moment from "moment";
 
 const DatePicker = ({value, setValue}) => {
     const [visible, setVisible] = useState(false)
@@ -12,11 +13,7 @@ const DatePicker = ({value, setValue}) => {
                 <View pointerEvents={'none'} style={styles.birthDayPicker}>
                     <TextInput
                         style={{fontSize: 20}}
-                        value={new Date(value).toLocaleDateString('ru-RU', {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric"
-                        })}
+                        value={moment(value).format('LL')}
                         editable={true}
                     />
                     <AntDesign name="calendar" size={28} color="black" />
