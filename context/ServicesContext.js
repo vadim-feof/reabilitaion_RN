@@ -12,7 +12,7 @@ export const ServicesProvider = ({children}) => {
         try {
             setIsLoading(true)
             const fetchedServices = await ServicesService.getAll()
-            setServices([...fetchedServices.reverse()])
+            setServices([...fetchedServices])
         } catch(e) {
             console.log(e)
         } finally {
@@ -24,7 +24,7 @@ export const ServicesProvider = ({children}) => {
         try {
             setIsLoading(true)
             const addedService = await ServicesService.create(newService)
-            setServices(prevService => [addedService, ...prevService])
+            setServices(prevService => [...prevService, addedService])
             toastShow('success', 'Услуга добавлена')
         } catch(e) {
             console.log(e)
