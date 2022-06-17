@@ -66,6 +66,7 @@ const FormAddService = ({navigation, isEdit, editingService}) => {
                             onBlur={handleBlur('name')}
                             value={values.name}
                             placeholder={'Введите название услуги'}
+                            multiline={true}
                         />
                         {touched.name && errors.name && <Text style={styles.error}>{errors.name}</Text>}
                         <CustomInput
