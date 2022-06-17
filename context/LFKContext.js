@@ -42,7 +42,7 @@ export const LFKProvider = ({children}) => {
                     return updatedItems
                 return items
             }))
-            toastShow('success', 'Копмлекс ЛФК обновлен')
+            toastShow('success', 'Комплекс ЛФК обновлен')
         } catch(e) {
             console.log(e)
         } finally {
