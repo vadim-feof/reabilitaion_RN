@@ -15,11 +15,7 @@ export default class PictureService {
         const response = await $api.post(staticUrl, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            },
-            transformRequest: (data, headers) => {
-                return data;
-            },
-            data: formData
+            }
         })
         return response.data
     }
